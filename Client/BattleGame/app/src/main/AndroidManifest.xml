@@ -2,11 +2,14 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="battlegame.battlegame" >
 
+    <uses-permission android:name="android.permission.INTERNET"/>
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
-        android:theme="@style/AppTheme" >
+        android:theme="@style/AppTheme"
+        android:name="com.gzfgeh.battlegame.App">
         <activity
             android:name="com.gzfgeh.battlegame.ui.MainActivity"
             android:label="@string/app_name"
@@ -20,6 +23,7 @@
 
         <activity android:name="com.gzfgeh.battlegame.ui.MainDisplay"/>
         <activity android:name="com.gzfgeh.battlegame.ui.Register"/>
+        <service android:name="com.gzfgeh.battlegame.service.MinaService"/>
 
     </application>
 
