@@ -39,16 +39,16 @@ public class MinaThread extends Thread {
 
         try{
             ConnectFuture future = connector.connect(new InetSocketAddress(ip,port));
-            future.awaitUninterruptibly();
+            //future.awaitUninterruptibly();
             session = future.getSession();
             session.write("start");
         }catch (Exception e){
             Log.i("TAG", "client connect exception----");
         }
 
-        session.getCloseFuture().awaitUninterruptibly();
+        //session.getCloseFuture().awaitUninterruptibly();
         Log.i("TAG", "client discut");
-        connector.dispose();
+        //connector.dispose();
         super.run();
     }
 }
