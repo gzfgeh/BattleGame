@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@drawable/splash_bg"
+    android:gravity="center">
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/ip"
+        android:layout_marginLeft="50dp"
+        android:layout_marginRight="50dp"
+        android:hint="ip"
+        android:inputType="text"/>
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/port"
+        android:layout_below="@+id/ip"
+        android:layout_marginLeft="50dp"
+        android:layout_marginRight="50dp"
+        android:hint="port"
+        android:inputType="number"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/set_socket"
+        android:text="Connect"
+        android:layout_below="@+id/port"
+        android:layout_centerHorizontal="true"/>
+
+</RelativeLayout>

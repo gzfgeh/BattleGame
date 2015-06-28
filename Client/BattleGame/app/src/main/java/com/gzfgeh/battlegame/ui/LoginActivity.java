@@ -9,14 +9,14 @@ import android.widget.TextView;
 
 import battlegame.battlegame.R;
 
-public class MainActivity extends Activity {
+public class LoginActivity extends Activity {
     private Button btn_login;
     private TextView tv_register;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_login);
 
         btn_login = (Button) findViewById(R.id.btn_login);
         btn_login.setOnClickListener(new View.OnClickListener() {
