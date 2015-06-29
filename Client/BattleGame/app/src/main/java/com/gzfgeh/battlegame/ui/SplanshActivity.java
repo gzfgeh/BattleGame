@@ -6,10 +6,11 @@ import android.view.View;
 import android.view.animation.AlphaAnimation;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.gzfgeh.battlegame.socket.MinaManager;
 
-import battlegame.battlegame.R;
+import com.gzfgeh.battlegame.R;
 
 /**
  * Created by guzhenf on 6/28/2015.
@@ -29,14 +30,18 @@ public class SplanshActivity extends BaseActivity {
         AlphaAnimation alphaAnimation = new AlphaAnimation(0.2f, 1.0f);
         alphaAnimation.setDuration(2000);
         view.startAnimation(alphaAnimation);
-        setSocket();
-    }
 
-    private void setSocket(){
         et_ip = (EditText) findViewById(R.id.ip);
         et_port = (EditText) findViewById(R.id.port);
         bt_connect = (Button) findViewById(R.id.set_socket);
 
+        //et_ip.setText("192.155.83.65");
+        et_ip.setText("16.155.240.61");
+        et_port.setText("8989");
+        setSocket();
+    }
+
+    private void setSocket(){
         bt_connect.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -48,6 +53,7 @@ public class SplanshActivity extends BaseActivity {
 
     @Override
     public void onConnectionSucceed() {
+        Toast.makeText(this, "onConnectionSucceed", Toast.LENGTH_SHORT).show();
         Intent intent = new Intent(SplanshActivity.this,LoginActivity.class);
         startActivity(intent);
         finish();

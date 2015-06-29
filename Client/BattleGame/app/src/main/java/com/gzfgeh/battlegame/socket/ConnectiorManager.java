@@ -8,6 +8,7 @@ import android.net.NetworkInfo;
 import com.gzfgeh.battlegame.handler.MinaClientHandler;
 
 import org.apache.mina.core.future.ConnectFuture;
+import org.apache.mina.core.future.WriteFuture;
 import org.apache.mina.core.session.IoSession;
 import org.apache.mina.filter.codec.ProtocolCodecFilter;
 import org.apache.mina.filter.codec.textline.LineDelimiter;
@@ -20,6 +21,7 @@ import java.nio.charset.Charset;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
+import java.util.concurrent.TimeUnit;
 
 /**
  * Created by guzhenf on 6/28/2015.
@@ -33,9 +35,17 @@ public class ConnectiorManager {
     private static ConnectiorManager manager;
     private ExecutorService executor;
 
-    public static final String ACTION_CONNECTION_FAILED = "CONNECTION_FAILED";
+    public static final String ACTION_CONNECTION_SUCCESS    = "ACTION_CONNECTION_SUCCESS";
+    public static final String ACTION_CONNECTION_FAILED     = "ACTION_CONNECTION_FAILED";
+    public static final String ACTION_CONNECTION            ="ACTION_CONNECTION";
+    public static final String ACTION_DISCONNECTION         ="ACTION_DISSENDREQUEST";
+    public static final String ACTION_SEND_MESSAGE          = "ACTION_SEND_MESSAGE";
+    public static final String ACTION_SEND_FAIL             = "ACTION_SEND_FAIL";
+    public static final String MESSAGE                      = "MESSAGE";
+    public static final String ACTION_MESSAGE_RECEIVED      = "ACTION_MESSAGE_RECEIVED";
 
     private ConnectiorManager(Context context){
+        this.context = context;
         executor = Executors.newFixedThreadPool(3);
 
         connector = new NioSocketConnector();
@@ -46,7 +56,7 @@ public class ConnectiorManager {
         connector.getFilterChain().addLast("codec", new ProtocolCodecFilter(new TextLineCodecFactory(
                 Charset.forName("UTF-8"), LineDelimiter.WINDOWS.getValue(), LineDelimiter.WINDOWS.getValue())));
 
-        connector.setHandler(new MinaClientHandler());
+        connector.setHandler(new MinaClientHandler(context));
     }
 
     public synchronized static ConnectiorManager getManager(Context context) {
@@ -76,7 +86,7 @@ public class ConnectiorManager {
 
     }
 
-    public  void connect(final String host, final int port) {
+    public void connect(final String host, final int port) {
 
         if (!netWorkAvailable(context)) {
 
@@ -102,6 +112,31 @@ public class ConnectiorManager {
             connect(host,port);
             e.printStackTrace();
         }
+    }
+
+    public void sendMessage(final String message){
+        executor.execute(new Runnable() {
+            @Override
+            public void run() {
+                if (session != null && session.isConnected()){
+                    WriteFuture wf = session.write(message);
+                    wf.awaitUninterruptibly(5, TimeUnit.SECONDS);
+                    if (!wf.isWritten()){
+                        Intent intent = new Intent();
+                        intent.setAction(ACTION_SEND_FAIL);
+                        intent.putExtra("exception", new Exception());
+                        intent.putExtra("sendMessage", message);
+                        context.sendBroadcast(intent);
+                    }
+                }else{
+                    Intent intent = new Intent();
+                    intent.setAction(ACTION_SEND_FAIL);
+                    intent.putExtra("exception", new Exception());
+                    intent.putExtra("sendMessage", message);
+                    context.sendBroadcast(intent);
+                }
+            }
+        });
     }
 
     public void destroy() {

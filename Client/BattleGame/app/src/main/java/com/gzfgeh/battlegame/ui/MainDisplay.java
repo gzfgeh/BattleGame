@@ -3,7 +3,7 @@ package com.gzfgeh.battlegame.ui;
 import android.app.Activity;
 import android.os.Bundle;
 
-import battlegame.battlegame.R;
+import com.gzfgeh.battlegame.R;
 
 /**
  * Created by guzhenf on 6/27/2015.

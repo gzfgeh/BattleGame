@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="battlegame.battlegame" >
+    package="com.gzfgeh.battlegame"
+    android:versionCode="1"
+    android:versionName="1.0">
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
@@ -27,7 +29,16 @@
         <activity android:name="com.gzfgeh.battlegame.ui.LoginActivity"/>
         <activity android:name="com.gzfgeh.battlegame.ui.MainDisplay"/>
         <activity android:name="com.gzfgeh.battlegame.ui.Register"/>
+
         <service android:name="com.gzfgeh.battlegame.service.MinaService"/>
+        <receiver android:name=".receiver.CustomMinaMessageReceiver">
+            <intent-filter>
+                <action android:name="ACTION_CONNECTION_SUCCESS"/>
+                <action android:name="ACTION_CONNECTION_FAILED"/>
+                <action android:name="ACTION_MESSAGE_RECEIVED"/>
+            </intent-filter>
+        </receiver>
+
 
     </application>
 

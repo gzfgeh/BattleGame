@@ -1,7 +1,6 @@
 package com.gzfgeh.battlegame.socket;
 
 import android.net.NetworkInfo;
-import android.os.Message;
 
 /**
  * Created by guzhenf on 6/28/2015.
@@ -11,7 +10,7 @@ public interface OnMinaMessageListener {
      * 当收到服务端推送过来的消息时调用
      * @param message
      */
-    public abstract void onMessageReceived(Message message);
+    public abstract void onMessageReceived(String message);
 
     /**
      * 当调用CIMPushManager.sendRequest()向服务端发送请求，获得相应时调用

@@ -14,8 +14,7 @@ public class MinaManager {
     public static String SERVIER_HOST = "SERVIER_HOST";
     public static String SERVIER_PORT = "SERVIER_PORT";
     public static String SERVICE_ACTION = "SERVICE_ACTION";
-    public static String  ACTION_CONNECTION ="ACTION_CONNECTION";
-    public static String  ACTION_DISCONNECTION ="ACTION_DISSENDREQUEST";
+
 
     private MinaManager(){
 
@@ -25,9 +24,16 @@ public class MinaManager {
         Intent intent = new Intent(context, MinaService.class);
         intent.putExtra(SERVIER_HOST, ip);
         intent.putExtra(SERVIER_PORT, port);
-        intent.putExtra(SERVICE_ACTION, ACTION_CONNECTION);
+        intent.putExtra(SERVICE_ACTION, ConnectiorManager.ACTION_CONNECTION);
         context.startService(intent);
         SharePerferencesTool.putValue(context, SERVIER_HOST, ip);
         SharePerferencesTool.putValue(context, SERVIER_PORT, port);
+    }
+
+    public static void sendMessage(Context context, String message){
+        Intent intent = new Intent(context, MinaService.class);
+        intent.putExtra(SERVICE_ACTION, ConnectiorManager.ACTION_SEND_MESSAGE);
+        intent.putExtra(ConnectiorManager.MESSAGE, message);
+        context.startService(intent);
     }
 }

@@ -3,7 +3,6 @@ package com.gzfgeh.battlegame.ui;
 import android.app.Activity;
 import android.net.NetworkInfo;
 import android.os.Bundle;
-import android.os.Message;
 
 import com.gzfgeh.battlegame.socket.MinaListenerManager;
 import com.gzfgeh.battlegame.socket.OnMinaMessageListener;
@@ -42,7 +41,7 @@ public abstract class BaseActivity extends Activity implements OnMinaMessageList
     public void onReplyReceived(String reply) {}
 
     @Override
-    public void onMessageReceived(Message arg0) {}
+    public void onMessageReceived(String arg0) {}
 
     @Override
     public   void onNetworkChanged(NetworkInfo info){};

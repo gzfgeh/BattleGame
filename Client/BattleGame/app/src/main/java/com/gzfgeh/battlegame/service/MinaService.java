@@ -34,13 +34,17 @@ public class MinaService extends Service {
 
         String action = intent.getStringExtra(MinaManager.SERVICE_ACTION);
 
-        if (MinaManager.ACTION_CONNECTION.equals(action)){
+        if (ConnectiorManager.ACTION_CONNECTION.equals(action)){
             String host = intent.getStringExtra(MinaManager.SERVIER_HOST);
             int port = intent.getIntExtra(MinaManager.SERVIER_PORT, 0);
             manager.connect(host, port);
         }
 
-        if (MinaManager.ACTION_DISCONNECTION.equals(action)){
+        if (ConnectiorManager.ACTION_SEND_MESSAGE.equals(action)){
+            manager.sendMessage(intent.getStringExtra(ConnectiorManager.MESSAGE));
+        }
+
+        if (ConnectiorManager.ACTION_DISCONNECTION.equals(action)){
             manager.closeSession();
         }
 
