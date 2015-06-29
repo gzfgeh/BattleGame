@@ -57,7 +57,7 @@ public class MinaClientHandler extends IoHandlerAdapter {
          String msg = message.toString();
         Intent intent = new Intent();
         intent.setAction(ConnectiorManager.ACTION_MESSAGE_RECEIVED);
-        intent.putExtra("message", msg);
+        intent.putExtra(ConnectiorManager.MESSAGE, msg);
         context.sendBroadcast(intent);
      }
 

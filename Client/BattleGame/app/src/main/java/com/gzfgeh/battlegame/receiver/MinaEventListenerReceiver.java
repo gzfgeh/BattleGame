@@ -25,6 +25,11 @@ public abstract  class MinaEventListenerReceiver extends BroadcastReceiver imple
         if (intent.getAction().equals(ConnectiorManager.ACTION_CONNECTION_FAILED)){
             onConnectionFailed();
         }
+
+        if (intent.getAction().equals(ConnectiorManager.ACTION_MESSAGE_RECEIVED)){
+            String message = intent.getStringExtra(ConnectiorManager.MESSAGE);
+            onMessageReceived(message);
+        }
     }
 
     private void dispatchConnectionSucceed(){
