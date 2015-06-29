@@ -35,9 +35,10 @@ public class SplanshActivity extends BaseActivity {
         et_port = (EditText) findViewById(R.id.port);
         bt_connect = (Button) findViewById(R.id.set_socket);
 
-        //et_ip.setText("192.155.83.65");
+        et_ip.setText("192.155.83.65");
         //et_ip.setText("16.155.240.61");
-        et_ip.setText("16.165.38.182");
+        //et_ip.setText("16.165.38.182");
+        //et_ip.setText("192.168.3.20");
         et_port.setText("8989");
         setSocket();
     }
@@ -54,7 +55,7 @@ public class SplanshActivity extends BaseActivity {
 
     @Override
     public void onConnectionSucceed() {
-        Toast.makeText(this, "onConnectionSucceed", Toast.LENGTH_SHORT).show();
+        Toast.makeText(getApplicationContext(), "onConnectionSucceed", Toast.LENGTH_SHORT).show();
         Intent intent = new Intent(SplanshActivity.this,LoginActivity.class);
         startActivity(intent);
         finish();

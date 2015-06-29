@@ -10,6 +10,7 @@ import android.widget.Toast;
 
 import com.gzfgeh.battlegame.R;
 import com.gzfgeh.battlegame.socket.MinaManager;
+import com.gzfgeh.battlegame.utils.ByteUtil;
 
 public class LoginActivity extends BaseActivity {
     private Button btn_login;
@@ -29,7 +30,8 @@ public class LoginActivity extends BaseActivity {
             @Override
             public void onClick(View v) {
                 String message = et_user.getText().toString() + et_password.getText().toString();
-                message = Integer.toHexString(message.length()) + message;
+                //message = ByteUtil.htons((short)message.length()) + message;
+                message = ByteUtil.NetByte(message);
                 MinaManager.sendMessage(LoginActivity.this, message);
 
             }
