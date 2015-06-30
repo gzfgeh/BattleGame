@@ -51,8 +51,9 @@ public class LoginActivity extends BaseActivity {
 
     @Override
     public void onMessageReceived(String message) {
-        Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
+        Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
         Intent intent = new Intent(this, MainDisplay.class);
         startActivity(intent);
+        finish();
     }
 }

@@ -302,7 +302,7 @@ public class ByteUtil {
 
     public static String NetByte(String s){
         short length = (short) (s.length() + 3);
-        length = htons(length);
+        //length = htons(length);
         return toASCII(length) + s + "\n";
     }
 }
