@@ -292,7 +292,7 @@ public class ByteUtil {
     }
 
     public static String toASCII(short j) {
-        int length = 4;
+        int length = 2;
         StringBuilder builder = new StringBuilder(length);
         for (int i = length - 1; i >= 0; i--) {
             builder.append((char) ((j >> (8 * i)) & 0xFF));
@@ -301,8 +301,8 @@ public class ByteUtil {
     }
 
     public static String NetByte(String s){
-        short length = (short) s.length();
+        short length = (short) (s.length() + 3);
         length = htons(length);
-        return toASCII(length);
+        return toASCII(length) + s + "\n";
     }
 }

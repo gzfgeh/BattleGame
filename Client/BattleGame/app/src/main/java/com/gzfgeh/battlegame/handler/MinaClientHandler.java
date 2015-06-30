@@ -2,7 +2,6 @@ package com.gzfgeh.battlegame.handler;
 
 import android.content.Context;
 import android.content.Intent;
-import android.util.Log;
 
 import com.gzfgeh.battlegame.socket.ConnectiorManager;
 
@@ -22,8 +21,6 @@ public class MinaClientHandler extends IoHandlerAdapter {
 
     @Override
     public void sessionCreated(IoSession session) throws Exception {
-        System.out.println(" MinaClinetHandler sessionCreated");
-
         Intent intent = new Intent();
         intent.setAction(ConnectiorManager.ACTION_CONNECTION_SUCCESS);
         context.sendBroadcast(intent);
@@ -47,8 +44,9 @@ public class MinaClientHandler extends IoHandlerAdapter {
     @Override
     public void exceptionCaught(IoSession session, Throwable cause)
                  throws Exception {
-         Log.d("TAG", "客户端发生异常");
-         super.exceptionCaught(session, cause);
+        Intent intent = new Intent();
+        intent.setAction(ConnectiorManager.ACTION_CONNECTION_FAILED);
+        context.sendBroadcast(intent);
     }
 
     @Override

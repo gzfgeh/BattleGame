@@ -32,6 +32,7 @@ public class LoginActivity extends BaseActivity {
                 String message = et_user.getText().toString() + et_password.getText().toString();
                 //message = ByteUtil.htons((short)message.length()) + message;
                 message = ByteUtil.NetByte(message);
+                //Message msg = new Message(message);
                 MinaManager.sendMessage(LoginActivity.this, message);
 
             }

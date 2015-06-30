@@ -36,6 +36,10 @@ public interface OnMinaMessageListener {
      */
     public abstract void onConnectionSucceed();
 
+    /**
+     * 连接服务端失败
+     */
+    public abstract void onConnectionFailed();
 
     /**
      * 连接断开

@@ -39,6 +39,13 @@ public class CustomMinaMessageReceiver extends MinaEventListenerReceiver {
     }
 
     @Override
+    public void onConnectionFailed() {
+        for (int i=0; i< MinaListenerManager.getListeners().size(); i++){
+            MinaListenerManager.getListeners().get(i).onConnectionFailed();
+        }
+    }
+
+    @Override
     public void onConnectionClosed() {
 
     }

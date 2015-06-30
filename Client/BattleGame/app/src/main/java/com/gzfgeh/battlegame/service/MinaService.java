@@ -41,6 +41,7 @@ public class MinaService extends Service {
         }
 
         if (ConnectiorManager.ACTION_SEND_MESSAGE.equals(action)){
+            //Message message = (Message)intent.getSerializableExtra(ConnectiorManager.MESSAGE);
             manager.sendMessage(intent.getStringExtra(ConnectiorManager.MESSAGE));
         }
 

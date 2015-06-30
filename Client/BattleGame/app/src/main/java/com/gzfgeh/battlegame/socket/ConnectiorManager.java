@@ -76,7 +76,11 @@ public class ConnectiorManager {
             connectFuture = connector.connect(remoteSocketAddress);
             connectFuture.awaitUninterruptibly();
             session = connectFuture.getSession();
-
+            if (session == null){
+                Intent intent = new Intent();
+                intent.setAction(ACTION_CONNECTION_FAILED);
+                context.sendBroadcast(intent);
+            }
         } catch (Exception e) {
             Intent intent = new Intent();
             intent.setAction(ACTION_CONNECTION_FAILED);

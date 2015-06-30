@@ -19,30 +19,16 @@ public abstract  class MinaEventListenerReceiver extends BroadcastReceiver imple
         this.context = context;
 
         if (intent.getAction().equals(ConnectiorManager.ACTION_CONNECTION_SUCCESS)){
-            dispatchConnectionSucceed();
-        }
+            onConnectionSucceed();
 
-        if (intent.getAction().equals(ConnectiorManager.ACTION_CONNECTION_FAILED)){
+        }else if (intent.getAction().equals(ConnectiorManager.ACTION_CONNECTION_FAILED)){
             onConnectionFailed();
-        }
 
-        if (intent.getAction().equals(ConnectiorManager.ACTION_MESSAGE_RECEIVED)){
+        }else if (intent.getAction().equals(ConnectiorManager.ACTION_MESSAGE_RECEIVED)){
             String message = intent.getStringExtra(ConnectiorManager.MESSAGE);
             onMessageReceived(message);
         }
     }
-
-    private void dispatchConnectionSucceed(){
-        System.out.println(" Success ");
-        onConnectionSucceed();
-    }
-
-    private void onConnectionFailed(){
-        System.out.println(" failed ");
-    }
-
-    @Override
-    public abstract void onMessageReceived(String message);
 
     @Override
     public abstract void onReplyReceived(String body);

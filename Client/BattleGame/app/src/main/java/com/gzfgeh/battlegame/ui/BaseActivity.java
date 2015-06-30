@@ -27,9 +27,8 @@ public abstract class BaseActivity extends Activity implements OnMinaMessageList
     @Override
     public void onConnectionClosed() {}
 
-    /**
-     * 连接服务端成功时回调
-     */
+    @Override
+    public void onConnectionFailed() {}
 
     @Override
     public void onConnectionSucceed() {}
@@ -44,5 +43,5 @@ public abstract class BaseActivity extends Activity implements OnMinaMessageList
     public void onMessageReceived(String arg0) {}
 
     @Override
-    public   void onNetworkChanged(NetworkInfo info){};
+    public void onNetworkChanged(NetworkInfo info){};
 }
