@@ -45,7 +45,7 @@ public class RegisterActivity extends BaseActivity {
                 String pwd = userPwd.getText().toString().trim();
                 String secondPwd = userSecondPwd.getText().toString().trim();
 
-                if (!(TextUtils.isEmpty(name)) && !(TextUtils.isEmpty(pwd)) && !(TextUtils.isEmpty(secondPwd)))
+                if (TextUtils.isEmpty(name) || TextUtils.isEmpty(pwd) || TextUtils.isEmpty(secondPwd))
                     return ;
 
                 if (!TextUtils.equals(pwd, secondPwd))
@@ -54,15 +54,23 @@ public class RegisterActivity extends BaseActivity {
                 JSONArray array = new JSONArray();
                 JSONObject object = new JSONObject();
                 try {
-                    object.put("cmd", "request");
-                    object.put("user", name);
+                    //JSONObject object1 = new JSONObject();
+                    //JSONObject object2 = new JSONObject();
+                    //JSONObject object3 = new JSONObject();
+                    //object.put("cmd", "register");
+                    //object.put("user", name);
+                    //object2.put("cmd", "register");
                     object.put("pwd", new SHA1Utils().getDigestOfString(pwd.getBytes()));
+                    object.put("cmd", "register");
+                    object.put("user", name);
                     array.put(object);
+                    //array.put(object2);
+                    //array.put(object3);
 
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
-
+                Toast.makeText(getApplicationContext(), array.toString(), Toast.LENGTH_SHORT).show();
                 MinaManager.sendMessage(RegisterActivity.this, array.toString());
             }
         });
