@@ -13,5 +13,6 @@
     <string name="login_account">账号 </string>
     <string name="login_pwd">密码 </string>
     <string name="login_email">确认密码 </string>
+    <string name="back">返回</string>
 
 </resources>

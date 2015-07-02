@@ -3,7 +3,7 @@ package com.gzfgeh.battlegame.utils;
 /**
  * Created by guzhenf on 6/29/2015.
  */
-public class ByteUtil {
+public class EncryptUtils {
     /**
      * 转换short为byte
      *
@@ -277,17 +277,17 @@ public class ByteUtil {
     public static short htons(short s){
         short rslt = 0;
         byte [] bs1 = new byte[2];
-        ByteUtil.putShort(bs1, s, 0);
+        EncryptUtils.putShort(bs1, s, 0);
         byte[] bs2 = ReversEndian(bs1, 2, false);
-        rslt = ByteUtil.getShort(bs2, 0);
+        rslt = EncryptUtils.getShort(bs2, 0);
         return rslt;
     }
     public static int htonl(int d){
         int rslt = 0;
         byte [] bs1 = new byte[4];
-        ByteUtil.putInt(bs1, d, 0);
+        EncryptUtils.putInt(bs1, d, 0);
         byte[] bs2 = ReversEndian(bs1, 4, false);
-        rslt = ByteUtil.getInt(bs2, 0);
+        rslt = EncryptUtils.getInt(bs2, 0);
         return rslt;
     }
 
@@ -302,7 +302,10 @@ public class ByteUtil {
 
     public static String NetByte(String s){
         short length = (short) (s.length() + 3);
-        //length = htons(length);
         return toASCII(length) + s + "\n";
+    }
+
+    public static String OpeRegister(String s){
+        return s;
     }
 }
