@@ -9,9 +9,12 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.gzfgeh.battlegame.R;
+import com.gzfgeh.battlegame.View.CustomProgress;
 import com.gzfgeh.battlegame.View.TopBar;
 import com.gzfgeh.battlegame.socket.MinaManager;
+import com.gzfgeh.battlegame.utils.EncryptUtils;
 import com.gzfgeh.battlegame.utils.SHA1Utils;
+import com.gzfgeh.battlegame.utils.ShowViewUtils;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -61,9 +64,10 @@ public class RegisterActivity extends BaseActivity {
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
-
-                Toast.makeText(getApplicationContext(), object.toString(), Toast.LENGTH_SHORT).show();
-                MinaManager.sendMessage(RegisterActivity.this, object.toString());
+                String message = EncryptUtils.NetByte(object.toString());
+                Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
+                MinaManager.sendMessage(RegisterActivity.this, message);
+                CustomProgress.show(RegisterActivity.this, " ", true, null);
             }
         });
 
@@ -84,6 +88,7 @@ public class RegisterActivity extends BaseActivity {
     @Override
     public void onMessageReceived(String message) {
         Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
+        new ShowViewUtils(this).hideProgressDialog();
         Intent intent = new Intent(this, LoginActivity.class);
         startActivity(intent);
         finish();
