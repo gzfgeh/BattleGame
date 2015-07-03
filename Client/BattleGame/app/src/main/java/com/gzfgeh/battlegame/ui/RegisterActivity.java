@@ -9,11 +9,10 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.gzfgeh.battlegame.R;
+import com.gzfgeh.battlegame.View.TopBar;
 import com.gzfgeh.battlegame.socket.MinaManager;
-import com.gzfgeh.battlegame.utils.EncryptUtils;
 import com.gzfgeh.battlegame.utils.SHA1Utils;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -27,12 +26,14 @@ public class RegisterActivity extends BaseActivity {
     private EditText userPwd;
     private EditText userSecondPwd;
     private Button btnRegister;
+    private TopBar topBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.register_layout);
+        setContentView(R.layout.activity_register);
 
+        topBar = (TopBar) findViewById(R.id.top_bar);
         userName = (EditText) findViewById(R.id.et_username);
         userPwd = (EditText) findViewById(R.id.et_password);
         userSecondPwd = (EditText) findViewById(R.id.et_email);
@@ -51,29 +52,33 @@ public class RegisterActivity extends BaseActivity {
                 if (!TextUtils.equals(pwd, secondPwd))
                     return;
 
-                JSONArray array = new JSONArray();
                 JSONObject object = new JSONObject();
                 try {
-                    //JSONObject object1 = new JSONObject();
-                    //JSONObject object2 = new JSONObject();
-                    //JSONObject object3 = new JSONObject();
-                    //object.put("cmd", "register");
-                    //object.put("user", name);
-                    //object2.put("cmd", "register");
-                    object.put("pwd", new SHA1Utils().getDigestOfString(pwd.getBytes()));
                     object.put("cmd", "register");
                     object.put("user", name);
-                    array.put(object);
-                    //array.put(object2);
-                    //array.put(object3);
+                    object.put("pwd", new SHA1Utils().getDigestOfString(pwd.getBytes()));
 
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
-                Toast.makeText(getApplicationContext(), array.toString(), Toast.LENGTH_SHORT).show();
-                MinaManager.sendMessage(RegisterActivity.this, array.toString());
+
+                Toast.makeText(getApplicationContext(), object.toString(), Toast.LENGTH_SHORT).show();
+                MinaManager.sendMessage(RegisterActivity.this, object.toString());
             }
         });
+
+        topBar.setListener(new TopBar.OnLeftAndRightClickListener() {
+            @Override
+            public void onLeftButtonClick() {
+                finish();
+            }
+
+            @Override
+            public void onRightButtonClick() {
+                Toast.makeText(RegisterActivity.this, "rightBtn", Toast.LENGTH_SHORT).show();
+            }
+        });
+
     }
 
     @Override
