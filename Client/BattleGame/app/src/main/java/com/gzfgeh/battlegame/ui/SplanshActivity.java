@@ -55,14 +55,14 @@ public class SplanshActivity extends BaseActivity {
 
     @Override
     public void onConnectionSucceed() {
-        Toast.makeText(getApplicationContext(), "onConnection Succeed", Toast.LENGTH_SHORT).show();
-        Intent intent = new Intent(SplanshActivity.this,LoginActivity.class);
+        Toast.makeText(getApplicationContext(), "Socket Connection Succeed", Toast.LENGTH_SHORT).show();
+        Intent intent = new Intent(SplanshActivity.this,MainDisplay.class);
         startActivity(intent);
         finish();
     }
 
     @Override
     public void onConnectionFailed() {
-        Toast.makeText(getApplicationContext(), "onConnection Failed", Toast.LENGTH_SHORT).show();
+        Toast.makeText(getApplicationContext(), "Socket Connection Failed", Toast.LENGTH_SHORT).show();
     }
 }

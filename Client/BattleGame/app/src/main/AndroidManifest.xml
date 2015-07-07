@@ -27,7 +27,6 @@
         </activity>
 
         <activity android:name="com.gzfgeh.battlegame.ui.LoginActivity"/>
-        <activity android:name="com.gzfgeh.battlegame.ui.MainDisplay"/>
         <activity android:name=".ui.RegisterActivity"/>
 
         <service android:name="com.gzfgeh.battlegame.service.MinaService"/>
@@ -39,6 +38,9 @@
             </intent-filter>
         </receiver>
 
+        <activity
+            android:name="com.gzfgeh.battlegame.ui.MainDisplay"
+            android:screenOrientation="landscape"/>
 
     </application>
 
