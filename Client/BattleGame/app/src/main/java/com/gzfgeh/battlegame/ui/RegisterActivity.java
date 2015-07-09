@@ -67,7 +67,7 @@ public class RegisterActivity extends BaseActivity {
                 String message = EncryptUtils.NetByte(object.toString());
                 Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
                 MinaManager.sendMessage(RegisterActivity.this, message);
-                CustomProgress.show(RegisterActivity.this, " ", true, null);
+                CustomProgress.show(RegisterActivity.this, "加载中... ", true, null);
             }
         });
 
@@ -88,6 +88,7 @@ public class RegisterActivity extends BaseActivity {
     @Override
     public void onMessageReceived(String message) {
         Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
+        CustomProgress.cancle();
         new ShowViewUtils(this).hideProgressDialog();
         Intent intent = new Intent(this, LoginActivity.class);
         startActivity(intent);

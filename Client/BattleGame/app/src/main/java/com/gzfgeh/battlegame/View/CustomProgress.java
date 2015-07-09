@@ -16,6 +16,8 @@ import com.gzfgeh.battlegame.R;
  */
 public class CustomProgress extends Dialog {
 
+    private static CustomProgress dialog;
+
     public CustomProgress(Context context) {
         super(context);
     }
@@ -63,7 +65,7 @@ public class CustomProgress extends Dialog {
      * @return
      */
     public static CustomProgress show(Context context, CharSequence message, boolean cancelable, OnCancelListener cancelListener) {
-        CustomProgress dialog = new CustomProgress(context, R.style.Custom_Progress);
+        dialog = new CustomProgress(context, R.style.Custom_Progress);
         dialog.setTitle("");
         dialog.setContentView(R.layout.progress_custom);
         if (message == null || message.length() == 0) {
@@ -87,4 +89,8 @@ public class CustomProgress extends Dialog {
         return dialog;
     }
 
+    public static void cancle(){
+        if (dialog != null)
+            dialog.dismiss();
+    }
 }
