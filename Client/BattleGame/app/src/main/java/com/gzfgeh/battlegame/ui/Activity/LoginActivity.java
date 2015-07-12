@@ -1,4 +1,4 @@
-package com.gzfgeh.battlegame.ui;
+package com.gzfgeh.battlegame.ui.Activity;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -6,12 +6,11 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.gzfgeh.battlegame.R;
 import com.gzfgeh.battlegame.socket.MinaManager;
 import com.gzfgeh.battlegame.utils.EncryptUtils;
-import com.gzfgeh.battlegame.utils.SHA1Utils;
+import com.gzfgeh.battlegame.utils.IntentTypeUtils;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -21,6 +20,8 @@ public class LoginActivity extends BaseActivity {
     private TextView tv_register;
     private EditText et_user, et_password;
     private boolean once = true;
+    private String uid;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,52 +34,38 @@ public class LoginActivity extends BaseActivity {
         btn_login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                String message = et_user.getText().toString() + et_password.getText().toString();
-//                message = EncryptUtils.NetByte(message);
-                //Message msg = new Message(message);
                 JSONObject object = new JSONObject();
                 try {
-                    object.put("cmd", "auth1");
+                    object.put("cmd","auth");
+                    object.put("name", et_user.getText().toString().trim());
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
                 MinaManager.sendMessage(LoginActivity.this, EncryptUtils.NetByte(object.toString()));
-
             }
         });
 
         tv_register = (TextView) findViewById(R.id.btn_register);
-        tv_register.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), RegisterActivity.class);
-                startActivity(intent);
-                finish();
-            }
-        });
-
     }
 
     @Override
     public void onMessageReceived(String message) {
-        Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
         if (once){
+            uid = message;
             JSONObject object = new JSONObject();
-            String user = et_user.getText().toString().trim();
-            String pwd = message + et_password.getText().toString().trim();
             try {
-                object.put("cmd","auth2");
-                object.put("user",user);
-                object.put("pwd", new SHA1Utils().getDigestOfString(pwd.getBytes()));
+                object.put("cmd", "room_list");
+                object.put("page_index", "1");
             } catch (JSONException e) {
                 e.printStackTrace();
             }
-            //String msg = et_user.getText().toString().trim() + et_password.getText().toString().trim();
-            String msg = EncryptUtils.NetByte(object.toString());
-            MinaManager.sendMessage(LoginActivity.this, msg);
+            MinaManager.sendMessage(LoginActivity.this, EncryptUtils.NetByte(object.toString()));
             once = false;
-        }else{
+        }else {
             Intent intent = new Intent(this, MainDisplay.class);
+            intent.putExtra(IntentTypeUtils.INTENT_KEY, uid);
+            intent.putExtra(IntentTypeUtils.ROOM_NUM, message);
+            intent.putExtra(IntentTypeUtils.USER_KEY, et_user.getText().toString().trim());
             startActivity(intent);
             finish();
         }

@@ -1,4 +1,4 @@
-package com.gzfgeh.battlegame.ui;
+package com.gzfgeh.battlegame.ui.Activity;
 
 import android.app.Activity;
 import android.net.NetworkInfo;
@@ -11,6 +11,7 @@ import com.gzfgeh.battlegame.socket.OnMinaMessageListener;
  * Created by guzhenf on 6/28/2015.
  */
 public abstract class BaseActivity extends Activity implements OnMinaMessageListener{
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

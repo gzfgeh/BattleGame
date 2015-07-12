@@ -1,4 +1,4 @@
-package com.gzfgeh.battlegame.ui;
+package com.gzfgeh.battlegame.ui.Activity;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -9,8 +9,8 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.gzfgeh.battlegame.R;
-import com.gzfgeh.battlegame.View.CustomProgress;
-import com.gzfgeh.battlegame.View.TopBar;
+import com.gzfgeh.battlegame.view.CustomProgress;
+import com.gzfgeh.battlegame.view.TopBar;
 import com.gzfgeh.battlegame.socket.MinaManager;
 import com.gzfgeh.battlegame.utils.EncryptUtils;
 import com.gzfgeh.battlegame.utils.SHA1Utils;

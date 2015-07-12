@@ -1,4 +1,4 @@
-package com.gzfgeh.battlegame.ui;
+package com.gzfgeh.battlegame.ui.Activity;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -36,9 +36,6 @@ public class SplanshActivity extends BaseActivity {
         bt_connect = (Button) findViewById(R.id.set_socket);
 
         et_ip.setText("192.155.83.65");
-        //et_ip.setText("16.155.240.61");
-        //et_ip.setText("16.165.38.182");
-        //et_ip.setText("192.168.3.20");
         et_port.setText("8989");
         setSocket();
     }
@@ -56,7 +53,7 @@ public class SplanshActivity extends BaseActivity {
     @Override
     public void onConnectionSucceed() {
         Toast.makeText(getApplicationContext(), "Socket Connection Succeed", Toast.LENGTH_SHORT).show();
-        Intent intent = new Intent(SplanshActivity.this,MainDisplay.class);
+        Intent intent = new Intent(SplanshActivity.this,LoginActivity.class);
         startActivity(intent);
         finish();
     }

@@ -6,7 +6,7 @@
     android:background="@color/theme_bg_color"
     android:orientation="vertical" >
 
-    <com.gzfgeh.battlegame.View.TopBar
+    <com.gzfgeh.battlegame.view.TopBar
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/top_bar"

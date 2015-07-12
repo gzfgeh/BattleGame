@@ -1,4 +1,4 @@
-package com.gzfgeh.battlegame.View;
+package com.gzfgeh.battlegame.view;
 
 import android.app.Activity;
 import android.content.Context;

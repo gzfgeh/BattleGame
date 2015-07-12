@@ -3,7 +3,7 @@ package com.gzfgeh.battlegame.utils;
 import android.content.Context;
 import android.widget.Toast;
 
-import com.gzfgeh.battlegame.View.CustomProgress;
+import com.gzfgeh.battlegame.view.CustomProgress;
 
 /**
  * Created by guzhenf on 7/2/2015.
