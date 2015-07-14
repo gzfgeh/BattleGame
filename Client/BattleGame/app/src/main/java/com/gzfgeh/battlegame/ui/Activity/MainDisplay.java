@@ -41,7 +41,7 @@ public class MainDisplay extends BaseActivity{
 
         token = intent.getStringExtra(IntentTypeUtils.INTENT_KEY);
         user  = intent.getStringExtra(IntentTypeUtils.USER_KEY);
-        rooms = Integer.valueOf(intent.getStringExtra(IntentTypeUtils.ROOM_NUM));
+        rooms = Integer.parseInt(intent.getStringExtra(IntentTypeUtils.ROOM_NUM));
     }
 
     private void initView(){
