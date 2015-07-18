@@ -11,7 +11,6 @@ import org.apache.mina.core.future.ConnectFuture;
 import org.apache.mina.core.future.WriteFuture;
 import org.apache.mina.core.session.IoSession;
 import org.apache.mina.filter.codec.ProtocolCodecFilter;
-import org.apache.mina.filter.codec.textline.LineDelimiter;
 import org.apache.mina.filter.codec.textline.TextLineCodecFactory;
 import org.apache.mina.filter.logging.LoggingFilter;
 import org.apache.mina.transport.socket.nio.NioSocketConnector;
@@ -37,8 +36,8 @@ public class ConnectiorManager {
 
     public static final String ACTION_CONNECTION_SUCCESS    = "ACTION_CONNECTION_SUCCESS";
     public static final String ACTION_CONNECTION_FAILED     = "ACTION_CONNECTION_FAILED";
-    public static final String ACTION_CONNECTION            ="ACTION_CONNECTION";
-    public static final String ACTION_DISCONNECTION         ="ACTION_DISSENDREQUEST";
+    public static final String ACTION_CONNECTION            = "ACTION_CONNECTION";
+    public static final String ACTION_DISCONNECTION         = "ACTION_DISSENDREQUEST";
     public static final String ACTION_SEND_MESSAGE          = "ACTION_SEND_MESSAGE";
     public static final String ACTION_SEND_FAIL             = "ACTION_SEND_FAIL";
     public static final String MESSAGE                      = "MESSAGE";
@@ -54,7 +53,7 @@ public class ConnectiorManager {
         connector.getSessionConfig().setKeepAlive(true);
         connector.getFilterChain().addLast("logger", new LoggingFilter());
         connector.getFilterChain().addLast("codec", new ProtocolCodecFilter(new TextLineCodecFactory(
-                Charset.forName("UTF-8"), LineDelimiter.WINDOWS.getValue(), LineDelimiter.WINDOWS.getValue())));
+                Charset.forName("UTF-8"))));
 
         connector.setHandler(new MinaClientHandler(context));
     }

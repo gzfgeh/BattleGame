@@ -301,7 +301,7 @@ public class EncryptUtils {
     }
 
     public static String NetByte(String s){
-        short length = (short) (s.length() + 3);
+        short length = (short) (s.length() + 2);
         return toASCII(length) + s + "\n";
     }
 
