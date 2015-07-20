@@ -7,7 +7,7 @@ import android.support.annotation.Nullable;
 
 import com.gzfgeh.battlegame.socket.ConnectiorManager;
 import com.gzfgeh.battlegame.socket.MinaManager;
-import com.gzfgeh.battlegame.utils.SharePerferencesTool;
+import com.gzfgeh.battlegame.utils.SharePerferencesUtils;
 
 /**
  * Created by guzhenf on 6/28/2015.
@@ -26,8 +26,8 @@ public class MinaService extends Service {
         //new MinaThread("192.155.83.65", 8989).run();
         if (intent == null){
             intent = new Intent();
-            String host = SharePerferencesTool.getValue(this, MinaManager.SERVIER_HOST, null);
-            int port = SharePerferencesTool.getValue(this, MinaManager.SERVIER_PORT, 0);
+            String host = SharePerferencesUtils.getValue(MinaManager.SERVIER_HOST, null);
+            int port = SharePerferencesUtils.getValue(MinaManager.SERVIER_PORT, 0);
             intent.putExtra(MinaManager.SERVIER_HOST, host);
             intent.putExtra(MinaManager.SERVIER_PORT, port);
         }

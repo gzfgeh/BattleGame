@@ -4,7 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 
 import com.gzfgeh.battlegame.service.MinaService;
-import com.gzfgeh.battlegame.utils.SharePerferencesTool;
+import com.gzfgeh.battlegame.utils.SharePerferencesUtils;
 
 /**
  * Created by guzhenf on 6/28/2015.
@@ -26,8 +26,8 @@ public class MinaManager {
         intent.putExtra(SERVIER_PORT, port);
         intent.putExtra(SERVICE_ACTION, ConnectiorManager.ACTION_CONNECTION);
         context.startService(intent);
-        SharePerferencesTool.putValue(context, SERVIER_HOST, ip);
-        SharePerferencesTool.putValue(context, SERVIER_PORT, port);
+        SharePerferencesUtils.putValue(SERVIER_HOST, ip);
+        SharePerferencesUtils.putValue(SERVIER_PORT, port);
     }
 
     public static void sendMessage(Context context, String message){
