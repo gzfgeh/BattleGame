@@ -1,5 +1,6 @@
 package com.gzfgeh.battlegame.ui.Activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -10,6 +11,7 @@ import android.widget.Toast;
 import com.gzfgeh.battlegame.R;
 import com.gzfgeh.battlegame.socket.MinaManager;
 import com.gzfgeh.battlegame.utils.EncryptUtils;
+import com.gzfgeh.battlegame.utils.IntentTypeUtils;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -41,7 +43,6 @@ public class LoginActivity extends BaseActivity {
                     e.printStackTrace();
                 }
                 String s = EncryptUtils.NetByte(object.toString());
-                Toast.makeText(LoginActivity.this, s, Toast.LENGTH_SHORT).show();
                 MinaManager.sendMessage(LoginActivity.this, s);
             }
         });
@@ -52,24 +53,32 @@ public class LoginActivity extends BaseActivity {
     @Override
     public void onMessageReceived(String message) {
         Toast.makeText(this,message,Toast.LENGTH_SHORT).show();
-//        if (once){
-//            uid = message;
-//            JSONObject object = new JSONObject();
-//            try {
-//                object.put("cmd", "room_list");
-//                object.put("page_index", "1");
-//            } catch (JSONException e) {
-//                e.printStackTrace();
-//            }
-//            MinaManager.sendMessage(LoginActivity.this, EncryptUtils.NetByte(object.toString()));
-//            once = false;
-//        }else {
-//            Intent intent = new Intent(this, MainDisplay.class);
-//            intent.putExtra(IntentTypeUtils.INTENT_KEY, uid);
-//            intent.putExtra(IntentTypeUtils.ROOM_NUM, message);
-//            intent.putExtra(IntentTypeUtils.USER_KEY, et_user.getText().toString().trim());
-//            startActivity(intent);
-//            finish();
+        String msg = message.substring(2);
+//        try {
+//            JSONObject object = new JSONObject(msg);
+//            String auth = object.getString("uid");
+//            String cmd = object.getString("cmd");
+//        } catch (JSONException e) {
+//            e.printStackTrace();
 //        }
+        if (once){
+            uid = message;
+            JSONObject object = new JSONObject();
+            try {
+                object.put("cmd", "room_list");
+                object.put("page_index", "1");
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+            MinaManager.sendMessage(LoginActivity.this, EncryptUtils.NetByte(object.toString()));
+            once = false;
+        }else {
+            Intent intent = new Intent(this, MainDisplay.class);
+            intent.putExtra(IntentTypeUtils.INTENT_KEY, uid);
+            intent.putExtra(IntentTypeUtils.ROOM_NUM, message);
+            intent.putExtra(IntentTypeUtils.USER_KEY, et_user.getText().toString().trim());
+            //startActivity(intent);
+            //finish();
+        }
     }
 }
