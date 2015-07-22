@@ -85,26 +85,5 @@ public class LoginActivity extends BaseActivity {
             }
 
         }
-
-
-//        if (once){
-//            uid = message;
-//            JSONObject object = new JSONObject();
-//            try {
-//                object.put("cmd", "room_list");
-//                object.put("page_index", "1");
-//            } catch (JSONException e) {
-//                e.printStackTrace();
-//            }
-//            MinaManager.sendMessage(LoginActivity.this, EncryptUtils.NetByte(object.toString()));
-//            once = false;
-//        }else {
-//            Intent intent = new Intent(this, MainDisplay.class);
-//            intent.putExtra(IntentTypeUtils.INTENT_KEY, uid);
-//            intent.putExtra(IntentTypeUtils.ROOM_NUM, message);
-//            intent.putExtra(IntentTypeUtils.USER_KEY, et_user.getText().toString().trim());
-//            //startActivity(intent);
-//            //finish();
-//        }
     }
 }
