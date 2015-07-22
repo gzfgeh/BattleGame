@@ -3,7 +3,7 @@ package com.gzfgeh.battlegame.utils;
 /**
  * Created by guzhenf on 6/29/2015.
  */
-public class EncryptUtils {
+public class CmdUtils {
     /**
      * 转换short为byte
      *
@@ -277,17 +277,17 @@ public class EncryptUtils {
     public static short htons(short s){
         short rslt = 0;
         byte [] bs1 = new byte[2];
-        EncryptUtils.putShort(bs1, s, 0);
+        CmdUtils.putShort(bs1, s, 0);
         byte[] bs2 = ReversEndian(bs1, 2, false);
-        rslt = EncryptUtils.getShort(bs2, 0);
+        rslt = CmdUtils.getShort(bs2, 0);
         return rslt;
     }
     public static int htonl(int d){
         int rslt = 0;
         byte [] bs1 = new byte[4];
-        EncryptUtils.putInt(bs1, d, 0);
+        CmdUtils.putInt(bs1, d, 0);
         byte[] bs2 = ReversEndian(bs1, 4, false);
-        rslt = EncryptUtils.getInt(bs2, 0);
+        rslt = CmdUtils.getInt(bs2, 0);
         return rslt;
     }
 

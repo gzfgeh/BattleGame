@@ -12,7 +12,7 @@ import com.gzfgeh.battlegame.R;
 import com.gzfgeh.battlegame.view.CustomProgress;
 import com.gzfgeh.battlegame.view.TopBar;
 import com.gzfgeh.battlegame.socket.MinaManager;
-import com.gzfgeh.battlegame.utils.EncryptUtils;
+import com.gzfgeh.battlegame.utils.CmdUtils;
 import com.gzfgeh.battlegame.utils.SHA1Utils;
 import com.gzfgeh.battlegame.utils.ShowViewUtils;
 
@@ -64,7 +64,7 @@ public class RegisterActivity extends BaseActivity {
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
-                String message = EncryptUtils.NetByte(object.toString());
+                String message = CmdUtils.NetByte(object.toString());
                 Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
                 MinaManager.sendMessage(RegisterActivity.this, message);
                 CustomProgress.show(RegisterActivity.this, "加载中... ", true, null);
