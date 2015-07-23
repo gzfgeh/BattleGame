@@ -301,8 +301,8 @@ public class CmdUtils {
     }
 
     public static String NetByte(String s){
-        short length = (short) (s.length() + 2);
-        return toASCII(length) + s + "\n";
+        short length = (short) (s.length() + 1);
+        return toASCII(length) + s;
     }
 
     public static String OpeRegister(String s){

@@ -80,8 +80,8 @@ public class LoginActivity extends BaseActivity {
                 intent.putExtra(IntentTypeUtils.INTENT_KEY, uid);
                 intent.putExtra(IntentTypeUtils.ROOM_NUM, message);
                 intent.putExtra(IntentTypeUtils.USER_KEY, et_user.getText().toString().trim());
-                startActivity(intent);
-                finish();
+                //startActivity(intent);
+                //finish();
             }
 
         }
