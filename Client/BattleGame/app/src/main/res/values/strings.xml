@@ -16,5 +16,9 @@
     <string name="back">返回</string>
     <string name="begin">开始</string>
     <string name="create_room">创建房间</string>
+    <string name="no_room">没有房间了，请创建房间</string>
+    <string name="is_create">是否创建房间</string>
+    <string name="OK">OK</string>
+    <string name="Cancle">Cancle</string>
 
 </resources>

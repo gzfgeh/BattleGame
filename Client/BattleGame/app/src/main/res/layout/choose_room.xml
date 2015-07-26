@@ -21,6 +21,17 @@
         android:layout_centerInParent="true"
         android:id="@+id/list_view"/>
 
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        gzfgeh:layout_widthPercent="60%w"
+        gzfgeh:layout_heightPercent="60%h"
+        android:layout_centerInParent="true"
+        android:id="@+id/no_room_text"
+        android:text="@string/no_room"
+        android:gravity="center"
+        android:visibility="gone"/>
+
     <Button
         android:layout_width="0dp"
         android:layout_height="wrap_content"

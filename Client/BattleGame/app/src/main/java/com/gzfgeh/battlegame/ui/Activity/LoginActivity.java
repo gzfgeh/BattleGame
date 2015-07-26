@@ -15,7 +15,6 @@ import com.gzfgeh.battlegame.R;
 import com.gzfgeh.battlegame.socket.MinaManager;
 import com.gzfgeh.battlegame.utils.CmdUtils;
 import com.gzfgeh.battlegame.utils.IntentTypeUtils;
-
 import static com.alibaba.fastjson.JSON.parseObject;
 
 public class LoginActivity extends BaseActivity {
@@ -23,7 +22,8 @@ public class LoginActivity extends BaseActivity {
     private TextView tv_register;
     private EditText et_user, et_password;
     private boolean once = true;
-    private int uid, roomNum;
+    private int uid;
+    private String rooms;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -77,11 +77,12 @@ public class LoginActivity extends BaseActivity {
                 return;
             else{
                 if (TextUtils.equals(roomList, "[]"))
-                    roomNum = 0;
+                    rooms = null;
+
                 Intent intent = new Intent(this, MainDisplay.class);
                 Bundle bundle = new Bundle();
                 bundle.putInt(IntentTypeUtils.INTENT_KEY, uid);
-                bundle.putInt(IntentTypeUtils.ROOM_NUM, roomNum);
+                bundle.putString(IntentTypeUtils.ROOM_LIST, rooms);
                 bundle.putString(IntentTypeUtils.USER_KEY, et_user.getText().toString().trim());
                 intent.putExtras(bundle);
                 startActivity(intent);
