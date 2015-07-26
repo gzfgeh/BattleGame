@@ -23,7 +23,7 @@ public class LoginActivity extends BaseActivity {
     private TextView tv_register;
     private EditText et_user, et_password;
     private boolean once = true;
-    private int uid;
+    private int uid, roomNum;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,10 +76,14 @@ public class LoginActivity extends BaseActivity {
             if (roomList == null || TextUtils.isEmpty(roomList))
                 return;
             else{
+                if (TextUtils.equals(roomList, "[]"))
+                    roomNum = 0;
                 Intent intent = new Intent(this, MainDisplay.class);
-                intent.putExtra(IntentTypeUtils.INTENT_KEY, uid);
-                intent.putExtra(IntentTypeUtils.ROOM_NUM, message);
-                intent.putExtra(IntentTypeUtils.USER_KEY, et_user.getText().toString().trim());
+                Bundle bundle = new Bundle();
+                bundle.putInt(IntentTypeUtils.INTENT_KEY, uid);
+                bundle.putInt(IntentTypeUtils.ROOM_NUM, roomNum);
+                bundle.putString(IntentTypeUtils.USER_KEY, et_user.getText().toString().trim());
+                intent.putExtras(bundle);
                 startActivity(intent);
                 finish();
             }

@@ -35,7 +35,7 @@ public class SplanshActivity extends BaseActivity {
         et_port = (EditText) findViewById(R.id.port);
         bt_connect = (Button) findViewById(R.id.set_socket);
 
-        et_ip.setText("192.155.83.65");
+        et_ip.setText("192.168.3.29");
         et_port.setText("8989");
         setSocket();
     }

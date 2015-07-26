@@ -22,8 +22,6 @@ public class MinaService extends Service {
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-
-        //new MinaThread("192.155.83.65", 8989).run();
         if (intent == null){
             intent = new Intent();
             String host = SharePerferencesUtils.getValue(MinaManager.SERVIER_HOST, null);
@@ -41,7 +39,6 @@ public class MinaService extends Service {
         }
 
         if (ConnectiorManager.ACTION_SEND_MESSAGE.equals(action)){
-            //Message message = (Message)intent.getSerializableExtra(ConnectiorManager.MESSAGE);
             manager.sendMessage(intent.getStringExtra(ConnectiorManager.MESSAGE));
         }
 

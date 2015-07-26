@@ -19,7 +19,7 @@ import java.util.Map;
  * Created by guzhenf on 6/27/2015.
  */
 public class MainDisplay extends BaseActivity{
-    private String token;
+    private int token;
     private String user;
     private int rooms;
     private TextView tvUser;
@@ -39,9 +39,10 @@ public class MainDisplay extends BaseActivity{
         if (intent == null)
             return ;
 
-        token = intent.getStringExtra(IntentTypeUtils.INTENT_KEY);
-        user  = intent.getStringExtra(IntentTypeUtils.USER_KEY);
-        rooms = Integer.parseInt(intent.getStringExtra(IntentTypeUtils.ROOM_NUM));
+        Bundle bundle = intent.getExtras();
+        token = bundle.getInt(IntentTypeUtils.INTENT_KEY);
+        user  = bundle.getString(IntentTypeUtils.USER_KEY);
+        rooms = bundle.getInt(IntentTypeUtils.ROOM_NUM);
     }
 
     private void initView(){
