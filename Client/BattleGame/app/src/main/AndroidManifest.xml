@@ -44,6 +44,16 @@
             android:screenOrientation="landscape"
             android:theme="@style/MyTheme.NoTitleBar.CustomBackground"/>
 
+        <activity
+            android:name=".ui.Activity.RoomActivity"
+            android:screenOrientation="landscape"
+            android:theme="@style/MyTheme.NoTitleBar.CustomBackground"/>
+
+        <activity
+            android:name=".ui.Activity.PlayActivity"
+            android:screenOrientation="landscape"
+            android:theme="@style/MyTheme.NoTitleBar.CustomBackground"/>
+
     </application>
 
 </manifest>

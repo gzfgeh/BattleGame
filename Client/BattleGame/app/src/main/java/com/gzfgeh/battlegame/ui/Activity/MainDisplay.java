@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
@@ -29,8 +30,8 @@ import static com.alibaba.fastjson.JSON.parseObject;
 /**
  * Created by guzhenf on 6/27/2015.
  */
-public class MainDisplay extends BaseActivity implements View.OnClickListener {
-    private int token;
+public class MainDisplay extends BaseActivity implements View.OnClickListener, AdapterView.OnItemClickListener {
+    private int uid;
     private String user;
     private String rooms;
     private TextView tvUser, tvNoRoom;
@@ -53,7 +54,7 @@ public class MainDisplay extends BaseActivity implements View.OnClickListener {
             return ;
 
         Bundle bundle = intent.getExtras();
-        token = bundle.getInt(IntentTypeUtils.INTENT_KEY);
+        uid = bundle.getInt(IntentTypeUtils.INTENT_KEY);
         user  = bundle.getString(IntentTypeUtils.USER_KEY);
         rooms = bundle.getString(IntentTypeUtils.ROOM_LIST);
     }
@@ -66,7 +67,7 @@ public class MainDisplay extends BaseActivity implements View.OnClickListener {
 
         listRooms = (ListView) findViewById(R.id.list_view);
         tvNoRoom = (TextView) findViewById(R.id.no_room_text);
-
+        listRooms.setOnItemClickListener(this);
         showListView();
     }
 
@@ -92,6 +93,7 @@ public class MainDisplay extends BaseActivity implements View.OnClickListener {
         for (int i=0; i<roomList.size(); i++){
             Map<String, String> data = new HashMap<>();
             data.put("room_index", roomList.get(i));
+            data.put("uid", String.valueOf(uid));
             datas.add(data);
         }
         return datas;
@@ -113,28 +115,54 @@ public class MainDisplay extends BaseActivity implements View.OnClickListener {
         switch (object.getString("cmd")){
             case "room_create":
                 String roomNum = object.getString("rid");
-                new AlertDialog.Builder(this)
-                        .setMessage(getString(R.string.is_create)+roomNum)
-                        .setPositiveButton(R.string.OK, new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                object = new JSONObject();
-                                object.put("cmd", "room_list");
-                                object.put("page_index", "1");
-                                MinaManager.sendMessage(MainDisplay.this, CmdUtils.NetByte(object.toString()));
-                            }
-                        })
-                        .setNegativeButton(R.string.Cancle, null)
-                        .show();
+                Intent intent = new Intent(MainDisplay.this, RoomActivity.class);
+                intent.putExtra(IntentTypeUtils.USER_KEY, user);
+                intent.putExtra(IntentTypeUtils.USER_ID, uid);
+                intent.putExtra(IntentTypeUtils.ROOM_NUM, roomNum);
+                intent.putExtra(IntentTypeUtils.ENTER_TYPE, "room_create");
+                startActivity(intent);
+
+//                new AlertDialog.Builder(this)
+//                        .setMessage(getString(R.string.is_create)+roomNum)
+//                        .setPositiveButton(R.string.OK, new DialogInterface.OnClickListener() {
+//                            @Override
+//                            public void onClick(DialogInterface dialog, int which) {
+//                                object = new JSONObject();
+//                                object.put("cmd", "room_list");
+//                                object.put("page_index", "1");
+//                                MinaManager.sendMessage(MainDisplay.this, CmdUtils.NetByte(object.toString()));
+//                            }
+//                        })
+//                        .setNegativeButton(R.string.Cancle, null)
+//                        .show();
                 break;
 
             case "room_list":
                 rooms = object.getString("room");
                 showListView();
                 break;
+
+            case "room_enter":
+                String num = object.getString("rid");
+                Intent i = new Intent(MainDisplay.this, RoomActivity.class);
+                i.putExtra(IntentTypeUtils.ENTER_TYPE, "room_enter");
+                i.putExtra(IntentTypeUtils.USER_KEY, user);
+                i.putExtra(IntentTypeUtils.USER_ID, uid);
+                i.putExtra(IntentTypeUtils.ROOM_NUM, num);
+                startActivity(i);
+                break;
         }
 
 
 
+    }
+
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        JSONObject object = new JSONObject();
+        object.put("cmd", "room_enter");
+        object.put("uid", String.valueOf(uid));
+        object.put("rid", position);
+        MinaManager.sendMessage(MainDisplay.this, CmdUtils.NetByte(object.toString()));
     }
 }
