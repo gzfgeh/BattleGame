@@ -78,6 +78,8 @@ public class LoginActivity extends BaseActivity {
             else{
                 if (TextUtils.equals(roomList, "[]"))
                     rooms = null;
+                else
+                    rooms = roomList;
 
                 Intent intent = new Intent(this, MainDisplay.class);
                 Bundle bundle = new Bundle();

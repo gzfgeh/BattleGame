@@ -15,6 +15,7 @@ import android.widget.Toast;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.gzfgeh.battlegame.R;
+import com.gzfgeh.battlegame.adapter.RoomListAdapter;
 import com.gzfgeh.battlegame.socket.MinaManager;
 import com.gzfgeh.battlegame.utils.CmdUtils;
 import com.gzfgeh.battlegame.utils.IntentTypeUtils;
@@ -38,7 +39,7 @@ public class MainDisplay extends BaseActivity implements View.OnClickListener, A
     private Button btnCreateRoom;
     private ListView listRooms;
     private JSONObject object;
-    private List<String> roomList = new ArrayList<>();
+    private List<Map<String, Object>> roomList = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,27 +77,21 @@ public class MainDisplay extends BaseActivity implements View.OnClickListener, A
             tvNoRoom.setVisibility(View.VISIBLE);
             listRooms.setVisibility(View.GONE);
         }else{
-            JSONArray array = parseArray(rooms);
-            for(int i=0; i<array.size(); i++){
-                object = array.getJSONObject(i);
-                roomList.add(object.getString("name"));
-            }
             tvNoRoom.setVisibility(View.GONE);
             listRooms.setVisibility(View.VISIBLE);
-            listRooms.setAdapter(new SimpleAdapter(this, getDatas(),R.layout.room_item,
-                    new String[]{"room_index"}, new int[]{R.id.room_num}));
+            listRooms.setAdapter(new RoomListAdapter(this, getDatas()));
         }
     }
 
-    private List<Map<String, String>> getDatas(){
-        List<Map<String, String>> datas = new ArrayList<>();
-        for (int i=0; i<roomList.size(); i++){
-            Map<String, String> data = new HashMap<>();
-            data.put("room_index", roomList.get(i));
-            data.put("uid", String.valueOf(uid));
-            datas.add(data);
+    private List<Map<String, Object>> getDatas(){
+        JSONArray array = parseArray(rooms);
+        for(int i=0; i<array.size(); i++){
+            Map<String, Object> map = new HashMap<>();
+            map.put("name", array.getJSONObject(i).getString("name"));
+            map.put("number", array.getJSONObject(i).getString("rid"));
+            roomList.add(map);
         }
-        return datas;
+        return roomList;
     }
 
     @Override
@@ -121,20 +116,6 @@ public class MainDisplay extends BaseActivity implements View.OnClickListener, A
                 intent.putExtra(IntentTypeUtils.ROOM_NUM, roomNum);
                 intent.putExtra(IntentTypeUtils.ENTER_TYPE, "room_create");
                 startActivity(intent);
-
-//                new AlertDialog.Builder(this)
-//                        .setMessage(getString(R.string.is_create)+roomNum)
-//                        .setPositiveButton(R.string.OK, new DialogInterface.OnClickListener() {
-//                            @Override
-//                            public void onClick(DialogInterface dialog, int which) {
-//                                object = new JSONObject();
-//                                object.put("cmd", "room_list");
-//                                object.put("page_index", "1");
-//                                MinaManager.sendMessage(MainDisplay.this, CmdUtils.NetByte(object.toString()));
-//                            }
-//                        })
-//                        .setNegativeButton(R.string.Cancle, null)
-//                        .show();
                 break;
 
             case "room_list":
@@ -162,7 +143,13 @@ public class MainDisplay extends BaseActivity implements View.OnClickListener, A
         JSONObject object = new JSONObject();
         object.put("cmd", "room_enter");
         object.put("uid", String.valueOf(uid));
-        object.put("rid", position);
+        object.put("rid", roomList.get(position).get("number"));
         MinaManager.sendMessage(MainDisplay.this, CmdUtils.NetByte(object.toString()));
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        showListView();
     }
 }
