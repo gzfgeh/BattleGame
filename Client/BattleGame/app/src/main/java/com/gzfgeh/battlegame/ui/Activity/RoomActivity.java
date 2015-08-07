@@ -57,7 +57,7 @@ public class RoomActivity extends BaseActivity implements View.OnClickListener {
         Intent intent = getIntent();
         if (intent != null){
             user = intent.getStringExtra(IntentTypeUtils.USER_KEY);
-            roomNum = intent.getIntExtra(IntentTypeUtils.ROOM_NUM, -1);
+            roomNum = Integer.valueOf(intent.getStringExtra(IntentTypeUtils.ROOM_NUM));
             uid = intent.getIntExtra(IntentTypeUtils.USER_ID, -1);
             enterType = intent.getStringExtra(IntentTypeUtils.ENTER_TYPE);
         }
