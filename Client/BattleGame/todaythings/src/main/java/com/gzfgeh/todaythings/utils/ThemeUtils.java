@@ -1,4 +1,4 @@
-package Utils;
+package com.gzfgeh.todaythings.utils;
 
 import android.app.Activity;
 

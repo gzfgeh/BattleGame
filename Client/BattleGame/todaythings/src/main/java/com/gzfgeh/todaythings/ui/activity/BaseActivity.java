@@ -1,4 +1,4 @@
-package com.gzfgeh.todaythings.ui;
+package com.gzfgeh.todaythings.ui.activity;
 
 import android.os.Build;
 import android.os.Bundle;
@@ -9,9 +9,9 @@ import android.view.MenuItem;
 import android.view.WindowManager;
 
 import com.gzfgeh.todaythings.R;
+import com.gzfgeh.todaythings.utils.ShareUtils;
 import com.readystatesoftware.systembartint.SystemBarTintManager;
-
-import Utils.ThemeUtils;
+import com.gzfgeh.todaythings.utils.ThemeUtils;
 
 /**
  * Created by guzhenf on 6/25/2015.
@@ -28,13 +28,9 @@ public abstract class BaseActivity extends AppCompatActivity {
     }
 
     private void initTheme(){
-        ThemeUtils.Theme theme = getCurrentTheme();
+        int value = ShareUtils.getValue(ThemeUtils.CHANGE_THEME, 0);
+        ThemeUtils.Theme theme = ThemeUtils.Theme.mapValueToTheme(value);
         ThemeUtils.changTheme(this, theme);
-    }
-
-    private ThemeUtils.Theme getCurrentTheme(){
-        int value = 0;
-        return ThemeUtils.Theme.mapValueToTheme(value);
     }
 
     private void initStatusWindow(){

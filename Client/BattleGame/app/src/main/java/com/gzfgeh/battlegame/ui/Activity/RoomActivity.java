@@ -42,10 +42,10 @@ public class RoomActivity extends BaseActivity implements View.OnClickListener {
 
         if ("room_enter".equals(enterType)){
             guest.setVisibility(View.VISIBLE);
-            btnBegin.setClickable(true);
+            btnBegin.setEnabled(true);
         }else{
             guest.setVisibility(View.GONE);
-            btnBegin.setClickable(false);
+            btnBegin.setEnabled(false);
         }
 
 
@@ -68,7 +68,7 @@ public class RoomActivity extends BaseActivity implements View.OnClickListener {
         super.onMessageReceived(message);
 
         guest.setVisibility(View.VISIBLE);
-        btnBegin.setClickable(true);
+        btnBegin.setEnabled(true);
     }
 
     @Override
