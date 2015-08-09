@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.gzfgeh.battlegame.R;
 import com.gzfgeh.battlegame.utils.IntentTypeUtils;
@@ -20,7 +21,7 @@ public class RoomActivity extends BaseActivity implements View.OnClickListener {
     private TextView tvRoomNum;
 
     private String user;
-    private int roomNum, uid;
+    private int rid, uid;
     private String enterType;
 
     @Override
@@ -38,7 +39,7 @@ public class RoomActivity extends BaseActivity implements View.OnClickListener {
         btnBegin = (Button) findViewById(R.id.begin);
         btnBack = (Button) findViewById(R.id.back);
         tvRoomNum = (TextView) findViewById(R.id.room_num);
-        tvRoomNum.setText(String.valueOf(roomNum));
+        tvRoomNum.setText(String.valueOf(rid));
 
         if ("room_enter".equals(enterType)){
             guest.setVisibility(View.VISIBLE);
@@ -57,7 +58,7 @@ public class RoomActivity extends BaseActivity implements View.OnClickListener {
         Intent intent = getIntent();
         if (intent != null){
             user = intent.getStringExtra(IntentTypeUtils.USER_KEY);
-            roomNum = Integer.valueOf(intent.getStringExtra(IntentTypeUtils.ROOM_NUM));
+            rid = intent.getIntExtra(IntentTypeUtils.ROOM_NUM, -1);
             uid = intent.getIntExtra(IntentTypeUtils.USER_ID, -1);
             enterType = intent.getStringExtra(IntentTypeUtils.ENTER_TYPE);
         }
@@ -67,6 +68,7 @@ public class RoomActivity extends BaseActivity implements View.OnClickListener {
     public void onMessageReceived(String message) {
         super.onMessageReceived(message);
 
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
         guest.setVisibility(View.VISIBLE);
         btnBegin.setEnabled(true);
     }
