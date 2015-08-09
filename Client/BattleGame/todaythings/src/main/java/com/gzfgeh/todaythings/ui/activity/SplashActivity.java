@@ -1,7 +1,9 @@
 package com.gzfgeh.todaythings.ui.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.view.MotionEvent;
 import android.widget.TextView;
 
 import com.gzfgeh.todaythings.APP;
@@ -14,9 +16,13 @@ import java.util.Random;
  * Created by guzhenfu on 15/8/8.
  */
 public class SplashActivity extends BaseActivity{
+    private static final int TIME = 3000;
     private static final String USER = "USER";
     private String userSentence = null;
     private TextView sentence;
+
+    private boolean isActive = true;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,6 +30,26 @@ public class SplashActivity extends BaseActivity{
         super.onCreate(savedInstanceState);
         initView();
 
+        Thread splashThread = new Thread(){
+            @Override
+            public void run() {
+                int waited = 0;
+
+                try {
+                    while (isActive && waited<TIME) {
+                        sleep(100);
+                        if (isActive)
+                            waited += 100;
+                    }
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }finally {
+                    finish();
+                    startActivity(new Intent(SplashActivity.this, MainActivity.class));
+                }
+            }
+        };
+        splashThread.start();
     }
 
     private void initView() {
@@ -51,5 +77,13 @@ public class SplashActivity extends BaseActivity{
     @Override
     protected int getContentView() {
         return R.layout.activity_splash;
+    }
+
+    @Override
+    public boolean onTouchEvent(MotionEvent event) {
+        if (event.getAction() == MotionEvent.ACTION_DOWN) {
+            isActive = false;
+        }
+        return true;
     }
 }
