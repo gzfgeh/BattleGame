@@ -19,8 +19,7 @@
     <com.gzfgeh.battlegame.view.PercentRelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/play"
-        android:visibility="gone">
+        android:id="@+id/play">
 
         <com.gzfgeh.battlegame.view.PercentLinearLayout
             android:layout_width="match_parent"

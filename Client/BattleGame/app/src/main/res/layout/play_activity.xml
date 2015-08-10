@@ -1,9 +1,106 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent" android:layout_height="match_parent">
+<com.gzfgeh.battlegame.view.PercentRelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:gzfgeh="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
-    <TextView
+    <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/back"/>
-</LinearLayout>
+        android:text="@string/back"
+        android:id="@+id/back"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"/>
+
+    <com.gzfgeh.battlegame.view.PercentLinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        gzfgeh:layout_heightPercent="50%h"
+        android:orientation="horizontal"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:gravity="bottom">
+
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            gzfgeh:layout_widthPercent="15%w"
+            gzfgeh:layout_heightPercent="60%h"
+            android:src="@drawable/gy"/>
+
+        <com.gzfgeh.battlegame.view.PercentLinearLayout
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            gzfgeh:layout_widthPercent="50%w"
+            gzfgeh:layout_heightPercent="40%h"
+            gzfgeh:layout_marginLeftPercent="3%w"
+            android:orientation="horizontal"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentLeft="true"
+            android:layout_gravity="bottom"
+            android:gravity="bottom">
+
+            <ImageView
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                gzfgeh:layout_widthPercent="10%w"
+                gzfgeh:layout_heightPercent="100%h"
+                android:layout_weight="1"
+                android:src="@drawable/kill"/>
+
+            <ImageView
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                gzfgeh:layout_widthPercent="10%w"
+                gzfgeh:layout_heightPercent="100%h"
+                android:layout_weight="1"
+                android:src="@drawable/kill"/>
+
+            <ImageView
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                gzfgeh:layout_widthPercent="10%w"
+                gzfgeh:layout_heightPercent="100%h"
+                android:layout_weight="1"
+                android:src="@drawable/avoid"/>
+
+            <ImageView
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                gzfgeh:layout_widthPercent="10%w"
+                gzfgeh:layout_heightPercent="100%h"
+                android:layout_weight="1"
+                android:src="@drawable/avoid"/>
+
+        </com.gzfgeh.battlegame.view.PercentLinearLayout>
+
+    </com.gzfgeh.battlegame.view.PercentLinearLayout>
+
+
+    <com.gzfgeh.battlegame.view.PercentLinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        gzfgeh:layout_heightPercent="50%h"
+        android:orientation="horizontal"
+        android:layout_alignParentTop="true"
+        android:gravity="center_horizontal">
+
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            gzfgeh:layout_widthPercent="15%w"
+            gzfgeh:layout_heightPercent="60%h"
+            android:src="@drawable/zf"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/hello_world"
+            gzfgeh:layout_marginTopPercent="25%h"
+            android:id="@+id/cards_num"/>
+
+    </com.gzfgeh.battlegame.view.PercentLinearLayout>
+
+
+</com.gzfgeh.battlegame.view.PercentRelativeLayout>
