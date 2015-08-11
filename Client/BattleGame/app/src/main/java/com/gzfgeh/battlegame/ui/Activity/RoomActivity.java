@@ -9,8 +9,11 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.alibaba.fastjson.JSONObject;
 import com.gzfgeh.battlegame.R;
 import com.gzfgeh.battlegame.utils.IntentTypeUtils;
+
+import static com.alibaba.fastjson.JSON.parseObject;
 
 /**
  * Created by guzhenfu on 15/8/5.
@@ -23,6 +26,7 @@ public class RoomActivity extends BaseActivity implements View.OnClickListener {
     private String user;
     private int rid, uid;
     private String enterType;
+    private String cardString;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,6 +75,10 @@ public class RoomActivity extends BaseActivity implements View.OnClickListener {
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
         guest.setVisibility(View.VISIBLE);
         btnBegin.setEnabled(true);
+
+        String msg = message.substring(2);
+        JSONObject object = parseObject(msg);
+        cardString = object.getString("card");
     }
 
     @Override
@@ -82,6 +90,7 @@ public class RoomActivity extends BaseActivity implements View.OnClickListener {
 
             case R.id.begin:
                 Intent intent = new Intent(this, PlayActivity.class);
+                intent.putExtra("card", cardString);
                 startActivity(intent);
             default:
                 break;
