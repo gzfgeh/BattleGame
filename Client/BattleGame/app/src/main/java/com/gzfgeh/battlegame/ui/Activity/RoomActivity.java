@@ -1,6 +1,5 @@
 package com.gzfgeh.battlegame.ui.Activity;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -73,8 +72,11 @@ public class RoomActivity extends BaseActivity implements View.OnClickListener {
         super.onMessageReceived(message);
 
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
-        guest.setVisibility(View.VISIBLE);
-        btnBegin.setEnabled(true);
+        if (!btnBegin.isEnabled()){
+            guest.setVisibility(View.VISIBLE);
+            btnBegin.setEnabled(true);
+        }
+
 
         String msg = message.substring(2);
         JSONObject object = parseObject(msg);

@@ -47,7 +47,6 @@
                 gzfgeh:layout_widthPercent="10%w"
                 gzfgeh:layout_heightPercent="100%h"
                 android:layout_weight="1"
-                android:src="@null"
                 android:id="@+id/card1"/>
 
             <ImageView
@@ -56,7 +55,6 @@
                 gzfgeh:layout_widthPercent="10%w"
                 gzfgeh:layout_heightPercent="100%h"
                 android:layout_weight="1"
-                android:src="@null"
                 android:id="@+id/card2"/>
 
             <ImageView
@@ -65,7 +63,6 @@
                 gzfgeh:layout_widthPercent="10%w"
                 gzfgeh:layout_heightPercent="100%h"
                 android:layout_weight="1"
-                android:src="@null"
                 android:id="@+id/card3"/>
 
             <ImageView
@@ -74,7 +71,6 @@
                 gzfgeh:layout_widthPercent="10%w"
                 gzfgeh:layout_heightPercent="100%h"
                 android:layout_weight="1"
-                android:src="@null"
                 android:id="@+id/card4"/>
 
         </com.gzfgeh.battlegame.view.PercentLinearLayout>

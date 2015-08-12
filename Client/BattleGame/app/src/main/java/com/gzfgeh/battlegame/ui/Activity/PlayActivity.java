@@ -28,6 +28,7 @@ public class PlayActivity extends BaseActivity implements View.OnClickListener {
     private TextView tvCardsNum;
     private String card;
     private ImageView card1, card2, card3, card4;
+    private boolean setCard1 = false, setCard2 = false, setCard3 = false, setCard4 = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,36 +49,51 @@ public class PlayActivity extends BaseActivity implements View.OnClickListener {
              String cardType = array.getJSONObject(i).getString("name");
             switch (cardType){
                 case "kill":
-                    if (Bitmap.createBitmap(card1.getDrawingCache()) != null)
-                        card1.setImageDrawable(getResources().getDrawable(R.drawable.kill));
-                    else if (Bitmap.createBitmap(card2.getDrawingCache()) != null)
-                        card2.setImageDrawable(getResources().getDrawable(R.drawable.kill));
-                    else if (Bitmap.createBitmap(card3.getDrawingCache()) != null)
-                        card3.setImageDrawable(getResources().getDrawable(R.drawable.kill));
-                    else
-                        card4.setImageDrawable(getResources().getDrawable(R.drawable.kill));
+                    if (!setCard1){
+                        card1.setImageResource(R.drawable.kill);
+                        setCard1 = true;
+                    }else if (!setCard2){
+                        card2.setImageResource(R.drawable.kill);
+                        setCard2 = true;
+                    }else if (!setCard3){
+                        card3.setImageResource(R.drawable.kill);
+                        setCard3 = true;
+                    }else{
+                        card4.setImageResource(R.drawable.kill);
+                        setCard4 = true;
+                    }
                     break;
 
                 case "run":
-                    if (Bitmap.createBitmap(card1.getDrawingCache()) != null)
-                        card1.setImageDrawable(getResources().getDrawable(R.drawable.avoid));
-                    else if (Bitmap.createBitmap(card2.getDrawingCache()) != null)
-                        card2.setImageDrawable(getResources().getDrawable(R.drawable.avoid));
-                    else if (Bitmap.createBitmap(card3.getDrawingCache()) != null)
-                        card3.setImageDrawable(getResources().getDrawable(R.drawable.avoid));
-                    else
-                        card4.setImageDrawable(getResources().getDrawable(R.drawable.avoid));
+                    if (!setCard1){
+                        card1.setImageResource(R.drawable.avoid);
+                        setCard1 = true;
+                    }else if (!setCard2){
+                        card2.setImageResource(R.drawable.avoid);
+                        setCard2 = true;
+                    }else if (!setCard3){
+                        card3.setImageResource(R.drawable.avoid);
+                        setCard3 = true;
+                    }else{
+                        card4.setImageResource(R.drawable.avoid);
+                        setCard4 = true;
+                    }
                     break;
 
                 case "peach":
-                    if (Bitmap.createBitmap(card1.getDrawingCache()) != null)
-                        card1.setImageDrawable(getResources().getDrawable(R.drawable.peach));
-                    else if (Bitmap.createBitmap(card2.getDrawingCache()) != null)
-                        card2.setImageDrawable(getResources().getDrawable(R.drawable.peach));
-                    else if (Bitmap.createBitmap(card3.getDrawingCache()) != null)
-                        card3.setImageDrawable(getResources().getDrawable(R.drawable.peach));
-                    else
-                        card4.setImageDrawable(getResources().getDrawable(R.drawable.peach));
+                    if (!setCard1){
+                        card1.setImageResource(R.drawable.peach);
+                        setCard1 = true;
+                    }else if (!setCard2){
+                        card2.setImageResource(R.drawable.peach);
+                        setCard2 = true;
+                    }else if (!setCard3){
+                        card3.setImageResource(R.drawable.peach);
+                        setCard3 = true;
+                    }else{
+                        card4.setImageResource(R.drawable.peach);
+                        setCard4 = true;
+                    }
                     break;
             }
 
@@ -95,10 +111,6 @@ public class PlayActivity extends BaseActivity implements View.OnClickListener {
         card2 = (ImageView) findViewById(R.id.card2);
         card3 = (ImageView) findViewById(R.id.card3);
         card4 = (ImageView) findViewById(R.id.card4);
-        card1.setDrawingCacheEnabled(true);
-        card2.setDrawingCacheEnabled(true);
-        card3.setDrawingCacheEnabled(true);
-        card4.setDrawingCacheEnabled(true);
     }
 
 
