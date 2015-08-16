@@ -2,22 +2,31 @@ package com.gzfgeh.battlegame.ui.Activity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.gzfgeh.battlegame.R;
+import com.gzfgeh.battlegame.View.GridViewDialog;
 import com.gzfgeh.battlegame.utils.IntentTypeUtils;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import static com.alibaba.fastjson.JSON.parseArray;
 import static com.alibaba.fastjson.JSON.parseObject;
 
 /**
  * Created by guzhenfu on 15/8/5.
  */
-public class RoomActivity extends BaseActivity implements View.OnClickListener {
+public class RoomActivity extends BaseActivity implements View.OnClickListener, GridViewDialog.GirdViewDialogItem {
     private ImageView host, guest;
     private Button btnBegin, btnBack;
     private TextView tvRoomNum;
@@ -80,7 +89,37 @@ public class RoomActivity extends BaseActivity implements View.OnClickListener {
 
         String msg = message.substring(2);
         JSONObject object = parseObject(msg);
-        cardString = object.getString("card");
+        if (TextUtils.equals("character_list", object.getString("cmd"))){
+            String nameList = object.getString("person");
+            new GridViewDialog(this, getDatas(nameList), this);
+        }
+        //cardString = object.getString("card");
+    }
+
+    private List getDatas(String nameList){
+        List list = new ArrayList();
+        JSONArray array = parseArray(nameList);
+        for(int i=0; i<array.size(); i++){
+            Map<String, Object> map = new HashMap<>();
+            String name = array.getJSONObject(i).getString("name");
+            map.put("itemText", name);
+            switch (name){
+                case "zhangfei":
+                    map.put("itemImage", R.drawable.head_zf);
+                    break;
+
+                case "guanyu":
+                    map.put("itemImage", R.drawable.head_gy);
+                    break;
+
+                case "liubei":
+                    map.put("itemImage", R.drawable.head_lb);
+                    break;
+            }
+
+            list.add(map);
+        }
+        return list;
     }
 
     @Override
@@ -97,5 +136,10 @@ public class RoomActivity extends BaseActivity implements View.OnClickListener {
             default:
                 break;
         }
+    }
+
+    @Override
+    public void ItemClickListener(int position) {
+        Toast.makeText(this, "select" + position, Toast.LENGTH_SHORT).show();
     }
 }
