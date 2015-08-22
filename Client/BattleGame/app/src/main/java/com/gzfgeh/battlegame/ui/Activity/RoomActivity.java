@@ -12,7 +12,7 @@ import android.widget.Toast;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.gzfgeh.battlegame.R;
-import com.gzfgeh.battlegame.View.GridViewDialog;
+import com.gzfgeh.battlegame.utils.GridViewDialog;
 import com.gzfgeh.battlegame.utils.IntentTypeUtils;
 
 import java.util.ArrayList;
@@ -91,7 +91,9 @@ public class RoomActivity extends BaseActivity implements View.OnClickListener, 
         JSONObject object = parseObject(msg);
         if (TextUtils.equals("character_list", object.getString("cmd"))){
             String nameList = object.getString("person");
-            new GridViewDialog(this, getDatas(nameList), this);
+            GridViewDialog dialog = new GridViewDialog(this, getDatas(nameList));
+            dialog.setItem(this);
+            dialog.show();
         }
         //cardString = object.getString("card");
     }
@@ -140,6 +142,6 @@ public class RoomActivity extends BaseActivity implements View.OnClickListener, 
 
     @Override
     public void ItemClickListener(int position) {
-        Toast.makeText(this, "select" + position, Toast.LENGTH_SHORT).show();
+
     }
 }

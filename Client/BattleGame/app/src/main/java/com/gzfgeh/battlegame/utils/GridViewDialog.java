@@ -1,4 +1,4 @@
-package com.gzfgeh.battlegame.View;
+package com.gzfgeh.battlegame.utils;
 
 import android.app.Dialog;
 import android.content.Context;
@@ -24,13 +24,12 @@ public class GridViewDialog extends Dialog implements AdapterView.OnItemClickLis
     private GirdViewDialogItem item;
     private GridView gridView;
 
-    public GridViewDialog(Context context, List datas, GirdViewDialogItem item) {
+    public GridViewDialog(Context context, List datas) {
         super(context, R.style.dialog_fullscreen);
         setContentView(R.layout.girdview_dialog);
 
         this.context = context;
         this.datas = datas;
-        this.item = item;
         setProperty();
         gridView = (GridView) this.findViewById(R.id.GridView_toolbar);
         SimpleAdapter adapter = new SimpleAdapter(context, datas, R.layout.grid_view_item,
@@ -39,7 +38,6 @@ public class GridViewDialog extends Dialog implements AdapterView.OnItemClickLis
 
         gridView.setAdapter(adapter);
         gridView.setOnItemClickListener(this);
-
 
         View view = findViewById(R.id.mainlayout);
         view.getBackground().setAlpha(0);
@@ -55,14 +53,20 @@ public class GridViewDialog extends Dialog implements AdapterView.OnItemClickLis
 
     }
 
+    public void setItem(GirdViewDialogItem item) {
+        this.item = item;
+    }
+
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        item.ItemClickListener(position);
+        if (item != null)
+            item.ItemClickListener(position);
+
         this.dismiss();
     }
 
-
-    public interface GirdViewDialogItem{
+    public interface GirdViewDialogItem {
         void ItemClickListener(int position);
     }
+
 }
