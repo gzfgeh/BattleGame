@@ -228,11 +228,13 @@ public class CustomDialog extends Dialog implements DialogInterface{
     }
     public CustomDialog setButton1Click(View.OnClickListener click) {
         mButton1.setOnClickListener(click);
+        this.dismiss();
         return this;
     }
 
     public CustomDialog setButton2Click(View.OnClickListener click) {
         mButton2.setOnClickListener(click);
+        this.dismiss();
         return this;
     }
 

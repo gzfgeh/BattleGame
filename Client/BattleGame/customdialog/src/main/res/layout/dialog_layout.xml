@@ -31,10 +31,10 @@ https://github.com/android/platform_frameworks_base/blob/master/core/res/res/lay
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
-        android:background="@drawable/dialog_bg"
         android:clickable="false"
         android:orientation="vertical"
-        android:visibility="visible">
+        android:visibility="visible"
+        android:maxHeight="100dp">
 
         <LinearLayout
             android:id="@+id/topPanel"
@@ -96,16 +96,16 @@ https://github.com/android/platform_frameworks_base/blob/master/core/res/res/lay
                 android:layout_marginRight="15dp"
                 android:paddingBottom="8dip"
                 android:paddingTop="8dip"
-                android:textColor="#ffe7c3"
-                android:textIsSelectable="true"
-                android:text="@string/hello_world"/>
+                android:textColor="#FCCCCC"
+                android:textIsSelectable="true"/>
         </LinearLayout>
 
         <FrameLayout
             android:id="@+id/customPanel"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1">
+            android:layout_weight="1"
+            android:background="@android:color/white">
 
         </FrameLayout>
 
