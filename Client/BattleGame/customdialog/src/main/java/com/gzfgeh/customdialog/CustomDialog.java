@@ -14,6 +14,8 @@ import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ListAdapter;
+import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -180,7 +182,7 @@ public class CustomDialog extends Dialog implements DialogInterface{
     }
 
     public CustomDialog withMessage(CharSequence msg) {
-        toggleView(mLinearLayoutMsgView,msg);
+        toggleView(mLinearLayoutMsgView, msg);
         if (msg != null)
             mMessage.setText(msg);
         return this;
@@ -254,6 +256,9 @@ public class CustomDialog extends Dialog implements DialogInterface{
         }
         mFrameLayoutCustomView.addView(view);
 
+        if (view instanceof ListView)
+            setListViewHeightBasedOnChildren((ListView)view);
+
         return this;
     }
     public CustomDialog isCancelableOnTouchOutside(boolean cancelable) {
@@ -294,6 +299,21 @@ public class CustomDialog extends Dialog implements DialogInterface{
         instance = null;
         mButton1.setVisibility(View.GONE);
         mButton2.setVisibility(View.GONE);
+    }
+
+    public void setListViewHeightBasedOnChildren(ListView listView) {
+        ListAdapter listAdapter = listView.getAdapter();
+        if (listAdapter == null) {
+            return;
+        }
+        if (listAdapter.getCount() < 4)
+            return;
+
+        WindowManager wm = (WindowManager) getContext().getSystemService(Context.WINDOW_SERVICE);
+        int height = wm.getDefaultDisplay().getHeight();
+        ViewGroup.LayoutParams params = listView.getLayoutParams();
+        params.height = height/3;
+        listView.setLayoutParams(params);
     }
 
 }

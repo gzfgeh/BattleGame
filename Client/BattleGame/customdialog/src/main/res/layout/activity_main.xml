@@ -20,5 +20,36 @@
         android:layout_centerHorizontal="true"
         android:layout_below="@+id/normal_dialog"/>
 
+    <Button
+        android:id="@+id/list_view_image_dialog"
+        android:text="ListView Image Dialog"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/list_view_normal_dialog"/>
+
+    <Button
+        android:id="@+id/list_view_checked_text"
+        android:text="ListView Checked Dialog"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/list_view_image_dialog"/>
+
+    <Button
+        android:id="@+id/list_view_checked_multext"
+        android:text="ListView Checked Dialog"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/list_view_checked_text"/>
+
+    <Button
+        android:id="@+id/list_view_custom_checked"
+        android:text="ListView Custom Dialog"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/list_view_checked_multext"/>
 
 </RelativeLayout>
