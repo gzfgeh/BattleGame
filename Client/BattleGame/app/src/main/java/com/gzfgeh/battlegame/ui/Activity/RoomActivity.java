@@ -12,6 +12,8 @@ import android.widget.Toast;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.gzfgeh.battlegame.R;
+import com.gzfgeh.battlegame.socket.MinaManager;
+import com.gzfgeh.battlegame.utils.CmdUtils;
 import com.gzfgeh.battlegame.utils.GridViewDialog;
 import com.gzfgeh.battlegame.utils.IntentTypeUtils;
 
@@ -132,9 +134,12 @@ public class RoomActivity extends BaseActivity implements View.OnClickListener, 
                 break;
 
             case R.id.begin:
-                Intent intent = new Intent(this, PlayActivity.class);
-                intent.putExtra("card", cardString);
-                startActivity(intent);
+                JSONObject object = new JSONObject();
+                object.put("cmd", "room_start");
+                object.put("uid", uid);
+                MinaManager.sendMessage(this, CmdUtils.NetByte(object.toString()));
+                break;
+
             default:
                 break;
         }
@@ -142,6 +147,8 @@ public class RoomActivity extends BaseActivity implements View.OnClickListener, 
 
     @Override
     public void ItemClickListener(int position) {
-
+        Intent intent = new Intent(this, PlayActivity.class);
+        intent.putExtra("card", cardString);
+        startActivity(intent);
     }
 }

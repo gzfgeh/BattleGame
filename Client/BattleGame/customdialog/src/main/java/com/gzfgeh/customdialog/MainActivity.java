@@ -31,7 +31,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private ListView listView;
     private ListAdapter adapter;
     private CustomDialog dialogBuilder;
-    private HashMap<Integer,Boolean> checkedMap = null;
+    private HashMap<Integer,Boolean> checkedMap = new HashMap<Integer, Boolean>();;
     private static final String[] strs = new String[] {
         "first", "second", "third", "fourth", "fifth",
             "first", "second", "third", "fourth", "fifth",
@@ -150,7 +150,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
 
             case R.id.list_view_custom_checked:
-                checkedMap = new HashMap<Integer, Boolean>();
                 listView = new ListView(this);
                 listView.setItemsCanFocus(false);
                 listView.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
