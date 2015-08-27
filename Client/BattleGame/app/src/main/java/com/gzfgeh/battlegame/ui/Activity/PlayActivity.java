@@ -35,7 +35,7 @@ public class PlayActivity extends BaseActivity implements View.OnClickListener {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.play_activity);
         initView();
-        parseIntent();
+        //parseIntent();
     }
 
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)

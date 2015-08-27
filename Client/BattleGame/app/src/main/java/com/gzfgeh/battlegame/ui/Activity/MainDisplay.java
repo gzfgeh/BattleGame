@@ -102,7 +102,7 @@ public class MainDisplay extends BaseActivity implements View.OnClickListener, A
 
     @Override
     public void onMessageReceived(String message) {
-        Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
+        //Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
         String msg = message.substring(2);
         object = parseObject(msg);
 

@@ -57,7 +57,7 @@ public class LoginActivity extends BaseActivity {
         if (TextUtils.isEmpty(message))
             return;
 
-        Toast.makeText(this,message,Toast.LENGTH_SHORT).show();
+        //Toast.makeText(this,message,Toast.LENGTH_SHORT).show();
         String msg = message.substring(2);
         JSONObject object = parseObject(msg);
 

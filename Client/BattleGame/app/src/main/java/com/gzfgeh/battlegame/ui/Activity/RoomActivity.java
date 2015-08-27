@@ -3,6 +3,7 @@ package com.gzfgeh.battlegame.ui.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -37,6 +38,7 @@ public class RoomActivity extends BaseActivity implements View.OnClickListener, 
     private int rid, uid;
     private String enterType;
     private String cardString;
+    private List<Map<String, Object>> data = new ArrayList();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -81,23 +83,23 @@ public class RoomActivity extends BaseActivity implements View.OnClickListener, 
     @Override
     public void onMessageReceived(String message) {
         super.onMessageReceived(message);
-
+        Log.i("TAG", message);
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
-        if (!btnBegin.isEnabled()){
-            guest.setVisibility(View.VISIBLE);
-            btnBegin.setEnabled(true);
-        }
-
 
         String msg = message.substring(2);
         JSONObject object = parseObject(msg);
         if (TextUtils.equals("character_list", object.getString("cmd"))){
-            String nameList = object.getString("person");
-            GridViewDialog dialog = new GridViewDialog(this, getDatas(nameList));
+            String nameList = object.getString("character_list");
+            data = getDatas(nameList);
+            GridViewDialog dialog = new GridViewDialog(this, data);
             dialog.setItem(this);
             dialog.show();
+        }else{
+            if (!btnBegin.isEnabled()){
+                guest.setVisibility(View.VISIBLE);
+                btnBegin.setEnabled(true);
+            }
         }
-        //cardString = object.getString("card");
     }
 
     private List getDatas(String nameList){
@@ -147,6 +149,8 @@ public class RoomActivity extends BaseActivity implements View.OnClickListener, 
 
     @Override
     public void ItemClickListener(int position) {
+        HashMap map = (HashMap) data.get(position);
+        cardString = (String) map.get("itemText");
         Intent intent = new Intent(this, PlayActivity.class);
         intent.putExtra("card", cardString);
         startActivity(intent);
