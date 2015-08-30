@@ -61,7 +61,7 @@ public class LoginActivity extends BaseActivity {
         String msg = message.substring(2);
         JSONObject object = parseObject(msg);
 
-        if (once){
+        if (TextUtils.equals(object.getString("cmd"),"auth")){
             String id = object.getString("uid");
             if (id != null && Integer.valueOf(id) > 0)
                 uid = Integer.valueOf(id);

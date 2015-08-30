@@ -54,7 +54,7 @@ public class ConnectiorManager {
         connector.getSessionConfig().setKeepAlive(true);
         connector.getFilterChain().addLast("logger", new LoggingFilter());
         connector.getFilterChain().addLast("codec", new ProtocolCodecFilter(
-                new TextLineCodecFactory(Charset.forName("UTF-8"))));
+                new MyTextLineFactory(Charset.forName("UTF-8"))));
 
         connector.setHandler(new MinaClientHandler(context));
     }

@@ -303,7 +303,7 @@ public class CmdUtils {
     }
 
     public static String NetByte(String s){
-        short length = (short) (s.length() + 1);
+        short length = (short) (s.length());        // +1
         return toASCII(length) + s;
     }
 

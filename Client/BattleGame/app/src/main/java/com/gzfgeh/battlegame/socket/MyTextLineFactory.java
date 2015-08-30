@@ -5,6 +5,8 @@ import org.apache.mina.filter.codec.ProtocolCodecFactory;
 import org.apache.mina.filter.codec.ProtocolDecoder;
 import org.apache.mina.filter.codec.ProtocolEncoder;
 
+import java.nio.charset.Charset;
+
 /**
  * Created by guzhenfu on 15/7/24.
  */
@@ -13,9 +15,9 @@ public class MyTextLineFactory implements ProtocolCodecFactory{
     private MyTextLineEncode encode;
     private MyTextLineDecode decode;
 
-    public MyTextLineFactory(){
-        encode = new MyTextLineEncode();
-        decode = new MyTextLineDecode();
+    public MyTextLineFactory(Charset charset){
+        encode = new MyTextLineEncode(charset);
+        decode = new MyTextLineDecode(charset);
     }
 
     @Override
