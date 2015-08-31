@@ -44,8 +44,8 @@ public class LoginActivity extends BaseActivity {
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
-                String s = CmdUtils.NetByte(object.toString());
-                MinaManager.sendMessage(LoginActivity.this, s);
+                //String s = CmdUtils.NetByte(object.toString());
+                MinaManager.sendMessage(LoginActivity.this, object.toString());
             }
         });
 

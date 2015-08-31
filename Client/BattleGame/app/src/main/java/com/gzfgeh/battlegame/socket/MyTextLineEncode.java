@@ -1,5 +1,7 @@
 package com.gzfgeh.battlegame.socket;
 
+import com.gzfgeh.battlegame.utils.CmdUtils;
+
 import org.apache.mina.core.buffer.IoBuffer;
 import org.apache.mina.core.session.IoSession;
 import org.apache.mina.filter.codec.ProtocolEncoder;
@@ -21,17 +23,14 @@ public class MyTextLineEncode extends ProtocolEncoderAdapter {
 
     @Override
     public void encode(IoSession session, Object message, ProtocolEncoderOutput output) throws Exception {
-        String value = (String) message;
+        String s = (String) message;
+        String value = CmdUtils.NetByte(s);
         IoBuffer buf = IoBuffer.allocate(value.getBytes().length);
         buf.setAutoExpand(true);
         if (value != null)
             buf.put(value.trim().getBytes());
         buf.flip();
         output.write(buf);
-    }
-
-    @Override
-    public void dispose(IoSession ioSession) throws Exception {
-
+        output.flush();
     }
 }
