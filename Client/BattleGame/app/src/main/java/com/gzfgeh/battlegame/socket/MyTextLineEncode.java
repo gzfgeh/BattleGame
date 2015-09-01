@@ -23,14 +23,19 @@ public class MyTextLineEncode extends ProtocolEncoderAdapter {
 
     @Override
     public void encode(IoSession session, Object message, ProtocolEncoderOutput output) throws Exception {
-        String s = (String) message;
-        String value = CmdUtils.NetByte(s);
-        IoBuffer buf = IoBuffer.allocate(value.getBytes().length);
-        buf.setAutoExpand(true);
-        if (value != null)
-            buf.put(value.trim().getBytes());
-        buf.flip();
-        output.write(buf);
-        output.flush();
+        String s = null;
+        if (message instanceof String)
+            s = (String)message;
+        if (s != null){
+            String value = CmdUtils.NetByte(s);
+            IoBuffer buf = IoBuffer.allocate(value.length());
+            buf.setAutoExpand(true);
+            if (value != null)
+                buf.putString(value, charset.newEncoder());
+            buf.flip();
+            output.write(buf);
+            output.flush();
+        }
+
     }
 }

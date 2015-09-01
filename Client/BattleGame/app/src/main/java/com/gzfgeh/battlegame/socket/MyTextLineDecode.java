@@ -10,6 +10,7 @@ import org.apache.mina.filter.codec.ProtocolDecoderOutput;
 
 import java.nio.charset.Charset;
 import java.nio.charset.CharsetDecoder;
+import java.nio.charset.CharsetEncoder;
 import java.util.IllegalFormatCodePointException;
 import java.util.jar.Attributes;
 
@@ -72,7 +73,7 @@ public class MyTextLineDecode implements ProtocolDecoder {
             // 读取正常的消息，并写入输出流中，以便IoHandler进行处理
             else if (length >= packHeadLength && length - packHeadLength <= buf.remaining()) {
                 int oldLimit2 = buf.limit();
-                buf.limit(buf.position() + length - packHeadLength);
+                buf.limit(buf.position() + length - 1);
                 String content = buf.getString(ctx.getDecoder());
                 buf.limit(oldLimit2);
                 out.write(content);

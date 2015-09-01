@@ -21,7 +21,6 @@ public class LoginActivity extends BaseActivity {
     private Button btn_login;
     private TextView tv_register;
     private EditText et_user, et_password;
-    private boolean once = true;
     private int uid;
     private String rooms;
 
@@ -44,7 +43,6 @@ public class LoginActivity extends BaseActivity {
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
-                //String s = CmdUtils.NetByte(object.toString());
                 MinaManager.sendMessage(LoginActivity.this, object.toString());
             }
         });
@@ -56,10 +54,7 @@ public class LoginActivity extends BaseActivity {
     public void onMessageReceived(String message) {
         if (TextUtils.isEmpty(message))
             return;
-
-        //Toast.makeText(this,message,Toast.LENGTH_SHORT).show();
-        String msg = message.substring(2);
-        JSONObject object = parseObject(msg);
+        JSONObject object = parseObject(message);
 
         if (TextUtils.equals(object.getString("cmd"),"auth")){
             String id = object.getString("uid");
@@ -69,8 +64,7 @@ public class LoginActivity extends BaseActivity {
             object = new JSONObject();
             object.put("cmd", "room_list");
             object.put("page_index", "1");
-            MinaManager.sendMessage(this, CmdUtils.NetByte(object.toString()));
-            once = false;
+            MinaManager.sendMessage(this, object.toString());
         }else{
             String roomList = object.getString("room");
             if (roomList == null || TextUtils.isEmpty(roomList))
