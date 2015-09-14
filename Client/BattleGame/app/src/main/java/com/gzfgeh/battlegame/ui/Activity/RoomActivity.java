@@ -17,6 +17,7 @@ import com.gzfgeh.battlegame.socket.MinaManager;
 import com.gzfgeh.battlegame.utils.CmdUtils;
 import com.gzfgeh.battlegame.utils.GridViewDialog;
 import com.gzfgeh.battlegame.utils.IntentTypeUtils;
+import com.gzfgeh.battlegame.utils.LogUtils;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -83,11 +84,8 @@ public class RoomActivity extends BaseActivity implements View.OnClickListener, 
     @Override
     public void onMessageReceived(String message) {
         super.onMessageReceived(message);
-        Log.i("TAG", message);
-        Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
-
-        String msg = message.substring(2);
-        JSONObject object = parseObject(msg);
+        LogUtils.i("TAG", message);
+        JSONObject object = parseObject(message);
         if (TextUtils.equals("character_list", object.getString("cmd"))){
             String nameList = object.getString("character_list");
             data = getDatas(nameList);
@@ -136,10 +134,11 @@ public class RoomActivity extends BaseActivity implements View.OnClickListener, 
                 break;
 
             case R.id.begin:
-                JSONObject object = new JSONObject();
-                object.put("cmd", "room_start");
-                object.put("uid", uid);
-                MinaManager.sendMessage(this, CmdUtils.NetByte(object.toString()));
+                if (cardString != null){
+                    Intent intent = new Intent(this, PlayActivity.class);
+                    intent.putExtra("card", cardString);
+                    startActivity(intent);
+                }
                 break;
 
             default:
@@ -151,8 +150,5 @@ public class RoomActivity extends BaseActivity implements View.OnClickListener, 
     public void ItemClickListener(int position) {
         HashMap map = (HashMap) data.get(position);
         cardString = (String) map.get("itemText");
-        Intent intent = new Intent(this, PlayActivity.class);
-        intent.putExtra("card", cardString);
-        startActivity(intent);
     }
 }

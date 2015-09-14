@@ -10,6 +10,7 @@
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$" />
+            <option value="$PROJECT_DIR$/addsub" />
             <option value="$PROJECT_DIR$/app" />
             <option value="$PROJECT_DIR$/customdialog" />
             <option value="$PROJECT_DIR$/todaythings" />

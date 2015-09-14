@@ -1,1 +1,1 @@
-include ':app', ':todaythings', ':customdialog'
+include ':app', ':todaythings', ':customdialog', ':addsub'

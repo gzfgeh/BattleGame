@@ -48,6 +48,7 @@ public class MainDisplay extends BaseActivity implements View.OnClickListener, A
 
         parseIntent(getIntent());
         initView();
+        roomList = getDatas();
     }
 
     private void parseIntent(Intent intent){
@@ -78,33 +79,32 @@ public class MainDisplay extends BaseActivity implements View.OnClickListener, A
         }else{
             tvNoRoom.setVisibility(View.GONE);
             listRooms.setVisibility(View.VISIBLE);
-            listRooms.setAdapter(new RoomListAdapter(this, getDatas()));
+            listRooms.setAdapter(new RoomListAdapter(this, roomList));
         }
     }
 
     private List<Map<String, Object>> getDatas(){
+        List<Map<String, Object>> list = new ArrayList<>();
         JSONArray array = parseArray(rooms);
         for(int i=0; i<array.size(); i++){
             Map<String, Object> map = new HashMap<>();
             map.put("name", array.getJSONObject(i).getString("name"));
             map.put("number", array.getJSONObject(i).getString("rid"));
-            roomList.add(map);
+            list.add(map);
         }
-        return roomList;
+        return list;
     }
 
     @Override
     public void onClick(View v) {
         object = new JSONObject();
         object.put("cmd", "room_create");
-        MinaManager.sendMessage(this, CmdUtils.NetByte(object.toString()));
+        MinaManager.sendMessage(this, object.toString());
     }
 
     @Override
     public void onMessageReceived(String message) {
-        //Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
-        String msg = message.substring(2);
-        object = parseObject(msg);
+        object = parseObject(message);
 
         switch (object.getString("cmd")){
             case "room_create":
@@ -144,7 +144,7 @@ public class MainDisplay extends BaseActivity implements View.OnClickListener, A
         object.put("cmd", "room_enter");
         object.put("uid", String.valueOf(uid));
         object.put("rid", rid);
-        MinaManager.sendMessage(MainDisplay.this, CmdUtils.NetByte(object.toString()));
+        MinaManager.sendMessage(MainDisplay.this, object.toString());
     }
 
     @Override
