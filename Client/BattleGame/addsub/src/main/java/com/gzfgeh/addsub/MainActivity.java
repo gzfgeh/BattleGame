@@ -15,6 +15,7 @@ public class MainActivity extends AppCompatActivity implements AddSub.ChangeList
         setContentView(R.layout.activity_main);
 
         AddSub view = (AddSub) findViewById(R.id.add_sub);
+        view.setMaxNum(8);
         view.setChangeListener(this);
     }
 

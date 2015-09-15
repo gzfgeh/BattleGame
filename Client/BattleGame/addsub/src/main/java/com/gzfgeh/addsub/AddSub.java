@@ -20,6 +20,11 @@ public class AddSub extends LinearLayout implements View.OnClickListener {
     private EditText edt;
     private int num = 0;
     private ChangeListener listener = null;
+    private int maxNum = 0;
+
+    public void setMaxNum(int maxNum) {
+        this.maxNum = maxNum;
+    }
 
     public void setChangeListener(ChangeListener listener) {
         this.listener = listener;
@@ -46,6 +51,8 @@ public class AddSub extends LinearLayout implements View.OnClickListener {
         addBtn.setOnClickListener(this);
         subBtn.setOnClickListener(this);
         edt.addTextChangedListener(new TextWatcher() {
+            private boolean isChanged = false;
+
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
@@ -53,11 +60,15 @@ public class AddSub extends LinearLayout implements View.OnClickListener {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-
+                if (isChanged)
+                    return;
             }
 
             @Override
             public void afterTextChanged(Editable s) {
+                if (isChanged)
+                    return;
+
                 if (!addBtn.isClickable()) {
                     addBtn.setClickable(true);
                     addBtn.setAlpha(1.0f);
@@ -78,15 +89,20 @@ public class AddSub extends LinearLayout implements View.OnClickListener {
                     if (numInt <= 0) {
                         subBtn.setClickable(false);
                         subBtn.setAlpha(0.5f);
-                    } else if(numInt >= 6){
+                    } else if(numInt >= maxNum){
                         addBtn.setAlpha(0.5f);
                         addBtn.setClickable(false);
+                        numInt = maxNum;
+                        isChanged = true;
+                        edt.setText(String.valueOf(maxNum));
+                        isChanged = false;
+                        edt.invalidate();
                     }
                     else {
                         //设置EditText光标位置 为文本末端
                         edt.setSelection(edt.getText().toString().length());
-                        num = numInt;
                     }
+                    num = numInt;
                     if (listener != null)
                         listener.onChangeListener(Integer.valueOf(edt.getText().toString()));
                 }
@@ -131,7 +147,7 @@ public class AddSub extends LinearLayout implements View.OnClickListener {
                             subBtn.setClickable(true);
                             subBtn.setAlpha(1.0f);
                         }
-                        else if(num == 6) {
+                        else if(num == maxNum) {
                             addBtn.setClickable(false);
                             addBtn.setAlpha(0.5f);
                         }
