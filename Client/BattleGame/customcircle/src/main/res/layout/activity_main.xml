@@ -1,0 +1,32 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity"
+    android:orientation="vertical">
+
+    <TextView android:text="@string/hello_world"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+
+    <com.gzfgeh.customcircle.CustomProgressBar
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:layout_gravity="center"
+        app:firstColor="@android:color/white"
+        app:secondColor="@android:color/holo_blue_dark"
+        app:startProgress="-135"
+        app:maxProgress="200"
+        app:progress="45"
+        app:roundWidth="20dp"
+        app:textColor="@android:color/black"
+        app:textSize="30sp"
+        app:point="@mipmap/ic_launcher"
+        app:textDisplay="true"
+        app:centerTextSize="40sp"
+        app:centerTextColor="@android:color/holo_red_dark"/>
+
+
+</LinearLayout>
