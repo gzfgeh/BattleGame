@@ -1,7 +1,0 @@
-<resources>
-    <string name="app_name">TodayThings</string>
-
-    <string name="hello_world">Hello world!</string>
-    <string name="action_settings">Settings</string>
-    <string name="love_sentence">警示名言：</string>
-</resources>

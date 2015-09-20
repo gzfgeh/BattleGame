@@ -7,7 +7,7 @@
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/customcircle/customcircle.iml" filepath="$PROJECT_DIR$/customcircle/customcircle.iml" />
       <module fileurl="file://$PROJECT_DIR$/customdialog/customdialog.iml" filepath="$PROJECT_DIR$/customdialog/customdialog.iml" />
-      <module fileurl="file://$PROJECT_DIR$/todaythings/todaythings.iml" filepath="$PROJECT_DIR$/todaythings/todaythings.iml" />
+      <module fileurl="file://$PROJECT_DIR$/happytime/happytime.iml" filepath="$PROJECT_DIR$/happytime/happytime.iml" />
     </modules>
   </component>
 </project>

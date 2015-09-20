@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.gzfgeh.happytime.widget.PercentRelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="?attr/colorPrimary">
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/head"
+        android:layout_centerHorizontal="true"
+        app:layout_marginTopPercent="30%h"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/love_sentence"
+        app:layout_marginTopPercent="50%h"
+        app:layout_marginLeftPercent="5%w"
+        android:id="@+id/love_sentence"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/love_sentence"
+        android:layout_below="@+id/love_sentence"
+        app:layout_marginTopPercent="5%h"
+        app:layout_marginLeftPercent="15%w"
+        app:layout_marginRightPercent="15%w"
+        android:id="@+id/sentence"
+        android:maxLines="4"/>
+
+</com.gzfgeh.happytime.widget.PercentRelativeLayout>
