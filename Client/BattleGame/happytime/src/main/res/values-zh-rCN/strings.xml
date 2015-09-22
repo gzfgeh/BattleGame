@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">欢乐时刻</string>
+
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">设置</string>
+    <string name="love_sentence">警示名言：</string>
+    <string name="reward_function">打赏功能</string>
+    <string name="video_reward">拍视频    赚赏钱</string>
+</resources>
