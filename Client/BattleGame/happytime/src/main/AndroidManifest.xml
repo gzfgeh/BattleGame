@@ -18,6 +18,9 @@
             </intent-filter>
         </activity>
 
+        <activity android:name=".ui.activity.LaunchActivity"
+            android:theme="@android:style/Theme.NoTitleBar.Fullscreen"/>
+
         <activity android:name=".ui.activity.MainActivity"/>
 
     </application>

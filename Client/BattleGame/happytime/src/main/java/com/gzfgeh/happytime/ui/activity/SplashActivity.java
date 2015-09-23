@@ -45,7 +45,7 @@ public class SplashActivity extends BaseActivity{
                     e.printStackTrace();
                 }finally {
                     finish();
-                    startActivity(new Intent(SplashActivity.this, MainActivity.class));
+                    startActivity(new Intent(SplashActivity.this, LaunchActivity.class));
                 }
             }
         };
