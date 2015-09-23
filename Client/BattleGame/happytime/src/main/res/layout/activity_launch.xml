@@ -6,7 +6,8 @@
     <com.gzfgeh.happytime.widget.GuideViewPager
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/vp_launcher"/>
+        android:id="@+id/vp_launcher"
+        android:background="@drawable/bg_launcher"/>
 
     <RelativeLayout
         android:layout_width="match_parent"

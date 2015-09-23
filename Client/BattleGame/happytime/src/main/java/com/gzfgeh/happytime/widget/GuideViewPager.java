@@ -4,7 +4,9 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Paint;
+import android.graphics.PixelFormat;
 import android.graphics.Rect;
+import android.graphics.drawable.Drawable;
 import android.support.v4.view.ViewPager;
 import android.util.AttributeSet;
 
@@ -21,6 +23,7 @@ public class GuideViewPager extends ViewPager{
 
     public GuideViewPager(Context context, AttributeSet attrs) {
         super(context, attrs);
+        bg = drawableToBitmap(getBackground());
     }
 
     /**
@@ -45,5 +48,16 @@ public class GuideViewPager extends ViewPager{
     public void setBackGroud(Bitmap paramBitmap) {
         this.bg = paramBitmap;
         this.b.setFilterBitmap(true);
+    }
+
+    public Bitmap drawableToBitmap(Drawable drawable) {
+        int width = drawable.getIntrinsicWidth();
+        int height = drawable.getIntrinsicHeight();
+        Bitmap bitmap = Bitmap.createBitmap(width, height, drawable.getOpacity() != PixelFormat.OPAQUE ? Bitmap.Config.ARGB_8888 : Bitmap.Config.RGB_565);
+        Canvas canvas = new Canvas(bitmap);
+        drawable.setBounds(0, 0, width, height);
+        drawable.draw(canvas);
+        return bitmap;
+
     }
 }

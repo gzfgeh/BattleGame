@@ -49,7 +49,7 @@ public class LaunchActivity extends FragmentActivity implements ViewPager.OnPage
         }
 
         viewPager = (GuideViewPager) findViewById(R.id.vp_launcher);
-        viewPager.setBackGroud(BitmapFactory.decodeResource(getResources(), R.drawable.bg_launcher));
+        //viewPager.setBackGroud(BitmapFactory.decodeResource(getResources(), R.drawable.bg_launcher));
         mFragmentList = new ArrayList<>();
         RewardLauncherFragment rewardFragment = new RewardLauncherFragment();
         mFragmentList.add(rewardFragment);
