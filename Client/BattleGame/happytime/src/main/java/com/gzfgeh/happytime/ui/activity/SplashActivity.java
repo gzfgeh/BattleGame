@@ -7,6 +7,7 @@ import android.view.MotionEvent;
 import android.widget.TextView;
 
 import com.gzfgeh.happytime.APP;
+import com.gzfgeh.happytime.Global;
 import com.gzfgeh.happytime.R;
 import com.gzfgeh.happytime.utils.ShareUtils;
 
@@ -17,7 +18,6 @@ import java.util.Random;
  */
 public class SplashActivity extends BaseActivity{
     private static final int TIME = 1000;
-    private static final String USER = "USER";
     private String userSentence = null;
     private TextView sentence;
 
@@ -45,7 +45,10 @@ public class SplashActivity extends BaseActivity{
                     e.printStackTrace();
                 }finally {
                     finish();
-                    startActivity(new Intent(SplashActivity.this, LaunchActivity.class));
+                    if (!ShareUtils.getValue(Global.APP_ONCE, false))
+                        startActivity(new Intent(SplashActivity.this, LaunchActivity.class));
+                    else
+                        startActivity(new Intent(SplashActivity.this, MainActivity.class));
                 }
             }
         };
@@ -59,7 +62,7 @@ public class SplashActivity extends BaseActivity{
     }
 
     private void getSentence(){
-        boolean once = ShareUtils.getValue(USER, false);
+        boolean once = ShareUtils.getValue(Global.USER_SET, false);
         if (once){
             userSentence = ShareUtils.getValue(APP.USER_SENTENCE, null);
         }else {

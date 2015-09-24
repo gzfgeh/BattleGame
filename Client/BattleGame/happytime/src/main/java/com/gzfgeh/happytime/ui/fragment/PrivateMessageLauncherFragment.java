@@ -18,6 +18,7 @@ import com.gzfgeh.happytime.R;
 public class PrivateMessageLauncherFragment extends LauncherBaseFragment {
     private ImageView ivLikeVideo,ivThinkReward,ivThisWeek,ivWatchMovie;
     private Animation likeAnimation,thinkAnimation,watchAnimation,thisWeekAnimation;
+    private boolean mStarted;
 
     @Nullable
     @Override
@@ -44,7 +45,8 @@ public class PrivateMessageLauncherFragment extends LauncherBaseFragment {
             public void onAnimationRepeat(Animation animation) {}
             @Override
             public void onAnimationEnd(Animation animation) {//鐩戝惉鍔ㄧ敾缁撴潫
-                thinkReward();
+                if (mStarted)
+                    thinkReward();
             }
         });
     }
@@ -63,7 +65,8 @@ public class PrivateMessageLauncherFragment extends LauncherBaseFragment {
             public void onAnimationRepeat(Animation animation) {}
             @Override
             public void onAnimationEnd(Animation animation) {
-                watchMovie();
+                if (mStarted)
+                    watchMovie();
             }
         });
     }
@@ -81,7 +84,8 @@ public class PrivateMessageLauncherFragment extends LauncherBaseFragment {
             public void onAnimationRepeat(Animation animation) {}
             @Override
             public void onAnimationEnd(Animation animation) {
-                thisWeek();
+                if (mStarted)
+                    thisWeek();
             }
         });
     }
@@ -96,15 +100,22 @@ public class PrivateMessageLauncherFragment extends LauncherBaseFragment {
 
     @Override
     public void startAnimation() {
+        ivLikeVideo.setVisibility(View.GONE);
+        ivThinkReward.setVisibility(View.GONE);
+        ivWatchMovie.setVisibility(View.GONE);
+        ivThisWeek.setVisibility(View.GONE);
+        mStarted = true;
         new Handler().postDelayed(new Runnable() {//寤舵椂0.5绉掍箣鍚庡紑鍚枩娆㈣棰戝姩鐢�			@Override
             public void run() {
-                likeVideoAnimation();
+                if (mStarted)
+                    likeVideoAnimation();
             }
         }, 500);
     }
 
     @Override
     public void stopAnimation() {
+        mStarted = false;
         ivLikeVideo.clearAnimation();
         ivThinkReward.clearAnimation();
         ivWatchMovie.clearAnimation();

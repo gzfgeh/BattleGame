@@ -75,7 +75,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        app:layout_marginBottomPercent="10%h"
+        app:layout_marginBottomPercent="15%h"
         android:text="开心看视频   快乐交朋友"
         android:textColor="#FFFFFFFF"
         android:textSize="27dp"/>

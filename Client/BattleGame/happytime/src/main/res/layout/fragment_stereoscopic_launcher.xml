@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.gzfgeh.happytime.widget.PercentLinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.gzfgeh.happytime.widget.PercentLinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -8,17 +9,23 @@
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        app:layout_widthPercent="55%h"
+        app:layout_heightPercent="55%h"
         app:layout_marginLeftPercent="3%w"
-        app:layout_marginTopPercent="20%h"
+        app:layout_marginTopPercent="10%h"
         android:layout_gravity="center"
         android:src="@drawable/launcher_the_world_is_so_big_not_to_see" />
 
     <ImageView
-        app:layout_marginBottomPercent="10%h"
         android:layout_gravity="center_horizontal"
         android:id="@+id/imgView_immediate_experience"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/launcher_immediate_experience" />
+        app:layout_widthPercent="25%h"
+        app:layout_heightPercent="8%h"
+        android:src="@drawable/launcher_immediate_experience"
+        app:layout_marginTopPercent="5%h"/>
+
+
 
 </com.gzfgeh.happytime.widget.PercentLinearLayout>

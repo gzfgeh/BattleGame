@@ -22,6 +22,7 @@ import com.nineoldandroids.animation.ObjectAnimator;
 public class RewardLauncherFragment extends LauncherBaseFragment {
     private ImageView ivReward, ivGold;
     private Bitmap goldBitmap;
+    private boolean mStarted;
 
     @Nullable
     @Override
@@ -36,6 +37,7 @@ public class RewardLauncherFragment extends LauncherBaseFragment {
 
     @Override
     public void startAnimation() {
+        mStarted = true;
         TranslateAnimation animation = new TranslateAnimation(0,0,0,goldBitmap.getHeight()*3 + 80);
         animation.setDuration(1000);
         animation.setFillAfter(true);
@@ -45,31 +47,33 @@ public class RewardLauncherFragment extends LauncherBaseFragment {
             public void onAnimationStart(Animation animation) {}
             @Override
             public void onAnimationEnd(Animation animation) {
-                ivReward.setVisibility(View.VISIBLE);
-                Animation anim= AnimationUtils.loadAnimation(getActivity(), R.anim.reward_launcher);
-                ivReward.startAnimation(anim);
-                anim.setAnimationListener(new Animation.AnimationListener() {
-                    @Override
-                    public void onAnimationStart(Animation animation) {}
-                    @Override
-                    public void onAnimationEnd(Animation animation) {
-                        AlphaAnimation alphaAnimation=new AlphaAnimation(1,0);
-                        alphaAnimation.setDuration(1000);
-                        ivReward.startAnimation(alphaAnimation);
-                        alphaAnimation.setAnimationListener(new Animation.AnimationListener() {
-                            @Override
-                            public void onAnimationStart(Animation animation) {}
-                            @Override
-                            public void onAnimationEnd(Animation animation) {
-                                ivReward.setVisibility(View.GONE);
-                            }
-                            @Override
-                            public void onAnimationRepeat(Animation animation) {}
-                        });
-                    }
-                    @Override
-                    public void onAnimationRepeat(Animation animation) {}
-                });
+                if (mStarted){
+                    ivReward.setVisibility(View.VISIBLE);
+                    Animation anim= AnimationUtils.loadAnimation(getActivity(), R.anim.reward_launcher);
+                    ivReward.startAnimation(anim);
+                    anim.setAnimationListener(new Animation.AnimationListener() {
+                        @Override
+                        public void onAnimationStart(Animation animation) {}
+                        @Override
+                        public void onAnimationEnd(Animation animation) {
+                            AlphaAnimation alphaAnimation=new AlphaAnimation(1,0);
+                            alphaAnimation.setDuration(1000);
+                            ivReward.startAnimation(alphaAnimation);
+                            alphaAnimation.setAnimationListener(new Animation.AnimationListener() {
+                                @Override
+                                public void onAnimationStart(Animation animation) {}
+                                @Override
+                                public void onAnimationEnd(Animation animation) {
+                                    ivReward.setVisibility(View.GONE);
+                                }
+                                @Override
+                                public void onAnimationRepeat(Animation animation) {}
+                            });
+                        }
+                        @Override
+                        public void onAnimationRepeat(Animation animation) {}
+                    });
+                }
             }
             @Override
             public void onAnimationRepeat(Animation animation) {}
@@ -78,6 +82,7 @@ public class RewardLauncherFragment extends LauncherBaseFragment {
 
     @Override
     public void stopAnimation() {
+        mStarted = false;
         ivGold.clearAnimation();
     }
 }
