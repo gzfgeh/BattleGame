@@ -10,7 +10,9 @@ import android.widget.LinearLayout;
 
 import com.gzfgeh.happytime.R;
 import com.gzfgeh.happytime.ui.fragment.LauncherBaseFragment;
+import com.gzfgeh.happytime.ui.fragment.PrivateMessageLauncherFragment;
 import com.gzfgeh.happytime.ui.fragment.RewardLauncherFragment;
+import com.gzfgeh.happytime.ui.fragment.StereoscopicLauncherFragment;
 import com.gzfgeh.happytime.widget.BaseFragmentAdapter;
 import com.gzfgeh.happytime.widget.GuideViewPager;
 
@@ -41,23 +43,24 @@ public class LaunchActivity extends FragmentActivity implements ViewPager.OnPage
             mIcons[i] = ivIcon;
 
             LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
-                    new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT,
-                            ViewGroup.LayoutParams.WRAP_CONTENT));
-            params.leftMargin = 20;
-            params.rightMargin = 20;
+                    new ViewGroup.LayoutParams(30,30));
+            params.setMargins(30,0,30,120);
             viewGroup.addView(ivIcon, params);
         }
 
         viewPager = (GuideViewPager) findViewById(R.id.vp_launcher);
-        //viewPager.setBackGroud(BitmapFactory.decodeResource(getResources(), R.drawable.bg_launcher));
+        viewPager.setBackGround(BitmapFactory.decodeResource(getResources(), R.drawable.bg_launcher));
         mFragmentList = new ArrayList<>();
         RewardLauncherFragment rewardFragment = new RewardLauncherFragment();
+        PrivateMessageLauncherFragment messageLauncherFragment = new PrivateMessageLauncherFragment();
+        StereoscopicLauncherFragment stereoscopicLauncherFragment = new StereoscopicLauncherFragment();
         mFragmentList.add(rewardFragment);
-        mFragmentList.add(rewardFragment);
-        mFragmentList.add(rewardFragment);
+        mFragmentList.add(messageLauncherFragment);
+        mFragmentList.add(stereoscopicLauncherFragment);
 
         BaseFragmentAdapter mAdapter = new BaseFragmentAdapter(getSupportFragmentManager(),mFragmentList);
         viewPager.setAdapter(mAdapter);
+        viewPager.setOffscreenPageLimit(2);
         viewPager.setOnPageChangeListener(this);
         viewPager.setCurrentItem(0);
     }
@@ -70,7 +73,7 @@ public class LaunchActivity extends FragmentActivity implements ViewPager.OnPage
     @Override
     public void onPageSelected(int i) {
         for(int j=0; j<mFragmentList.size(); j++){
-            mIcons[i].setBackgroundResource(j == i ? R.drawable.page_indicator_focused : R.drawable.page_indicator_unfocused);
+            mIcons[j].setBackgroundResource(j == i ? R.drawable.page_indicator_focused : R.drawable.page_indicator_unfocused);
         }
         LauncherBaseFragment fragment = mFragmentList.get(i);
         fragment.startAnimation();

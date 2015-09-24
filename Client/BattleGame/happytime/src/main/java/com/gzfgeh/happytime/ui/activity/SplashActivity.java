@@ -16,7 +16,7 @@ import java.util.Random;
  * Created by guzhenfu on 15/8/8.
  */
 public class SplashActivity extends BaseActivity{
-    private static final int TIME = 3000;
+    private static final int TIME = 1000;
     private static final String USER = "USER";
     private String userSentence = null;
     private TextView sentence;

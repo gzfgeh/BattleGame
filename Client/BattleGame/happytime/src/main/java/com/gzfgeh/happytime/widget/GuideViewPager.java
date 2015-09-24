@@ -15,7 +15,7 @@ import android.util.AttributeSet;
  */
 public class GuideViewPager extends ViewPager{
     private Bitmap bg;
-    private Paint b = new Paint(1);
+    private Paint b = new Paint(20);
 
     public GuideViewPager(Context context){
         this(context, null);
@@ -23,7 +23,6 @@ public class GuideViewPager extends ViewPager{
 
     public GuideViewPager(Context context, AttributeSet attrs) {
         super(context, attrs);
-        bg = drawableToBitmap(getBackground());
     }
 
     /**
@@ -33,6 +32,7 @@ public class GuideViewPager extends ViewPager{
     @Override
     protected void dispatchDraw(Canvas canvas) {
         if (bg != null){
+            b.setStrokeWidth(10);
             int width = bg.getWidth();
             int height = bg.getHeight();
             int count = getAdapter().getCount();
@@ -45,19 +45,8 @@ public class GuideViewPager extends ViewPager{
         super.dispatchDraw(canvas);
     }
 
-    public void setBackGroud(Bitmap paramBitmap) {
+    public void setBackGround(Bitmap paramBitmap) {
         this.bg = paramBitmap;
         this.b.setFilterBitmap(true);
-    }
-
-    public Bitmap drawableToBitmap(Drawable drawable) {
-        int width = drawable.getIntrinsicWidth();
-        int height = drawable.getIntrinsicHeight();
-        Bitmap bitmap = Bitmap.createBitmap(width, height, drawable.getOpacity() != PixelFormat.OPAQUE ? Bitmap.Config.ARGB_8888 : Bitmap.Config.RGB_565);
-        Canvas canvas = new Canvas(bitmap);
-        drawable.setBounds(0, 0, width, height);
-        drawable.draw(canvas);
-        return bitmap;
-
     }
 }
