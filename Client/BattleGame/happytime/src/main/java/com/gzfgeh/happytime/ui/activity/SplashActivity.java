@@ -64,7 +64,7 @@ public class SplashActivity extends BaseActivity{
     private void getSentence(){
         boolean once = ShareUtils.getValue(Global.USER_SET, false);
         if (once){
-            userSentence = ShareUtils.getValue(APP.USER_SENTENCE, null);
+            userSentence = ShareUtils.getValue(Global.USER_SENTENCE, null);
         }else {
             int num = new Random().nextInt(10) + 1;
             String s = String.valueOf(num);

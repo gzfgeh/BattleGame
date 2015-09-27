@@ -2,16 +2,19 @@ package com.gzfgeh.happytime;
 
 import android.app.Application;
 import android.content.Context;
+import android.content.pm.ApplicationInfo;
 
+import com.gzfgeh.happytime.utils.LogUtils;
 import com.gzfgeh.happytime.utils.ShareUtils;
+import com.squareup.leakcanary.LeakCanary;
+import com.squareup.leakcanary.RefWatcher;
 
 /**
  * Created by guzhenfu on 15/8/8.
  */
 public class APP extends Application {
-    private static final String ONCE = "ONCE";
-    public static final String USER_SENTENCE = "USER_SENTENCE";
     private static Context context;
+    private RefWatcher refWatcher;
 
     public static Context getContext(){
         return context;
@@ -22,11 +25,18 @@ public class APP extends Application {
         super.onCreate();
         context = getApplicationContext();
         setSentence();
+        if (debugMode()){
+            refWatcher = LeakCanary.install(this);
+            LogUtils.LEVEL = 0;
+        }else{
+            refWatcher = RefWatcher.DISABLED;
+            LogUtils.LEVEL = LogUtils.NOTHING;
+        }
 
     }
 
     private void setSentence(){
-        boolean once = ShareUtils.getValue(ONCE, false);
+        boolean once = ShareUtils.getValue(Global.APP_ONCE, false);
         if (!once){
             ShareUtils.putValue("1", "我说1");
             ShareUtils.putValue("2", "我说2");
@@ -38,7 +48,15 @@ public class APP extends Application {
             ShareUtils.putValue("8", "我说8");
             ShareUtils.putValue("9", "我说9");
             ShareUtils.putValue("10", "我说10");
-            ShareUtils.putValue(ONCE, true);
+        }
+    }
+
+    private static boolean debugMode(){
+        ApplicationInfo info = getContext().getApplicationInfo();
+        if ((info.flags & ApplicationInfo.FLAG_DEBUGGABLE) != 0) {
+            return true;
+        }else{
+            return false;
         }
     }
 }

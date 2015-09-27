@@ -47,6 +47,7 @@
         <attr name="pstsTabBackground" format="reference" />
         <attr name="pstsShouldExpand" format="boolean" />
         <attr name="pstsTextAllCaps" format="boolean" />
+        <attr name="pstsSelectTextColor" format="color" />
     </declare-styleable>
 
 </resources>

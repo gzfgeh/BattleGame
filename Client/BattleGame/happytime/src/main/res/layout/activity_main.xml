@@ -12,7 +12,7 @@
         android:layout_height="match_parent"
         android:id="@+id/drawer_layout">
 
-        <include layout="@layout/main_fragment"/>
+        <include layout="@layout/main_view_pager"/>
 
         <include layout="@layout/left_menu" />
 
