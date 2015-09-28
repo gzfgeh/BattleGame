@@ -37,10 +37,9 @@ public class GifFragment extends Fragment implements WaveSwipeRefreshLayout.OnRe
         mWaveSwipeRefreshLayout = (WaveSwipeRefreshLayout) rootView.findViewById(R.id.main_swipe);
         mWaveSwipeRefreshLayout.setColorSchemeColors(Color.WHITE, Color.WHITE);
         mWaveSwipeRefreshLayout.setOnRefreshListener(this);
-        mWaveSwipeRefreshLayout.setWaveColor(Color.BLUE);
-        //mWaveSwipeRefreshLayout.setMaxDropHeight(1500);
+        mWaveSwipeRefreshLayout.setWaveColor(Color.RED);
 
-        mListView = (ListView) rootView.findViewById(R.id.main_list);
+        mListView = (ListView) rootView.findViewById(android.R.id.list);
         return rootView;
     }
 
@@ -54,4 +53,5 @@ public class GifFragment extends Fragment implements WaveSwipeRefreshLayout.OnRe
             }
         }, 3000);
     }
+
 }

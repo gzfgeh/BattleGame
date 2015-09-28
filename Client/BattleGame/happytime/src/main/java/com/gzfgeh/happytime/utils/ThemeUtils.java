@@ -1,6 +1,7 @@
 package com.gzfgeh.happytime.utils;
 
 import android.app.Activity;
+import android.content.res.TypedArray;
 
 import com.gzfgeh.happytime.R;
 
@@ -42,6 +43,14 @@ public class ThemeUtils {
                 break;
         }
         activity.setTheme(style);
+    }
+
+    public static int getThemeColor(Activity activity){
+        TypedArray array = activity.getTheme().obtainStyledAttributes(new int[]{android.R.attr.colorBackground,
+                android.R.attr.textColorPrimary,});
+        int color = array.getColor(0, 0xFF00FF);
+        array.recycle();
+        return  color;
     }
 
     public enum Theme{
