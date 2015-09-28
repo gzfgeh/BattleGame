@@ -1,19 +1,56 @@
 <?xml version="1.0" encoding="utf-8"?>
-<jp.co.recruit_lifestyle.android.widget.WaveSwipeRefreshLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/main_swipe">
+     android:orientation="vertical">
 
-    <FrameLayout xmlns:fab="http://schemas.android.com/apk/res-auto"
+    <FrameLayout
+        android:id="@+id/frameLayout"
+        android:layout_width="fill_parent"
+        android:layout_height="180dp"
+        android:orientation="vertical" >
+
+        <com.gzfgeh.happytime.widget.ViewFlow
+            android:id="@+id/viewFlow"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent" />
+
+        <FrameLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:background="@android:color/transparent"
+            android:gravity="center"
+            android:padding="3dip" >
+
+            <com.gzfgeh.happytime.widget.CircleFlowIndicator
+                android:id="@+id/viewFlowIndicator"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal|bottom"
+                android:padding="2dip"
+                app:activeColor="#ff0000"
+                app:activeType="fill"
+                app:circleSeparation="20dip"
+                app:inactiveColor="#ffffff"
+                app:inactiveType="fill"
+                app:radius="4dip" />
+        </FrameLayout>
+    </FrameLayout>
+
+
+    <jp.co.recruit_lifestyle.android.widget.WaveSwipeRefreshLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:id="@+id/main_swipe">
 
         <ListView
             android:id="@android:id/list"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
-    </FrameLayout>
 
-</jp.co.recruit_lifestyle.android.widget.WaveSwipeRefreshLayout>
+    </jp.co.recruit_lifestyle.android.widget.WaveSwipeRefreshLayout>
+</LinearLayout>
 
