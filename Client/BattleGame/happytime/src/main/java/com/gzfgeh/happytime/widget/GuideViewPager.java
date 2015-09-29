@@ -49,4 +49,6 @@ public class GuideViewPager extends ViewPager{
         this.bg = paramBitmap;
         this.b.setFilterBitmap(true);
     }
+
+
 }

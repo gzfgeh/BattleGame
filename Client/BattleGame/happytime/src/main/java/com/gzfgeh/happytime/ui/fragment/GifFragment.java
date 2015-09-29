@@ -8,7 +8,9 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.ScrollView;
 
 import com.gzfgeh.happytime.Global;
 import com.gzfgeh.happytime.R;
@@ -17,6 +19,7 @@ import com.gzfgeh.happytime.widget.CircleFlowIndicator;
 import com.gzfgeh.happytime.widget.ViewFlow;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import jp.co.recruit_lifestyle.android.widget.WaveSwipeRefreshLayout;
 
@@ -48,9 +51,33 @@ public class GifFragment extends Fragment implements WaveSwipeRefreshLayout.OnRe
         mWaveSwipeRefreshLayout.setColorSchemeColors(Color.WHITE, Color.WHITE);
         mWaveSwipeRefreshLayout.setOnRefreshListener(this);
         mWaveSwipeRefreshLayout.setWaveColor(Color.RED);
+        ScrollView scrollView = (ScrollView) rootView.findViewById(R.id.scrollView);
+        scrollView.smoothScrollTo(0, 0);
         mListView = (ListView) rootView.findViewById(android.R.id.list);
+        mListView.setAdapter(new ArrayAdapter<>(getActivity(), android.R.layout.simple_expandable_list_item_1, getData()));
         initViewFlow(rootView);
         return rootView;
+    }
+
+    private List<String> getData(){
+        List<String> data = new ArrayList<>();
+        data.add("测试数据1");
+        data.add("测试数据2");
+        data.add("测试数据3");
+        data.add("测试数据4");
+        data.add("测试数据5");
+        data.add("测试数据6");
+        data.add("测试数据7");
+        data.add("测试数据8");
+        data.add("测试数据1");
+        data.add("测试数据2");
+        data.add("测试数据3");
+        data.add("测试数据4");
+        data.add("测试数据5");
+        data.add("测试数据6");
+        data.add("测试数据7");
+        data.add("测试数据8");
+        return data;
     }
 
     private void initViewFlow(View rootView) {
@@ -84,7 +111,7 @@ public class GifFragment extends Fragment implements WaveSwipeRefreshLayout.OnRe
         // 我的ImageAdapter实际图片张数为3
 
         mViewFlow.setFlowIndicator(mFlowIndicator);
-        mViewFlow.setTimeSpan(4500);
+        mViewFlow.setTimeSpan(1000);
         mViewFlow.setSelection(imageUrlList.size() * 1000); // 设置初始位置
         mViewFlow.startAutoFlowTimer(); // 启动自动播放
     }

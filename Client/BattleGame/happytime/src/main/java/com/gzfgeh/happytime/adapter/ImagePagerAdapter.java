@@ -8,10 +8,7 @@ package com.gzfgeh.happytime.adapter;
 import java.util.List;
 
 import android.content.Context;
-import android.content.Intent;
-import android.graphics.Bitmap;
 import android.os.Bundle;
-import android.text.TextUtils;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
@@ -19,10 +16,12 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.android.volley.RequestQueue;
+import com.android.volley.toolbox.ImageLoader;
+import com.android.volley.toolbox.NetworkImageView;
+import com.android.volley.toolbox.Volley;
 import com.gzfgeh.happytime.R;
-import com.nostra13.universalimageloader.core.DisplayImageOptions;
-import com.nostra13.universalimageloader.core.ImageLoader;
-import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
+import com.gzfgeh.happytime.module.BitmapCache;
 
 /**
  * @Description: 图片适配器
@@ -36,30 +35,21 @@ public class ImagePagerAdapter extends BaseAdapter {
 	private List<String> urlTitlesList;
 	private int size;
 	private boolean isInfiniteLoop;
-	private ImageLoader imageLoader;
-	private DisplayImageOptions options;
+	private ImageLoader mImageLoader;
 
 	public ImagePagerAdapter(Context context, List<String> imageIdList,
-			List<String> urllist, List<String> urlTitlesList) {
+			List<String> urlList, List<String> urlTitlesList) {
 		this.context = context;
 		this.imageIdList = imageIdList;
 		if (imageIdList != null) {
 			this.size = imageIdList.size();
 		}
-		this.linkUrlArray = urllist;
+		this.linkUrlArray = urlList;
 		this.urlTitlesList = urlTitlesList;
 		isInfiniteLoop = false;
-		// 初始化imageLoader 否则会报错
-		imageLoader = ImageLoader.getInstance();
-		imageLoader.init(ImageLoaderConfiguration.createDefault(context));
-		options = new DisplayImageOptions.Builder()
-				.showStubImage(R.drawable.ic_add) // 设置图片下载期间显示的图片
-				.showImageForEmptyUri(R.drawable.ic_add) // 设置图片Uri为空或是错误的时候显示的图片
-				.showImageOnFail(R.drawable.ic_add) // 设置图片加载或解码过程中发生错误显示的图片
-				.cacheInMemory(true) // 设置下载的图片是否缓存在内存中
-				.cacheOnDisc(true) // 设置下载的图片是否缓存在SD卡中
-				.build();
 
+		RequestQueue mQueue = Volley.newRequestQueue(context);
+		mImageLoader = new ImageLoader(mQueue, new BitmapCache());
 	}
 
 	@Override
@@ -83,7 +73,7 @@ public class ImagePagerAdapter extends BaseAdapter {
 		final ViewHolder holder;
 		if (view == null) {
 			holder = new ViewHolder();
-			view = holder.imageView = new ImageView(context);
+			view = holder.imageView = new NetworkImageView(context);
 			holder.imageView
 					.setLayoutParams(new ViewGroup.LayoutParams(-1, -1));
 			holder.imageView.setScaleType(ImageView.ScaleType.FIT_XY);
@@ -92,9 +82,9 @@ public class ImagePagerAdapter extends BaseAdapter {
 			holder = (ViewHolder) view.getTag();
 		}
 
-		imageLoader.displayImage(
-				(String) this.imageIdList.get(getPosition(position)),
-				holder.imageView, options);
+		holder.imageView.setDefaultImageResId(R.drawable.ic_add);
+		holder.imageView.setErrorImageResId(R.drawable.ic_add);
+		holder.imageView.setImageUrl(this.imageIdList.get(getPosition(position)), mImageLoader);
 
 		holder.imageView.setOnClickListener(new OnClickListener() {
 
@@ -127,7 +117,7 @@ public class ImagePagerAdapter extends BaseAdapter {
 
 	private static class ViewHolder {
 
-		ImageView imageView;
+		NetworkImageView imageView;
 	}
 
 	/**
