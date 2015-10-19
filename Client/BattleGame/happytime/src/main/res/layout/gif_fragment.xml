@@ -1,63 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <jp.co.recruit_lifestyle.android.widget.WaveSwipeRefreshLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/main_swipe">
 
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/scrollView">
-
-
-    <LinearLayout
+    <ListView
+        android:id="@android:id/list"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
-
-        <FrameLayout
-            android:id="@+id/frameLayout"
-            android:layout_width="fill_parent"
-            android:layout_height="260dp"
-            android:orientation="vertical" >
-
-            <com.gzfgeh.happytime.widget.ViewFlow
-                android:id="@+id/viewFlow"
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent" />
-
-            <FrameLayout
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="bottom"
-                android:background="@android:color/transparent"
-                android:gravity="center"
-                android:padding="3dip" >
-
-                <com.gzfgeh.happytime.widget.CircleFlowIndicator
-                    android:id="@+id/viewFlowIndicator"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal|bottom"
-                    android:padding="2dip"
-                    app:activeColor="?attr/colorAccent"
-                    app:activeType="fill"
-                    app:circleSeparation="20dip"
-                    app:inactiveColor="@android:color/white"
-                    app:inactiveType="fill"
-                    app:radius="4dip" />
-            </FrameLayout>
-        </FrameLayout>
-
-        <com.gzfgeh.happytime.widget.ListViewForScrollView
-            android:id="@android:id/list"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:focusable="false"/>
-    </LinearLayout>
-    </ScrollView>
+        android:focusable="false"/>
 
 </jp.co.recruit_lifestyle.android.widget.WaveSwipeRefreshLayout>
 

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:banner="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.gzfgeh.happytime.banner.SimpleImageBanner
+        android:id="@+id/banner"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        banner:bb_barColor="#88000000"
+        banner:bb_barPaddingBottom="5dp"
+        banner:bb_barPaddingLeft="10dp"
+        banner:bb_barPaddingRight="10dp"
+        banner:bb_barPaddingTop="5dp"
+        banner:bb_delay="1"
+        banner:bb_indicatorGravity="RIGHT"
+        banner:bb_isAutoScrollEnable="true"
+        banner:bb_isBarShowWhenLast="true"
+        banner:bb_isIndicatorShow="true"
+        banner:bb_isLoopEnable="true"
+        banner:bb_isTitleShow="true"
+        banner:bb_period="10"
+        banner:bb_scale="0.5625"
+        banner:bb_textColor="#ffffff"
+        banner:bb_textSize="13.5sp"
+        banner:bib_indicatorCornerRadius="3dp"
+        banner:bib_indicatorGap="8dp"
+        banner:bib_indicatorHeight="6dp"
+        banner:bib_indicatorSelectColor="#ffffff"
+        banner:bib_indicatorStyle="CORNER_RECTANGLE"
+        banner:bib_indicatorUnselectColor="#88ffffff"
+        banner:bib_indicatorWidth="6dp"/>
+
+</LinearLayout>
