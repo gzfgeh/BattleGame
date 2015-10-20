@@ -16,11 +16,9 @@ import com.flyco.banner.transform.ZoomOutSlideTransformer;
 import com.flyco.banner.widget.Banner.base.BaseBanner;
 import com.gzfgeh.happytime.Global;
 import com.gzfgeh.happytime.R;
-import com.gzfgeh.happytime.adapter.ImagePagerAdapter;
-import com.gzfgeh.happytime.banner.DataProvider;
-import com.gzfgeh.happytime.banner.SimpleImageBanner;
-import com.gzfgeh.happytime.widget.CircleFlowIndicator;
-import com.gzfgeh.happytime.widget.ViewFlow;
+import com.gzfgeh.happytime.module.banner.DataProvider;
+import com.gzfgeh.happytime.module.banner.SimpleImageBanner;
+import com.gzfgeh.happytime.ui.activity.BannerActivityOne;
 import com.gzfgeh.happytime.widget.ZoomInEnter;
 
 import java.util.ArrayList;
@@ -69,7 +67,15 @@ public class GifFragment extends Fragment implements WaveSwipeRefreshLayout.OnRe
         banner.setOnItemClickL(new BaseBanner.OnItemClickL() {
             @Override
             public void onItemClick(int i) {
-                //BannerFragmentOne.newInstance(i + 1 + "");
+                switch (i){
+                    case 0:
+                        startActivity(new Intent(getActivity(), BannerActivityOne.class));
+                        break;
+
+                    case 1:
+                        break;
+                }
+
             }
         });
     }
@@ -103,7 +109,7 @@ public class GifFragment extends Fragment implements WaveSwipeRefreshLayout.OnRe
             public void run() {
                 mWaveSwipeRefreshLayout.setRefreshing(false);
             }
-        }, 3000);
+        }, 2000);
     }
 
 }

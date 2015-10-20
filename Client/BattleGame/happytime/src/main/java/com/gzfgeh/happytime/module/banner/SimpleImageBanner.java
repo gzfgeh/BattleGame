@@ -1,4 +1,4 @@
-package com.gzfgeh.happytime.banner;
+package com.gzfgeh.happytime.module.banner;
 
 import android.content.Context;
 import android.graphics.Color;

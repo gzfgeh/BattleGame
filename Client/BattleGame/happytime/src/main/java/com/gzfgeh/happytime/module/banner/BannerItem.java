@@ -1,4 +1,4 @@
-package com.gzfgeh.happytime.banner;
+package com.gzfgeh.happytime.module.banner;
 
 /**
  * Created by guzhenfu on 15/10/19.
