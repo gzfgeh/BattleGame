@@ -5,18 +5,12 @@
     android:layout_height="match_parent"
     android:id="@+id/main_swipe">
 
-    <ListView
-        android:id="@android:id/list"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:focusable="false"/>
-<!--
     <android.support.v7.widget.RecyclerView
         android:id="@+id/id_recyclerview"
-        android:divider="#ffff0000"
+        android:divider="?attr/colorAccent"
         android:dividerHeight="10dp"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />-->
+        android:layout_height="wrap_content"/>
 
 
 </jp.co.recruit_lifestyle.android.widget.WaveSwipeRefreshLayout>

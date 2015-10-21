@@ -23,7 +23,6 @@ repositories {
     maven {
         url "https://jitpack.io"
     }
-    jcenter()
 }
 
 dependencies {
@@ -39,5 +38,5 @@ dependencies {
     compile 'com.flyco.banner:FlycoBanner_Lib:1.1.8@aar'
     compile 'me.imid.swipebacklayout.lib:library:1.0.0'
     compile 'com.android.support:recyclerview-v7:22.2.1'
-    compile (group: 'com.tumblr', name: 'bookends', version: '1.0.0', ext: 'aar')
+    compile 'jp.wasabeef:recyclerview-animators:1.3.0'
 }
