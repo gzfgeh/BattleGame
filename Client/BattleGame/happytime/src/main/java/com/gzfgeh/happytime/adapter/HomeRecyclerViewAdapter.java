@@ -1,7 +1,6 @@
 package com.gzfgeh.happytime.adapter;
 
 import android.content.Context;
-import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,7 +12,6 @@ import com.flyco.banner.widget.Banner.base.BaseBanner;
 import com.gzfgeh.happytime.R;
 import com.gzfgeh.happytime.module.banner.DataProvider;
 import com.gzfgeh.happytime.module.banner.SimpleImageBanner;
-import com.gzfgeh.happytime.ui.activity.BannerActivityOne;
 import com.gzfgeh.happytime.widget.ZoomInEnter;
 
 import java.util.List;
@@ -26,6 +24,9 @@ public class HomeRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.V
     private static final int TYPE_ITEM = 1;
     private Context context;
     private List<String> data;
+    private RecyclerItemClickListener mListener;
+    private RecyclerItemLongClickListener mLongListener;
+    private BaseBanner.OnItemClickL mListenerL;
 
     public HomeRecyclerViewAdapter(Context context, List<String> data){
         this.data = data;
@@ -36,10 +37,10 @@ public class HomeRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.V
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
         if (i == TYPE_HEADER){
             View view = LayoutInflater.from(context).inflate(R.layout.list_view_header, viewGroup, false);
-            return new VHHeader(view);
+            return new VHHeader(view, mListenerL);
         }else if (i == TYPE_ITEM){
             View view = LayoutInflater.from(context).inflate(R.layout.recycler_view_item, viewGroup, false);
-            return new VHItem(view);
+            return new VHItem(view, mListener, mLongListener);
         }
         throw new RuntimeException("there is no type that matches the type ");
     }
@@ -55,18 +56,6 @@ public class HomeRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.V
                     .setSource(DataProvider.getList())
                     .setTransformerClass(ZoomOutSlideTransformer.class)
                     .startScroll();
-            ((VHHeader) holder).banner.setOnItemClickL(new BaseBanner.OnItemClickL() {
-                @Override
-                public void onItemClick(int i) {
-                    switch (i) {
-                        case 0:
-
-                        case 1:
-                            break;
-                    }
-
-                }
-            });
         }
     }
 
@@ -101,21 +90,70 @@ public class HomeRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.V
         notifyItemInserted(position);
     }
 
-    static class VHItem extends RecyclerView.ViewHolder {
-        TextView title;
+    public void setListener(RecyclerItemClickListener mListener) {
+        this.mListener = mListener;
+    }
 
-        public VHItem(View itemView) {
+    public void setLongListener(RecyclerItemLongClickListener mLongListener) {
+        this.mLongListener = mLongListener;
+    }
+
+    public void setListenerL(BaseBanner.OnItemClickL mListenerL) {
+        this.mListenerL = mListenerL;
+    }
+
+    static class VHItem extends RecyclerView.ViewHolder implements View.OnClickListener, View.OnLongClickListener {
+        private TextView title;
+        private RecyclerItemClickListener mListener;
+        private RecyclerItemLongClickListener mLongListener;
+
+        public VHItem(View itemView, RecyclerItemClickListener listener,
+                      RecyclerItemLongClickListener longListener) {
             super(itemView);
             title = (TextView) itemView.findViewById(R.id.id_num);
+            mListener = listener;
+            mLongListener = longListener;
+            itemView.setOnClickListener(this);
+            itemView.setOnLongClickListener(this);
+        }
+
+        @Override
+        public void onClick(View v) {
+            if (mListener != null)
+                mListener.onItemClick(v, getPosition());
+        }
+
+        @Override
+        public boolean onLongClick(View v) {
+            if (mLongListener != null)
+                mLongListener.onItemLongClick(v, getPosition());
+            return true;
         }
     }
 
-    static class VHHeader extends RecyclerView.ViewHolder {
-        SimpleImageBanner banner;
+    static class VHHeader extends RecyclerView.ViewHolder implements BaseBanner.OnItemClickL {
+        private SimpleImageBanner banner;
+        private BaseBanner.OnItemClickL mListener;
 
-        public VHHeader(View itemView) {
+        public VHHeader(View itemView, BaseBanner.OnItemClickL listener) {
             super(itemView);
             banner = (SimpleImageBanner) itemView.findViewById(R.id.banner);
+            mListener = listener;
+            banner.setOnItemClickL(this);
         }
+
+        @Override
+        public void onItemClick(int i) {
+            if (mListener != null)
+                mListener.onItemClick(i);
+        }
+    }
+
+    public interface RecyclerItemClickListener {
+        public void onItemClick(View view,int postion);
+    }
+
+    public interface RecyclerItemLongClickListener {
+        public void onItemLongClick(View view,int postion);
     }
 }

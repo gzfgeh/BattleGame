@@ -1,16 +1,21 @@
 package com.gzfgeh.happytime.ui.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.view.MenuItemCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.widget.SearchView;
+import android.support.v7.widget.ShareActionProvider;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
 
 import com.gzfgeh.happytime.R;
 import com.gzfgeh.happytime.ui.fragment.GifFragment;
@@ -79,6 +84,27 @@ public class MainActivity extends BaseActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_main, menu);
+        SearchView searchView = (SearchView) menu.findItem(R.id.ab_search).getActionView();
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String s) {
+                Toast.makeText(MainActivity.this, "提交文本：" + s, Toast.LENGTH_SHORT).show();
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String s) {
+                Toast.makeText(MainActivity.this, "当前文本：" + s, Toast.LENGTH_SHORT).show();
+                return false;
+            }
+        });
+
+        ShareActionProvider mShareActionProvider =(ShareActionProvider)
+                MenuItemCompat.getActionProvider(menu.findItem(R.id.action_share));
+        Intent share = new Intent(Intent.ACTION_SEND);
+        share.setAction(Intent.ACTION_SEND).putExtra(Intent.EXTRA_TEXT, "TEST")
+                .setType("text/plain");
+        mShareActionProvider.setShareIntent(share);
         return true;
     }
 
@@ -86,8 +112,10 @@ public class MainActivity extends BaseActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
 
-        if (id == R.id.action_settings) {
-            return true;
+        switch (id){
+            case R.id.action_settings:
+                Toast.makeText(this, "action setting", Toast.LENGTH_SHORT).show();
+                return true;
         }
 
         return super.onOptionsItemSelected(item);
