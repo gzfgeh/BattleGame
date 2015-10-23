@@ -30,6 +30,10 @@ public class HomeRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.V
     private RecyclerItemLongClickListener mLongListener;
     private BaseBanner.OnItemClickL mListenerL;
 
+    public List<String> getData() {
+        return data;
+    }
+
     public HomeRecyclerViewAdapter(Context context, List<String> data){
         this.data = data;
         this.context = context;
@@ -54,7 +58,7 @@ public class HomeRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.V
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int i) {
         if (holder instanceof VHItem) {
-            String dataItem = data.get(i);
+            String dataItem = data.get(i - 1);
             ((VHItem) holder).title.setText(dataItem);
         } else if (holder instanceof VHHeader) {
             ((VHHeader) holder).banner
@@ -67,7 +71,7 @@ public class HomeRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.V
 
     @Override
     public int getItemCount() {
-        return data.size();
+        return data.size() + 2;
     }
 
     @Override
@@ -86,7 +90,7 @@ public class HomeRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.V
     }
 
     private boolean isPositionFooter(int position){
-        return position == data.size();
+        return position == data.size() + 1;
     }
 
     public void remove(int position) {

@@ -46,10 +46,13 @@ public class GifFragment extends Fragment implements SwipeRefreshLayout.OnRefres
                 case 0:
                     Toast.makeText(getActivity(), "DOWN", Toast.LENGTH_SHORT).show();
                     mSwipeRefreshLayout.setRefreshing(false);
+                    mAdapter.getData().clear();
+                    addList();
                     break;
+
                 case 1:
                     Toast.makeText(getActivity(), "UP", Toast.LENGTH_SHORT).show();
-
+                    addList();
                     break;
 
                 default:
@@ -59,6 +62,23 @@ public class GifFragment extends Fragment implements SwipeRefreshLayout.OnRefres
         }
 
     };
+
+    private void addList() {
+        List<String> list = getList();
+        mAdapter.getData().addAll(list);
+        mAdapter.notifyDataSetChanged();
+    }
+
+    private List<String> getList() {
+        List<String> list = new ArrayList<>();
+        int size = mAdapter.getData().size();
+        int lastPosition = size > 0 ? Integer.valueOf(mAdapter.getData().get(size - 2)) : 0;
+        for (int i = 1; i < 20; i++) {
+            list.add(lastPosition + i + "");
+        }
+
+        return list;
+    }
 
     public static GifFragment newInstance(String title){
         GifFragment fragment = new GifFragment();
@@ -102,23 +122,22 @@ public class GifFragment extends Fragment implements SwipeRefreshLayout.OnRefres
         mAdapter.setListener(this);
         mAdapter.setLongListener(this);
         mAdapter.setListenerL(this);
-//        mRecyclerView.setOnScrollListener(new RecyclerView.OnScrollListener() {
-//            @Override
-//            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
-//                super.onScrollStateChanged(recyclerView, newState);
-//                if (newState == RecyclerView.SCROLL_STATE_IDLE
-//                        && lastVisibleItem + 1 == mAdapter.getItemCount()) {
-//                    mSwipeRefreshLayout.setRefreshing(true);
-//                    handler.sendEmptyMessageDelayed(0, 3000);
-//                }
-//            }
-//
-//            @Override
-//            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
-//                super.onScrolled(recyclerView, dx, dy);
-//                lastVisibleItem = mLayoutManager.findLastVisibleItemPosition();
-//            }
-//        });
+        mRecyclerView.setOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+                super.onScrollStateChanged(recyclerView, newState);
+                if (newState == RecyclerView.SCROLL_STATE_IDLE
+                        && lastVisibleItem + 1 == mAdapter.getItemCount()) {
+                    handler.sendEmptyMessageDelayed(1, 3000);
+                }
+            }
+
+            @Override
+            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+                lastVisibleItem = mLayoutManager.findLastVisibleItemPosition();
+            }
+        });
         return rootView;
     }
 
