@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Message;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -37,7 +38,27 @@ public class GifFragment extends Fragment implements SwipeRefreshLayout.OnRefres
     private HomeRecyclerViewAdapter mAdapter;
     private LinearLayoutManager mLayoutManager;
     private int lastVisibleItem;
-    private boolean isLoading, hasMore;
+    private Handler handler = new Handler() {
+
+        @Override
+        public void handleMessage(Message msg) {
+            switch (msg.what) {
+                case 0:
+                    Toast.makeText(getActivity(), "DOWN", Toast.LENGTH_SHORT).show();
+                    mSwipeRefreshLayout.setRefreshing(false);
+                    break;
+                case 1:
+                    Toast.makeText(getActivity(), "UP", Toast.LENGTH_SHORT).show();
+
+                    break;
+
+                default:
+                    break;
+            }
+
+        }
+
+    };
 
     public static GifFragment newInstance(String title){
         GifFragment fragment = new GifFragment();
@@ -57,9 +78,20 @@ public class GifFragment extends Fragment implements SwipeRefreshLayout.OnRefres
         mSwipeRefreshLayout.setProgressViewOffset(false, 0, (int) TypedValue
                 .applyDimension(TypedValue.COMPLEX_UNIT_DIP, 48, getResources()
                         .getDisplayMetrics()));
+        mSwipeRefreshLayout.post(new Runnable() {
 
+            @SuppressWarnings("static-access")
+            @Override
+            public void run() {
+                try {
+                    handler.sendEmptyMessageDelayed(0, 3000);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        });
 
-        mRecyclerView = (RecyclerView) rootView.findViewById(R.id.id_recyclerview);
+        mRecyclerView = (RecyclerView) rootView.findViewById(R.id.id_recycler_view);
         mLayoutManager = new LinearLayoutManager(getActivity());
         mRecyclerView.setLayoutManager(mLayoutManager);
         mAdapter = new HomeRecyclerViewAdapter(getActivity(), getData());
@@ -70,60 +102,47 @@ public class GifFragment extends Fragment implements SwipeRefreshLayout.OnRefres
         mAdapter.setListener(this);
         mAdapter.setLongListener(this);
         mAdapter.setListenerL(this);
-        mRecyclerView.setOnScrollListener(new RecyclerView.OnScrollListener() {
-            @Override
-            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
-                super.onScrollStateChanged(recyclerView, newState);
-                if (!isLoading && hasMore
-                        && mAdapter.getItemCount() == (mLayoutManager
-                        .findLastVisibleItemPosition() + 1)
-                        && newState == RecyclerView.SCROLL_STATE_IDLE) {
-                    isLoading = true;
-                    requestServerArticleMore();
-                }
-            }
-
-            @Override
-            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
-                super.onScrolled(recyclerView, dx, dy);
-                mRecyclerView.setEnabled(mLayoutManager
-                        .findFirstCompletelyVisibleItemPosition() == 0);
-            }
-        });
+//        mRecyclerView.setOnScrollListener(new RecyclerView.OnScrollListener() {
+//            @Override
+//            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+//                super.onScrollStateChanged(recyclerView, newState);
+//                if (newState == RecyclerView.SCROLL_STATE_IDLE
+//                        && lastVisibleItem + 1 == mAdapter.getItemCount()) {
+//                    mSwipeRefreshLayout.setRefreshing(true);
+//                    handler.sendEmptyMessageDelayed(0, 3000);
+//                }
+//            }
+//
+//            @Override
+//            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+//                super.onScrolled(recyclerView, dx, dy);
+//                lastVisibleItem = mLayoutManager.findLastVisibleItemPosition();
+//            }
+//        });
         return rootView;
-    }
-
-    private void requestServerArticleMore() {
-
     }
 
     private List<String> getData(){
         List<String> data = new ArrayList<>();
-        for (int i=0; i<100; i++){
+        for (int i=0; i<10; i++){
             data.add("" + i);
         }
         return data;
     }
 
-
     @Override
     public void onRefresh() {
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                mSwipeRefreshLayout.setRefreshing(false);
-            }
-        }, 2000);
+        handler.sendEmptyMessageDelayed(0, 3000);
     }
 
     @Override
-    public void onItemClick(View view, int postion) {
-        Toast.makeText(getActivity(), "click --" + postion, Toast.LENGTH_SHORT).show();
+    public void onItemClick(View view, int position) {
+        Toast.makeText(getActivity(), "click --" + position, Toast.LENGTH_SHORT).show();
     }
 
     @Override
-    public void onItemLongClick(View view, int postion) {
-        Toast.makeText(getActivity(), "long click --" + postion, Toast.LENGTH_SHORT).show();
+    public void onItemLongClick(View view, int position) {
+        Toast.makeText(getActivity(), "long click --" + position, Toast.LENGTH_SHORT).show();
     }
 
     @Override

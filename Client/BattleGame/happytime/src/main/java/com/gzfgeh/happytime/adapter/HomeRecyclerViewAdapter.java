@@ -20,8 +20,10 @@ import java.util.List;
  * Created by guzhenfu on 15/10/20.
  */
 public class HomeRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
-    private static final int TYPE_HEADER = 0;
-    private static final int TYPE_ITEM = 1;
+    private static final int TYPE_HEADER    = 0;
+    private static final int TYPE_ITEM      = 1;
+    private static final int TYPE_FOOTER    = 2;
+
     private Context context;
     private List<String> data;
     private RecyclerItemClickListener mListener;
@@ -41,6 +43,10 @@ public class HomeRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.V
         }else if (i == TYPE_ITEM){
             View view = LayoutInflater.from(context).inflate(R.layout.recycler_view_item, viewGroup, false);
             return new VHItem(view, mListener, mLongListener);
+        } else if (i == TYPE_FOOTER){
+            View view = LayoutInflater.from(context).inflate(R.layout.recycler_view_footer_view, viewGroup, false);
+            view.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+            return new VHFooter(view);
         }
         throw new RuntimeException("there is no type that matches the type ");
     }
@@ -61,13 +67,16 @@ public class HomeRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.V
 
     @Override
     public int getItemCount() {
-        return data.size() + 1;
+        return data.size();
     }
 
     @Override
     public int getItemViewType(int position) {
         if (isPositionHeader(position))
             return TYPE_HEADER;
+
+        if (isPositionFooter(position))
+            return TYPE_FOOTER;
 
         return TYPE_ITEM;
     }
@@ -76,8 +85,8 @@ public class HomeRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.V
         return position == 0;
     }
 
-    private String getItem(int position) {
-        return data.get(position - 1);
+    private boolean isPositionFooter(int position){
+        return position == data.size();
     }
 
     public void remove(int position) {
@@ -149,11 +158,18 @@ public class HomeRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.V
         }
     }
 
+    static class VHFooter extends RecyclerView.ViewHolder {
+
+        public VHFooter(View itemView) {
+            super(itemView);
+        }
+    }
+
     public interface RecyclerItemClickListener {
-        public void onItemClick(View view,int postion);
+        public void onItemClick(View view,int position);
     }
 
     public interface RecyclerItemLongClickListener {
-        public void onItemLongClick(View view,int postion);
+        public void onItemLongClick(View view,int position);
     }
 }
