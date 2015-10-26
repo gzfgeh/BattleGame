@@ -8,6 +8,7 @@ import android.os.Message;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.TypedValue;
@@ -20,6 +21,7 @@ import com.flyco.banner.widget.Banner.base.BaseBanner;
 import com.gzfgeh.happytime.Global;
 import com.gzfgeh.happytime.R;
 import com.gzfgeh.happytime.adapter.HomeRecyclerViewAdapter;
+import com.gzfgeh.happytime.adapter.SampleAdapter;
 import com.gzfgeh.happytime.ui.activity.BannerActivityOne;
 
 import java.util.ArrayList;
@@ -72,8 +74,8 @@ public class GifFragment extends Fragment implements SwipeRefreshLayout.OnRefres
     private List<String> getList() {
         List<String> list = new ArrayList<>();
         int size = mAdapter.getData().size();
-        int lastPosition = size > 0 ? Integer.valueOf(mAdapter.getData().get(size - 2)) : 0;
-        for (int i = 1; i < 20; i++) {
+        int lastPosition = size > 0 ? Integer.valueOf(mAdapter.getData().get(size - 1)) : 0;
+        for (int i = 1; i < 10; i++) {
             list.add(lastPosition + i + "");
         }
 
@@ -114,11 +116,14 @@ public class GifFragment extends Fragment implements SwipeRefreshLayout.OnRefres
         mRecyclerView = (RecyclerView) rootView.findViewById(R.id.id_recycler_view);
         mLayoutManager = new LinearLayoutManager(getActivity());
         mRecyclerView.setLayoutManager(mLayoutManager);
-        mAdapter = new HomeRecyclerViewAdapter(getActivity(), getData());
+        mAdapter = new HomeRecyclerViewAdapter(getActivity());
+
         mRecyclerView.setItemAnimator(new FadeInAnimator());
-        AlphaInAnimationAdapter alphaAdapter = new AlphaInAnimationAdapter(mAdapter);
-        ScaleInAnimationAdapter scaleAdapter = new ScaleInAnimationAdapter(alphaAdapter);
-        mRecyclerView.setAdapter(scaleAdapter);
+        mRecyclerView.setHasFixedSize(true);
+        //AlphaInAnimationAdapter alphaAdapter = new AlphaInAnimationAdapter(mAdapter);
+        //ScaleInAnimationAdapter scaleAdapter = new ScaleInAnimationAdapter(alphaAdapter);
+        //mRecyclerView.setAdapter(scaleAdapter);
+        mRecyclerView.setAdapter(mAdapter);
         mAdapter.setListener(this);
         mAdapter.setLongListener(this);
         mAdapter.setListenerL(this);

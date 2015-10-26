@@ -14,6 +14,7 @@ import com.gzfgeh.happytime.module.banner.DataProvider;
 import com.gzfgeh.happytime.module.banner.SimpleImageBanner;
 import com.gzfgeh.happytime.widget.ZoomInEnter;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -34,8 +35,8 @@ public class HomeRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.V
         return data;
     }
 
-    public HomeRecyclerViewAdapter(Context context, List<String> data){
-        this.data = data;
+    public HomeRecyclerViewAdapter(Context context){
+        data = new ArrayList<>();
         this.context = context;
     }
 
