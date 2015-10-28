@@ -146,14 +146,6 @@ public class GifFragment extends Fragment implements SwipeRefreshLayout.OnRefres
         return rootView;
     }
 
-    private List<String> getData(){
-        List<String> data = new ArrayList<>();
-        for (int i=0; i<10; i++){
-            data.add("" + i);
-        }
-        return data;
-    }
-
     @Override
     public void onRefresh() {
         handler.sendEmptyMessageDelayed(0, 3000);
