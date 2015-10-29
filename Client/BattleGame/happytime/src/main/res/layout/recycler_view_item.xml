@@ -11,4 +11,12 @@
         android:text="1"
         android:layout_margin="20dp"
         android:background="@android:color/holo_blue_dark"/>
+
+    <pl.droidsonroids.gif.GifImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:src="@drawable/load"
+        android:background="@android:color/white"
+        android:id="@+id/gif_view"/>
+
 </FrameLayout>
