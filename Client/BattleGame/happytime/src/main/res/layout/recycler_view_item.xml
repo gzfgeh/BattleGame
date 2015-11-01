@@ -1,22 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content" >
+    android:layout_height="wrap_content"
+    android:background="@android:color/holo_blue_dark"
+    android:layout_margin="10dp">
 
     <TextView
         android:id="@+id/id_num"
-        android:layout_width="match_parent"
-        android:layout_height="100dp"
-        android:gravity="center"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
         android:text="1"
-        android:layout_margin="20dp"
-        android:background="@android:color/holo_blue_dark"/>
+        android:textColor="@android:color/holo_red_dark"
+        android:layout_margin="5dp"/>
 
     <pl.droidsonroids.gif.GifImageView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:src="@drawable/load"
-        android:background="@android:color/white"
-        android:id="@+id/gif_view"/>
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/gif_view"
+        android:layout_centerHorizontal="true"
+        android:layout_margin="5dp"
+        android:layout_below="@+id/id_num"/>
 
-</FrameLayout>
+
+
+</RelativeLayout>

@@ -1,14 +1,12 @@
 package com.gzfgeh.happytime.ui.fragment;
 
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.TypedValue;
@@ -21,15 +19,18 @@ import com.flyco.banner.widget.Banner.base.BaseBanner;
 import com.gzfgeh.happytime.Global;
 import com.gzfgeh.happytime.R;
 import com.gzfgeh.happytime.adapter.HomeRecyclerViewAdapter;
-import com.gzfgeh.happytime.adapter.SampleAdapter;
+import com.gzfgeh.happytime.module.banner.DataProvider;
+import com.gzfgeh.happytime.module.recyclerview.DividerItemDecoration;
+import com.gzfgeh.happytime.module.recyclerview.RecyclerDataProvider;
+import com.gzfgeh.happytime.module.recyclerview.RecyclerViewItem;
 import com.gzfgeh.happytime.ui.activity.BannerActivityOne;
+import com.gzfgeh.happytime.ui.activity.RecyclerViewItemActivity;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import jp.wasabeef.recyclerview.animators.FadeInAnimator;
-import jp.wasabeef.recyclerview.animators.adapters.AlphaInAnimationAdapter;
-import jp.wasabeef.recyclerview.animators.adapters.ScaleInAnimationAdapter;
+import pl.droidsonroids.gif.GifImageView;
 
 /**
  * Created by guzhenfu on 15/9/27.
@@ -66,21 +67,11 @@ public class GifFragment extends Fragment implements SwipeRefreshLayout.OnRefres
     };
 
     private void addList() {
-        List<String> list = getList();
+        List<RecyclerViewItem> list = RecyclerDataProvider.getList();
         mAdapter.getData().addAll(list);
         mAdapter.notifyDataSetChanged();
     }
 
-    private List<String> getList() {
-        List<String> list = new ArrayList<>();
-        int size = mAdapter.getData().size();
-        int lastPosition = size > 0 ? Integer.valueOf(mAdapter.getData().get(size - 1)) : 0;
-        for (int i = 1; i < 10; i++) {
-            list.add(lastPosition + i + "");
-        }
-
-        return list;
-    }
 
     public static GifFragment newInstance(String title){
         GifFragment fragment = new GifFragment();
@@ -106,7 +97,7 @@ public class GifFragment extends Fragment implements SwipeRefreshLayout.OnRefres
             @Override
             public void run() {
                 try {
-                    handler.sendEmptyMessageDelayed(0, 3000);
+                    handler.sendEmptyMessageDelayed(0, 1000);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -120,6 +111,8 @@ public class GifFragment extends Fragment implements SwipeRefreshLayout.OnRefres
 
         mRecyclerView.setItemAnimator(new FadeInAnimator());
         mRecyclerView.setHasFixedSize(true);
+        mRecyclerView.addItemDecoration(new DividerItemDecoration(
+                getActivity(), DividerItemDecoration.HORIZONTAL_LIST));
         //AlphaInAnimationAdapter alphaAdapter = new AlphaInAnimationAdapter(mAdapter);
         //ScaleInAnimationAdapter scaleAdapter = new ScaleInAnimationAdapter(alphaAdapter);
         //mRecyclerView.setAdapter(scaleAdapter);
@@ -133,7 +126,7 @@ public class GifFragment extends Fragment implements SwipeRefreshLayout.OnRefres
                 super.onScrollStateChanged(recyclerView, newState);
                 if (newState == RecyclerView.SCROLL_STATE_IDLE
                         && lastVisibleItem + 1 == mAdapter.getItemCount()) {
-                    handler.sendEmptyMessageDelayed(1, 3000);
+                    handler.sendEmptyMessageDelayed(1, 1000);
                 }
             }
 
@@ -148,11 +141,15 @@ public class GifFragment extends Fragment implements SwipeRefreshLayout.OnRefres
 
     @Override
     public void onRefresh() {
-        handler.sendEmptyMessageDelayed(0, 3000);
+        handler.sendEmptyMessageDelayed(0, 1000);
     }
 
     @Override
     public void onItemClick(View view, int position) {
+        if (view instanceof GifImageView){
+            Intent intent = new Intent(getActivity(), RecyclerViewItemActivity.class);
+            startActivity(intent);
+        }
         Toast.makeText(getActivity(), "click --" + position, Toast.LENGTH_SHORT).show();
     }
 

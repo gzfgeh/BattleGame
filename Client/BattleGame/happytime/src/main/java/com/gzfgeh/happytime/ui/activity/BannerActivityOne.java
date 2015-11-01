@@ -12,8 +12,12 @@ public class BannerActivityOne extends SwipeBackActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_banner_one);
 
         setEdgeFromLeft();
+    }
+
+    @Override
+    protected int getContentView() {
+        return R.layout.activity_banner_one;
     }
 }

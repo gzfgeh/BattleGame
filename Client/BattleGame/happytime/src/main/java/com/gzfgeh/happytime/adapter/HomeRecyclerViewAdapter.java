@@ -6,16 +6,28 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.flyco.banner.transform.ZoomOutSlideTransformer;
 import com.flyco.banner.widget.Banner.base.BaseBanner;
+import com.gzfgeh.happytime.APP;
 import com.gzfgeh.happytime.R;
+import com.gzfgeh.happytime.module.recyclerview.AsyncHttpHandler;
+import com.gzfgeh.happytime.module.recyclerview.RecyclerViewItem;
 import com.gzfgeh.happytime.module.banner.DataProvider;
 import com.gzfgeh.happytime.module.banner.SimpleImageBanner;
 import com.gzfgeh.happytime.widget.ZoomInEnter;
+import com.loopj.android.http.AsyncHttpClient;
+import com.loopj.android.http.AsyncHttpResponseHandler;
 
+import org.apache.http.Header;
+
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+
+import pl.droidsonroids.gif.GifDrawable;
+import pl.droidsonroids.gif.GifImageView;
 
 /**
  * Created by guzhenfu on 15/10/20.
@@ -26,18 +38,21 @@ public class HomeRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.V
     private static final int TYPE_FOOTER    = 2;
 
     private Context context;
-    private List<String> data;
+    private List<RecyclerViewItem> data;
     private RecyclerItemClickListener mListener;
     private RecyclerItemLongClickListener mLongListener;
     private BaseBanner.OnItemClickL mListenerL;
+    private AsyncHttpClient mAsyncHttpClient;
+    private AsyncHttpHandler handler;
 
-    public List<String> getData() {
+    public List<RecyclerViewItem> getData() {
         return data;
     }
 
     public HomeRecyclerViewAdapter(Context context){
         data = new ArrayList<>();
         this.context = context;
+        mAsyncHttpClient = APP.getAsyncHttpClientInstance();
     }
 
     @Override
@@ -57,10 +72,13 @@ public class HomeRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.V
     }
 
     @Override
-    public void onBindViewHolder(RecyclerView.ViewHolder holder, int i) {
+    public void onBindViewHolder(final RecyclerView.ViewHolder holder, int i) {
         if (holder instanceof VHItem) {
-            String dataItem = data.get(i - 1);
-            ((VHItem) holder).title.setText(dataItem);
+            RecyclerViewItem dataItem = data.get(i - 1);
+            ((VHItem) holder).title.setText(dataItem.mName);
+            handler = new AsyncHttpHandler(((VHItem) holder).gifImageView);
+            mAsyncHttpClient.get(dataItem.mGifViewUrl, handler);
+
         } else if (holder instanceof VHHeader) {
             ((VHHeader) holder).banner
             .setSelectAnimClass(ZoomInEnter.class)
@@ -99,8 +117,8 @@ public class HomeRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.V
         notifyItemRemoved(position);
     }
 
-    public void add(String text, int position) {
-        data.add(position, text);
+    public void add(RecyclerViewItem item, int position) {
+        data.add(position, item);
         notifyItemInserted(position);
     }
 
@@ -118,6 +136,7 @@ public class HomeRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.V
 
     static class VHItem extends RecyclerView.ViewHolder implements View.OnClickListener, View.OnLongClickListener {
         private TextView title;
+        private GifImageView gifImageView;
         private RecyclerItemClickListener mListener;
         private RecyclerItemLongClickListener mLongListener;
 
@@ -125,10 +144,12 @@ public class HomeRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.V
                       RecyclerItemLongClickListener longListener) {
             super(itemView);
             title = (TextView) itemView.findViewById(R.id.id_num);
+            gifImageView = (GifImageView) itemView.findViewById(R.id.gif_view);
             mListener = listener;
             mLongListener = longListener;
             itemView.setOnClickListener(this);
             itemView.setOnLongClickListener(this);
+            gifImageView.setOnClickListener(this);
         }
 
         @Override
@@ -177,4 +198,6 @@ public class HomeRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.V
     public interface RecyclerItemLongClickListener {
         public void onItemLongClick(View view,int position);
     }
+
+
 }

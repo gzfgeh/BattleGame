@@ -3,16 +3,19 @@ package com.gzfgeh.happytime.module.swipeback;
 
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
-import android.support.v4.app.FragmentActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
+
+import com.gzfgeh.happytime.R;
+import com.gzfgeh.happytime.ui.activity.BaseActivity;
 
 import me.imid.swipebacklayout.lib.SwipeBackLayout;
 
-public class SwipeBackActivity extends FragmentActivity {
+public abstract class SwipeBackActivity extends BaseActivity {
 
     private SwipeBackLayout mSwipeBackLayout;
 
-    private boolean mOverrideExitAniamtion = true;
+    private boolean mOverrideExitAnimation = true;
 
     private boolean mIsFinishing;
 
@@ -22,6 +25,12 @@ public class SwipeBackActivity extends FragmentActivity {
         getWindow().setBackgroundDrawable(new ColorDrawable(0));
         getWindow().getDecorView().setBackgroundDrawable(null);
         mSwipeBackLayout = new SwipeBackLayout(this);
+    }
+
+    @Override
+    protected void initToolBar() {
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        super.initToolBar(toolbar);
     }
 
     @Override
@@ -60,7 +69,7 @@ public class SwipeBackActivity extends FragmentActivity {
      * @param override
      */
     public void setOverrideExitAniamtion(boolean override) {
-        mOverrideExitAniamtion = override;
+        mOverrideExitAnimation = override;
     }
 
     /**
@@ -72,7 +81,7 @@ public class SwipeBackActivity extends FragmentActivity {
 
     @Override
     public void finish() {
-        if (mOverrideExitAniamtion && !mIsFinishing) {
+        if (mOverrideExitAnimation && !mIsFinishing) {
             scrollToFinishActivity();
             mIsFinishing = true;
             return;
