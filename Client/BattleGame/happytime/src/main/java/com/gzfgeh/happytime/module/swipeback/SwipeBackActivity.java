@@ -3,6 +3,7 @@ package com.gzfgeh.happytime.module.swipeback;
 
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.support.v4.app.FragmentActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 
@@ -28,15 +29,15 @@ public abstract class SwipeBackActivity extends BaseActivity {
     }
 
     @Override
-    protected void initToolBar() {
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        super.initToolBar(toolbar);
-    }
-
-    @Override
     protected void onPostCreate(Bundle savedInstanceState) {
         super.onPostCreate(savedInstanceState);
         mSwipeBackLayout.attachToActivity(this);
+    }
+
+    @Override
+    protected void initToolBar() {
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        super.initToolBar(toolbar);
     }
 
     @Override

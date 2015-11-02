@@ -34,7 +34,7 @@ public class RecyclerViewItemActivity extends SwipeBackActivity implements Swipe
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        //setContentView(R.layout.activity_recycle_item);
         setEdgeFromLeft();
         initView();
     }
