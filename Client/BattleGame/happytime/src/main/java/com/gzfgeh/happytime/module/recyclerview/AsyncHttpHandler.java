@@ -3,6 +3,7 @@ package com.gzfgeh.happytime.module.recyclerview;
 import android.widget.Toast;
 
 import com.gzfgeh.happytime.APP;
+import com.gzfgeh.happytime.R;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 
 import org.apache.http.Header;
@@ -40,11 +41,17 @@ public class AsyncHttpHandler extends AsyncHttpResponseHandler {
             e.printStackTrace();
         }
         mDrawable.start();
-        mView.setBackgroundDrawable(mDrawable);
+        mView.setImageDrawable(mDrawable);
     }
 
     @Override
     public void onFailure(int i, Header[] headers, byte[] bytes, Throwable throwable) {
         Toast.makeText(APP.getContext(), "load error", Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onProgress(int bytesWritten, int totalSize) {
+        mView.setImageDrawable(APP.getContext().getResources().getDrawable(R.drawable.ic_add));
+        super.onProgress(bytesWritten, totalSize);
     }
 }

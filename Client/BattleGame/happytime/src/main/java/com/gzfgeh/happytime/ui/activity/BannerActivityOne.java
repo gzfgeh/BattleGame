@@ -8,12 +8,10 @@ import com.gzfgeh.happytime.module.swipeback.SwipeBackActivity;
 /**
  * Created by guzhenfu on 15/10/19.
  */
-public class BannerActivityOne extends SwipeBackActivity {
+public class BannerActivityOne extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //setContentView(R.layout.activity_banner_one);
-        setEdgeFromLeft();
     }
 
     @Override

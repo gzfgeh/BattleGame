@@ -84,6 +84,12 @@ public abstract class BaseActivity extends AppCompatActivity {
         }
     }
 
-    protected abstract void initToolBar();
+    protected void initToolBar(){
+        Toolbar mToolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(mToolbar);
+        getSupportActionBar().setHomeButtonEnabled(true);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        initToolBar(mToolbar);
+    }
     protected abstract int getContentView();
 }

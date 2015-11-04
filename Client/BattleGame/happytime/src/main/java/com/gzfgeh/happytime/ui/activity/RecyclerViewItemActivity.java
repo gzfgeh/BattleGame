@@ -1,6 +1,7 @@
 package com.gzfgeh.happytime.ui.activity;
 
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -25,7 +26,7 @@ import jp.wasabeef.recyclerview.animators.adapters.ScaleInAnimationAdapter;
 /**
  * Created by guzhenfu on 15/11/1.
  */
-public class RecyclerViewItemActivity extends SwipeBackActivity implements SwipeRefreshLayout.OnRefreshListener {
+public class RecyclerViewItemActivity extends BaseActivity implements SwipeRefreshLayout.OnRefreshListener {
     private SwipeRefreshLayout mSwipeRefreshLayout;
     private RecyclerView mRecyclerView;
     private LinearLayoutManager mLayoutManager;
@@ -34,8 +35,6 @@ public class RecyclerViewItemActivity extends SwipeBackActivity implements Swipe
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //setContentView(R.layout.activity_recycle_item);
-        setEdgeFromLeft();
         initView();
     }
 
@@ -96,6 +95,12 @@ public class RecyclerViewItemActivity extends SwipeBackActivity implements Swipe
 
     @Override
     public void onRefresh() {
-
+        Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                mSwipeRefreshLayout.setRefreshing(false);
+            }
+        }, 2000);
     }
 }
