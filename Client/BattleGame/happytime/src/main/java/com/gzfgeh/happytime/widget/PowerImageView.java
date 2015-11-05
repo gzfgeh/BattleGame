@@ -9,9 +9,15 @@ import android.graphics.Movie;
 import android.os.SystemClock;
 import android.util.AttributeSet;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.Toast;
 
+import com.gzfgeh.happytime.APP;
 import com.gzfgeh.happytime.R;
+import com.loopj.android.http.AsyncHttpResponseHandler;
+
+import org.apache.http.Header;
 
 import java.io.InputStream;
 
@@ -54,6 +60,51 @@ public class PowerImageView extends ImageView implements View.OnClickListener {
      */
     private boolean isAutoPlay;
 
+    private String url;
+    private Bitmap bitmap;
+    private TypedArray a;
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
+        APP.getAsyncHttpClientInstance().get(url, new AsyncHttpResponseHandler() {
+            @Override
+            public void onSuccess(int i, Header[] headers, byte[] bytes) {
+                mMovie = Movie.decodeByteArray(bytes, 0, bytes.length);
+                bitmap = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
+                if (mMovie != null) {
+                    // 如果返回值不等于null，就说明这是一个GIF图片，下面获取是否自动播放的属性
+                    isAutoPlay = a.getBoolean(R.styleable.PowerImageView_auto_play, false);
+                    mImageWidth = bitmap.getWidth();
+                    mImageHeight = bitmap.getHeight();
+                    bitmap.recycle();
+                    if (!isAutoPlay) {
+                        mStartButton = BitmapFactory.decodeResource(getResources(), R.drawable.ic_add);
+                        setOnClickListener(PowerImageView.this);
+                    }
+                    measure(MeasureSpec.makeMeasureSpec(mMovie.width(), MeasureSpec.EXACTLY),
+                            MeasureSpec.makeMeasureSpec(mMovie.height(), MeasureSpec.EXACTLY));
+                }
+
+                invalidate();
+            }
+
+            @Override
+            public void onFailure(int i, Header[] headers, byte[] bytes, Throwable throwable) {
+                Toast.makeText(APP.getContext(), "load error", Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onProgress(int bytesWritten, int totalSize) {
+                super.onProgress(bytesWritten, totalSize);
+
+            }
+        });
+    }
+
     public PowerImageView(Context context) {
         this(context, null);
     }
@@ -65,17 +116,18 @@ public class PowerImageView extends ImageView implements View.OnClickListener {
     public PowerImageView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
 
-        TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.PowerImageView);
+        a = context.obtainStyledAttributes(attrs, R.styleable.PowerImageView);
         int resourceId = getResourceId(attrs);
+        url = a.getString(R.styleable.PowerImageView_url);
         if (resourceId != 0) {
             // 当资源id不等于0时，就去获取该资源的流
             InputStream is = getResources().openRawResource(resourceId);
             // 使用Movie类对流进行解码
             mMovie = Movie.decodeStream(is);
+            bitmap = BitmapFactory.decodeStream(is);
             if (mMovie != null) {
                 // 如果返回值不等于null，就说明这是一个GIF图片，下面获取是否自动播放的属性
                 isAutoPlay = a.getBoolean(R.styleable.PowerImageView_auto_play, false);
-                Bitmap bitmap = BitmapFactory.decodeStream(is);
                 mImageWidth = bitmap.getWidth();
                 mImageHeight = bitmap.getHeight();
                 bitmap.recycle();
@@ -85,6 +137,7 @@ public class PowerImageView extends ImageView implements View.OnClickListener {
                 }
             }
         }
+
     }
 
     private int getResourceId(AttributeSet attrs){
@@ -100,7 +153,7 @@ public class PowerImageView extends ImageView implements View.OnClickListener {
     public void onClick(View v) {
         if (v.getId() == getId()) {
             // 当用户点击图片时，开始播放GIF动画
-            isPlaying = true;
+            isPlaying = !isPlaying;
             invalidate();
         }
     }
@@ -139,9 +192,24 @@ public class PowerImageView extends ImageView implements View.OnClickListener {
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
+
+        ViewGroup.LayoutParams lp= getLayoutParams();
+        boolean isWidMat=lp.width== ViewGroup.LayoutParams.MATCH_PARENT;
+        boolean isHeiMat=lp.height== ViewGroup.LayoutParams.MATCH_PARENT;
+        boolean isWidWra=lp.width== ViewGroup.LayoutParams.WRAP_CONTENT;
+        boolean isHeiWra=lp.height== ViewGroup.LayoutParams.WRAP_CONTENT;
+        if(isWidMat&&isHeiMat){
+            super.onMeasure(widthMeasureSpec, heightMeasureSpec);
+            return;
+        }
+
         if (mMovie != null) {
-            // 如果是GIF图片则重写设定PowerImageView的大小
-            setMeasuredDimension(mImageWidth, mImageHeight);
+            requestLayout();
+            setMeasuredDimension(isWidMat?MeasureSpec.getSize(widthMeasureSpec):isWidWra?mMovie.width():lp.width,
+                    isHeiMat?MeasureSpec.getSize(heightMeasureSpec):isHeiWra?mMovie.height():lp.height);
+        } else {
+            setMeasuredDimension(isWidMat?MeasureSpec.getSize(widthMeasureSpec):isWidWra?0:lp.width,
+                    isHeiMat?MeasureSpec.getSize(heightMeasureSpec):isHeiWra?0:lp.height);
         }
     }
 

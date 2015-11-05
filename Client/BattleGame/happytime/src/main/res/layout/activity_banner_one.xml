@@ -21,8 +21,9 @@
     <com.gzfgeh.happytime.widget.PowerImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/load"
-        gzfgeh:auto_play="false"/>
+        gzfgeh:auto_play="false"
+        android:id="@+id/power_image_view"
+        />
 <!--    <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
