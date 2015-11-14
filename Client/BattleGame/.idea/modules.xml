@@ -3,10 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/BattleGame.iml" filepath="$PROJECT_DIR$/BattleGame.iml" />
-      <module fileurl="file://$PROJECT_DIR$/addsub/addsub.iml" filepath="$PROJECT_DIR$/addsub/addsub.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
-      <module fileurl="file://$PROJECT_DIR$/customcircle/customcircle.iml" filepath="$PROJECT_DIR$/customcircle/customcircle.iml" />
-      <module fileurl="file://$PROJECT_DIR$/customdialog/customdialog.iml" filepath="$PROJECT_DIR$/customdialog/customdialog.iml" />
       <module fileurl="file://$PROJECT_DIR$/happytime/happytime.iml" filepath="$PROJECT_DIR$/happytime/happytime.iml" />
     </modules>
   </component>

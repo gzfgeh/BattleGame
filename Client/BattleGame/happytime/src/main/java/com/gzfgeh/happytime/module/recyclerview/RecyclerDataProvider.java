@@ -12,6 +12,7 @@ public class RecyclerDataProvider {
             "3",
             "4",
             "5",
+            "6",
     };
 
     public static String[] urls = new String[]{//640*360 360/640=0.5625
@@ -20,6 +21,7 @@ public class RecyclerDataProvider {
             "http://cdn.duitang.com/uploads/item/201311/20/20131120213622_mJCUy.thumb.600_0.gif",//花千骨:尊上沦为花千骨
             "http://cdn.duitang.com/uploads/item/201311/20/20131120213622_mJCUy.thumb.600_0.gif",//综艺饭:胖轩偷看夏天洗澡掀波澜
             "http://cdn.duitang.com/uploads/item/201311/20/20131120213622_mJCUy.thumb.600_0.gif",//碟中谍4:阿汤哥高塔命悬一线,超越不可能
+            "http://cdn.duitang.com/uploads/item/201311/20/20131120213622_mJCUy.thumb.600_0.gif",
     };
 
     public static ArrayList<RecyclerViewItem> getList() {

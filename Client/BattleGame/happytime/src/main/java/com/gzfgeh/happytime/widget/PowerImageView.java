@@ -5,7 +5,11 @@ import android.content.res.TypedArray;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.Movie;
+import android.graphics.Paint;
+import android.graphics.RectF;
+import android.graphics.drawable.Drawable;
 import android.os.SystemClock;
 import android.util.AttributeSet;
 import android.view.View;
@@ -63,9 +67,15 @@ public class PowerImageView extends ImageView implements View.OnClickListener {
     private String url;
     private Bitmap bitmap;
     private TypedArray a;
+    private boolean mIsLoadFail;
+    private int mLoadFailResId = -1;
+    private Bitmap bitmapLoadFail;
 
-    public String getUrl() {
-        return url;
+    private static final int CIRCLE_WIDTH = 10;
+
+    public void setLoadFailResId(int mLoadFailResId) {
+        this.mLoadFailResId = mLoadFailResId;
+        invalidate();
     }
 
     public void setUrl(String url) {
@@ -76,31 +86,20 @@ public class PowerImageView extends ImageView implements View.OnClickListener {
                 mMovie = Movie.decodeByteArray(bytes, 0, bytes.length);
                 bitmap = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
                 if (mMovie != null) {
-                    // 如果返回值不等于null，就说明这是一个GIF图片，下面获取是否自动播放的属性
-                    isAutoPlay = a.getBoolean(R.styleable.PowerImageView_auto_play, false);
                     mImageWidth = bitmap.getWidth();
                     mImageHeight = bitmap.getHeight();
                     bitmap.recycle();
-                    if (!isAutoPlay) {
-                        mStartButton = BitmapFactory.decodeResource(getResources(), R.drawable.ic_add);
-                        setOnClickListener(PowerImageView.this);
-                    }
                     measure(MeasureSpec.makeMeasureSpec(mMovie.width(), MeasureSpec.EXACTLY),
                             MeasureSpec.makeMeasureSpec(mMovie.height(), MeasureSpec.EXACTLY));
                 }
-
                 invalidate();
             }
 
             @Override
             public void onFailure(int i, Header[] headers, byte[] bytes, Throwable throwable) {
-                Toast.makeText(APP.getContext(), "load error", Toast.LENGTH_SHORT).show();
-            }
-
-            @Override
-            public void onProgress(int bytesWritten, int totalSize) {
-                super.onProgress(bytesWritten, totalSize);
-
+                Toast.makeText(APP.getContext(), "load power image view error", Toast.LENGTH_SHORT).show();
+                mIsLoadFail = true;
+                bitmapLoadFail = BitmapFactory.decodeResource(getResources(), mLoadFailResId);
             }
         });
     }
@@ -116,9 +115,16 @@ public class PowerImageView extends ImageView implements View.OnClickListener {
     public PowerImageView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
 
-        a = context.obtainStyledAttributes(attrs, R.styleable.PowerImageView);
+        TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.PowerImageView);
+        isAutoPlay = a.getBoolean(R.styleable.PowerImageView_auto_play, false);
+        a.recycle();
+
+        if (!isAutoPlay) {
+            mStartButton = BitmapFactory.decodeResource(getResources(),R.drawable.ic_add);
+            setOnClickListener(this);
+        }
+
         int resourceId = getResourceId(attrs);
-        url = a.getString(R.styleable.PowerImageView_url);
         if (resourceId != 0) {
             // 当资源id不等于0时，就去获取该资源的流
             InputStream is = getResources().openRawResource(resourceId);
@@ -127,14 +133,11 @@ public class PowerImageView extends ImageView implements View.OnClickListener {
             bitmap = BitmapFactory.decodeStream(is);
             if (mMovie != null) {
                 // 如果返回值不等于null，就说明这是一个GIF图片，下面获取是否自动播放的属性
-                isAutoPlay = a.getBoolean(R.styleable.PowerImageView_auto_play, false);
+
                 mImageWidth = bitmap.getWidth();
                 mImageHeight = bitmap.getHeight();
                 bitmap.recycle();
-                if (!isAutoPlay) {
-                    mStartButton = BitmapFactory.decodeResource(getResources(),R.drawable.ic_add);
-                    setOnClickListener(this);
-                }
+
             }
         }
 
@@ -161,9 +164,16 @@ public class PowerImageView extends ImageView implements View.OnClickListener {
     @Override
     protected void onDraw(Canvas canvas) {
         if (mMovie == null) {
-            // mMovie等于null，说明是张普通的图片，则直接调用父类的onDraw()方法
-            super.onDraw(canvas);
+            if (mIsLoadFail && (mLoadFailResId != -1)){
+                canvas.drawBitmap(bitmapLoadFail, bitmapLoadFail.getWidth(),
+                        bitmapLoadFail.getHeight(), null);
+            }else{
+                // mMovie等于null，说明是张普通的图片，则直接调用父类的onDraw()方法
+                if (mIsLoadFail)
+                    super.onDraw(canvas);
+            }
         } else {
+
             // mMovie不等于null，说明是张GIF图片
             if (isAutoPlay) {
                 // 如果允许自动播放，就调用playMovie()方法播放GIF动画
@@ -193,24 +203,27 @@ public class PowerImageView extends ImageView implements View.OnClickListener {
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
 
-        ViewGroup.LayoutParams lp= getLayoutParams();
-        boolean isWidMat=lp.width== ViewGroup.LayoutParams.MATCH_PARENT;
-        boolean isHeiMat=lp.height== ViewGroup.LayoutParams.MATCH_PARENT;
-        boolean isWidWra=lp.width== ViewGroup.LayoutParams.WRAP_CONTENT;
-        boolean isHeiWra=lp.height== ViewGroup.LayoutParams.WRAP_CONTENT;
-        if(isWidMat&&isHeiMat){
-            super.onMeasure(widthMeasureSpec, heightMeasureSpec);
-            return;
+        if (mMovie != null){
+            setMeasuredDimension(mImageWidth, mImageHeight);
         }
-
-        if (mMovie != null) {
-            requestLayout();
-            setMeasuredDimension(isWidMat?MeasureSpec.getSize(widthMeasureSpec):isWidWra?mMovie.width():lp.width,
-                    isHeiMat?MeasureSpec.getSize(heightMeasureSpec):isHeiWra?mMovie.height():lp.height);
-        } else {
-            setMeasuredDimension(isWidMat?MeasureSpec.getSize(widthMeasureSpec):isWidWra?0:lp.width,
-                    isHeiMat?MeasureSpec.getSize(heightMeasureSpec):isHeiWra?0:lp.height);
-        }
+//        ViewGroup.LayoutParams lp= getLayoutParams();
+//        boolean isWidMat=lp.width== ViewGroup.LayoutParams.MATCH_PARENT;
+//        boolean isHeiMat=lp.height== ViewGroup.LayoutParams.MATCH_PARENT;
+//        boolean isWidWra=lp.width== ViewGroup.LayoutParams.WRAP_CONTENT;
+//        boolean isHeiWra=lp.height== ViewGroup.LayoutParams.WRAP_CONTENT;
+//        if(isWidMat&&isHeiMat){
+//            super.onMeasure(widthMeasureSpec, heightMeasureSpec);
+//            return;
+//        }
+//
+//        if (mMovie != null) {
+//            requestLayout();
+//            setMeasuredDimension(isWidMat?MeasureSpec.getSize(widthMeasureSpec):isWidWra?mMovie.width():lp.width,
+//                    isHeiMat?MeasureSpec.getSize(heightMeasureSpec):isHeiWra?mMovie.height():lp.height);
+//        } else {
+//            setMeasuredDimension(isWidMat?MeasureSpec.getSize(widthMeasureSpec):isWidWra?0:lp.width,
+//                    isHeiMat?MeasureSpec.getSize(heightMeasureSpec):isHeiWra?0:lp.height);
+//        }
     }
 
     /**

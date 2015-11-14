@@ -85,7 +85,6 @@
 
     <declare-styleable name="PowerImageView">
         <attr name="auto_play" format="boolean"/>
-        <attr name="url" format="string"/>
     </declare-styleable>
 
 </resources>

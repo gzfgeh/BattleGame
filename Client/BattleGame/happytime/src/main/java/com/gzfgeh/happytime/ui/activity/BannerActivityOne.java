@@ -17,6 +17,7 @@ public class BannerActivityOne extends BaseActivity {
         super.onCreate(savedInstanceState);
         powerImageView = (PowerImageView) findViewById(R.id.power_image_view);
         powerImageView.setUrl("http://cdn.duitang.com/uploads/item/201311/20/20131120213622_mJCUy.thumb.600_0.gif");
+
     }
 
     @Override
