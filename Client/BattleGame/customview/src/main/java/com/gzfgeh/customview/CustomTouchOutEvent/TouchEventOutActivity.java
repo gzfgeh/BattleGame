@@ -1,4 +1,4 @@
-package com.gzfgeh.customview.CustomTouchEvent;
+package com.gzfgeh.customview.CustomTouchOutEvent;
 
 import android.app.Activity;
 import android.graphics.Color;
@@ -20,7 +20,7 @@ import java.util.ArrayList;
 /**
  * Created by guzhenfu on 15/11/14.
  */
-public class TouchEventActivity extends Activity {
+public class TouchEventOutActivity extends Activity {
     private HorizontalScrollViewExt horizontalScrollViewExt;
 
     @Override
@@ -57,7 +57,7 @@ public class TouchEventActivity extends Activity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view,
                                     int position, long id) {
-                Toast.makeText(TouchEventActivity.this, "click item",
+                Toast.makeText(TouchEventOutActivity.this, "click item",
                         Toast.LENGTH_SHORT).show();
 
             }

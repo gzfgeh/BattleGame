@@ -1,4 +1,4 @@
-package com.gzfgeh.customview.CustomTouchEvent;
+package com.gzfgeh.customview.CustomTouchInEvent;
 
 import android.content.Context;
 import android.util.AttributeSet;

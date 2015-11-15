@@ -8,7 +8,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 
-import com.gzfgeh.customview.CustomTouchEvent.TouchEventActivity;
+import com.gzfgeh.customview.CustomTouchOutEvent.TouchEventOutActivity;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -21,7 +21,7 @@ public class MainActivity extends AppCompatActivity {
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(MainActivity.this, TouchEventActivity.class));
+                startActivity(new Intent(MainActivity.this, TouchEventOutActivity.class));
             }
         });
     }

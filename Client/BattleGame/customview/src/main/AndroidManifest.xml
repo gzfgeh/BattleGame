@@ -17,7 +17,7 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".CustomTouchEvent.TouchEventActivity"/>
+        <activity android:name=".CustomTouchOutEvent.TouchEventOutActivity"/>
 
     </application>
 
