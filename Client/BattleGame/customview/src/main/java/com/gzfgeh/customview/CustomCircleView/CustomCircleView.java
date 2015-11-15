@@ -17,7 +17,7 @@ public class CustomCircleView extends View {
         this(context, null);
     }
     public CustomCircleView(Context context, AttributeSet attrs) {
-        super(context, attrs, 0);
+        this(context, attrs, 0);
     }
     public CustomCircleView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
@@ -26,12 +26,36 @@ public class CustomCircleView extends View {
     }
 
     @Override
+    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+        super.onMeasure(widthMeasureSpec, heightMeasureSpec);
+        int widthSize = MeasureSpec.getSize(widthMeasureSpec);
+        int widthMode = MeasureSpec.getMode(widthMeasureSpec);
+        int heightSize = MeasureSpec.getSize(heightMeasureSpec);
+        int heightMode = MeasureSpec.getMode(heightMeasureSpec);
+
+        if (widthMode == MeasureSpec.AT_MOST && heightMode == MeasureSpec.AT_MOST){
+            setMeasuredDimension(200, 200);
+        }else if (heightMode == MeasureSpec.AT_MOST){
+            setMeasuredDimension(widthSize, 200);
+        }else if (widthMode == MeasureSpec.AT_MOST){
+            setMeasuredDimension(200, heightSize);
+        }else{
+
+        }
+    }
+
+    @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
         mPaint.setColor(Color.RED);
-        int width = getWidth();
-        int height = getHeight();
-        int radius = Math.min(width/2, height/2);
-        canvas.drawCircle(width/2, height/2, radius, mPaint);
+        int left = getPaddingLeft();
+        int top = getPaddingTop();
+        int right = getPaddingRight();
+        int bottom = getPaddingBottom();
+
+        int width = getWidth() - left - right;
+        int height = getHeight() - top - bottom;
+        int radius = Math.min(width, height)/2;
+        canvas.drawCircle(left + width/2, top + height/2, radius, mPaint);
     }
 }

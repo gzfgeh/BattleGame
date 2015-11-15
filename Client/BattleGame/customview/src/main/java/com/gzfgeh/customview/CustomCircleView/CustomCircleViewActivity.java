@@ -12,6 +12,6 @@ public class CustomCircleViewActivity extends Activity{
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_touch_event);
+        setContentView(R.layout.activity_custom_circle_view);
     }
 }
