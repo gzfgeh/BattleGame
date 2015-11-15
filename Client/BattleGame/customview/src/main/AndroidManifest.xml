@@ -19,6 +19,8 @@
 
         <activity android:name=".CustomTouchOutEvent.TouchEventOutActivity"/>
         <activity android:name=".CustomTouchInEvent.TouchEventInActivity"/>
+        <activity android:name=".CustomCircleView.CustomCircleViewActivity"/>
+
     </application>
 
 </manifest>
