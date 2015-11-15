@@ -1,1 +1,1 @@
-include ':app', ':happytime'
+include ':app', ':happytime', ':customview'
