@@ -10,4 +10,32 @@
         android:background="@drawable/edit"
         android:layout_margin="20dp"/>
 
+    <TextView
+        android:id="@+id/test_transition"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:background="@drawable/transition_drawable"
+        android:layout_gravity="center"
+        android:text="" />
+
+    <TextView
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:background="@drawable/inset_drawable"
+        android:layout_gravity="center"
+        android:text="" />
+
+    <TextView
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_gravity="center"
+        android:text="Custom Drawable"
+        android:gravity="center"
+        android:id="@+id/custom_drawable"/>
+
+
 </LinearLayout>

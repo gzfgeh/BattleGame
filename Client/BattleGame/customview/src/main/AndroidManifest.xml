@@ -20,7 +20,7 @@
         <activity android:name=".CustomTouchOutEvent.TouchEventOutActivity"/>
         <activity android:name=".CustomTouchInEvent.TouchEventInActivity"/>
         <activity android:name=".CustomCircleView.CustomCircleViewActivity"/>
-        <activity android:name=".CustomDrawable.CustomDrawable"/>
+        <activity android:name=".CustomDrawable.CustomDrawableActivity"/>
 
     </application>
 
