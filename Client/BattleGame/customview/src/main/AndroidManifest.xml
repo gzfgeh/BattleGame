@@ -21,6 +21,7 @@
         <activity android:name=".CustomTouchInEvent.TouchEventInActivity"/>
         <activity android:name=".CustomCircleView.CustomCircleViewActivity"/>
         <activity android:name=".CustomDrawable.CustomDrawableActivity"/>
+        <activity android:name=".threadpool.ThreadPoolActivity"/>
 
     </application>
 

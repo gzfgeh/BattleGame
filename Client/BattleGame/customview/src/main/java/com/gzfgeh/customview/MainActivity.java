@@ -10,6 +10,7 @@ import com.gzfgeh.customview.CustomCircleView.CustomCircleViewActivity;
 import com.gzfgeh.customview.CustomDrawable.CustomDrawableActivity;
 import com.gzfgeh.customview.CustomTouchInEvent.TouchEventInActivity;
 import com.gzfgeh.customview.CustomTouchOutEvent.TouchEventOutActivity;
+import com.gzfgeh.customview.threadpool.ThreadPoolActivity;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -50,6 +51,13 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        Button btn5 = (Button) findViewById(R.id.thread_pool);
+        btn5.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this, ThreadPoolActivity.class));
+            }
+        });
     }
 
 }
