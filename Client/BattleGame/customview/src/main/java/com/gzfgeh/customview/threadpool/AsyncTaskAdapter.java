@@ -6,6 +6,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 
+import com.gzfgeh.customview.R;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,33 +17,37 @@ import java.util.List;
 public class AsyncTaskAdapter extends BaseAdapter {
     private Context mContext;
     private LayoutInflater inflater;
-    private List mDatas;
-    private int mTaskCnt;
+    private List<AsyncTaskTest> mDatas;
 
-    public AsyncTaskAdapter(Context context, int taskCnt){
+    public AsyncTaskAdapter(Context context, List<AsyncTaskTest> data){
         this.mContext = context;
-        this.mTaskCnt = taskCnt;
+        this.mDatas = data;
         inflater = LayoutInflater.from(context);
-        mDatas = new ArrayList();
     }
 
     @Override
     public int getCount() {
-        return 0;
+        return mDatas.size();
     }
 
     @Override
     public Object getItem(int position) {
-        return null;
+        return mDatas.get(position);
     }
 
     @Override
     public long getItemId(int position) {
-        return 0;
+        return position;
     }
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        return null;
+        if (convertView == null){
+            convertView = inflater.inflate(R.layout.list_view_item, null);
+            AsyncTaskTest task = new AsyncTaskTest((MyListItem)convertView);
+            task.executeOnExecutor(NoLimitActivity.allTaskExecutor);
+            mDatas.add(task);
+        }
+        return convertView;
     }
 }

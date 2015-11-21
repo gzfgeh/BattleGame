@@ -14,6 +14,8 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:id="@+id/task_progress"
-        android:layout_weight="8"/>
+        android:layout_weight="8"
+        android:max="100"
+        style="@android:style/Widget.ProgressBar.Horizontal"/>
 
 </com.gzfgeh.customview.threadpool.MyListItem>

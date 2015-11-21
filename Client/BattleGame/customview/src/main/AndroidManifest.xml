@@ -22,6 +22,7 @@
         <activity android:name=".CustomCircleView.CustomCircleViewActivity"/>
         <activity android:name=".CustomDrawable.CustomDrawableActivity"/>
         <activity android:name=".threadpool.ThreadPoolActivity"/>
+        <activity android:name=".threadpool.NoLimitActivity"/>
 
     </application>
 
