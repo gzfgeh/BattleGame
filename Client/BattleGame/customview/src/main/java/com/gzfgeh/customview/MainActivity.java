@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+import com.gzfgeh.customview.CustomCache.CustomCacheActivity;
 import com.gzfgeh.customview.CustomCircleView.CustomCircleViewActivity;
 import com.gzfgeh.customview.CustomDrawable.CustomDrawableActivity;
 import com.gzfgeh.customview.CustomTouchInEvent.TouchEventInActivity;
@@ -56,6 +57,14 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(MainActivity.this, ThreadPoolActivity.class));
+            }
+        });
+
+        Button btn6 = (Button) findViewById(R.id.cache);
+        btn6.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this, CustomCacheActivity.class));
             }
         });
     }
