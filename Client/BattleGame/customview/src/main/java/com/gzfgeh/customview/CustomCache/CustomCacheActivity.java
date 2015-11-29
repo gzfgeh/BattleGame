@@ -3,6 +3,7 @@ package com.gzfgeh.customview.CustomCache;
 import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +12,7 @@ import android.widget.GridView;
 import android.widget.ImageView;
 
 import com.gzfgeh.customview.R;
+import com.gzfgeh.customview.Utils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,6 +22,8 @@ import java.util.List;
  */
 public class CustomCacheActivity extends Activity {
     private List<String> mUrList = new ArrayList<>();
+    private ImageLoader loader;
+    private int mImageWidth = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,7 +34,10 @@ public class CustomCacheActivity extends Activity {
         initData();
         GridViewAdapter adapter = new GridViewAdapter(this, mUrList);
         gridView.setAdapter(adapter);
-
+        loader = ImageLoader.getInstance(this);
+        int screenWidth = Utils.getScreenMetrics(this).widthPixels;
+        int space = (int)Utils.dp2px(this, 20f);
+        mImageWidth = (screenWidth - space) / 3;
     }
 
     private void initData() {
@@ -95,7 +102,7 @@ public class CustomCacheActivity extends Activity {
         }
 
         @Override
-        public Object getItem(int position) {
+        public String getItem(int position) {
             return datas.get(position);
         }
 
@@ -110,18 +117,24 @@ public class CustomCacheActivity extends Activity {
             if (convertView == null){
                 convertView = inflater.inflate(R.layout.grid_view_item, null);
                 holder = new ViewHolder();
-                holder.imageView = (ImageView) convertView.findViewById(R.id.image_view);
+                holder.imageView = (SquareImageView) convertView.findViewById(R.id.image_view);
                 convertView.setTag(holder);
             }else{
                 holder = (ViewHolder) convertView.getTag();
             }
-            holder.imageView.setBackgroundResource(R.drawable.image1);
 
+            String url = getItem(position);
+            holder.imageView.setTag(url);
+            loader.bindBitmap(url, holder.imageView, mImageWidth, mImageWidth);
+            String tag = (String) holder.imageView.getTag();
+            if (!TextUtils.equals(url, tag)){
+                holder.imageView.setBackgroundResource(R.drawable.image1);
+            }
             return convertView;
         }
 
         private class ViewHolder{
-            public ImageView imageView;
+            public SquareImageView imageView;
         }
     }
 }
