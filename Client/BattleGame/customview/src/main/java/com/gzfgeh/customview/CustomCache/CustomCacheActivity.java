@@ -7,9 +7,9 @@ import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AbsListView;
 import android.widget.BaseAdapter;
 import android.widget.GridView;
-import android.widget.ImageView;
 
 import com.gzfgeh.customview.R;
 import com.gzfgeh.customview.Utils;
@@ -20,10 +20,12 @@ import java.util.List;
 /**
  * Created by guzhenfu on 15/11/26.
  */
-public class CustomCacheActivity extends Activity {
+public class CustomCacheActivity extends Activity implements AbsListView.OnScrollListener {
     private List<String> mUrList = new ArrayList<>();
     private ImageLoader loader;
     private int mImageWidth = 0;
+    private boolean isScroll = false;
+    private GridViewAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,8 +34,11 @@ public class CustomCacheActivity extends Activity {
 
         GridView gridView = (GridView) findViewById(R.id.grid_view);
         initData();
-        GridViewAdapter adapter = new GridViewAdapter(this, mUrList);
+        adapter = new GridViewAdapter(this, mUrList);
         gridView.setAdapter(adapter);
+        gridView.setOnScrollListener(this);
+
+
         loader = ImageLoader.getInstance(this);
         int screenWidth = Utils.getScreenMetrics(this).widthPixels;
         int space = (int)Utils.dp2px(this, 20f);
@@ -85,6 +90,21 @@ public class CustomCacheActivity extends Activity {
         }
     }
 
+    @Override
+    public void onScrollStateChanged(AbsListView view, int scrollState) {
+        if (scrollState == SCROLL_STATE_IDLE){
+            isScroll = false;
+            adapter.notifyDataSetChanged();
+        }else {
+            isScroll = true;
+        }
+    }
+
+    @Override
+    public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
+
+    }
+
     class GridViewAdapter extends BaseAdapter{
         private Context context;
         private List<String> datas;
@@ -125,7 +145,8 @@ public class CustomCacheActivity extends Activity {
 
             String url = getItem(position);
             holder.imageView.setTag(url);
-            loader.bindBitmap(url, holder.imageView, mImageWidth, mImageWidth);
+            if (!isScroll)
+                loader.bindBitmap(url, holder.imageView, mImageWidth, mImageWidth);
             String tag = (String) holder.imageView.getTag();
             if (!TextUtils.equals(url, tag)){
                 holder.imageView.setBackgroundResource(R.drawable.image1);
