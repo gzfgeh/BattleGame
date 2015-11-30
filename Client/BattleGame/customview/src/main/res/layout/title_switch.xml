@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal"
+    android:layout_gravity="center">
+
+    <Button
+        android:id="@+id/left"
+        android:layout_width="70dip"
+        android:layout_height="30dip"
+        android:background="@drawable/baike_btn_pink_left_f_96"
+        android:gravity="center"
+        android:text="消息"
+        android:textColor="#df3031"
+        android:textSize="14sp" />
+
+    <Button
+        android:id="@+id/right"
+        android:layout_width="70dip"
+        android:layout_height="30dip"
+        android:background="@drawable/baike_btn_trans_right_f_96"
+        android:gravity="center"
+        android:text="电话"
+        android:textColor="#ffffff"
+        android:textSize="14sp" />
+
+</LinearLayout>

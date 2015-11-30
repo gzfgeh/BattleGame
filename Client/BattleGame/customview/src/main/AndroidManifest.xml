@@ -28,6 +28,7 @@
         <activity android:name=".threadpool.ThreadPoolActivity"/>
         <activity android:name=".threadpool.NoLimitActivity"/>
         <activity android:name=".CustomCache.CustomCacheActivity"/>
+        <activity android:name=".CustomTitleSwitch.CustomTitleSwitchActivity"/>
 
     </application>
 

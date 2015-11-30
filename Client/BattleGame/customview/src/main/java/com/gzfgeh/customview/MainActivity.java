@@ -9,6 +9,7 @@ import android.widget.Button;
 import com.gzfgeh.customview.CustomCache.CustomCacheActivity;
 import com.gzfgeh.customview.CustomCircleView.CustomCircleViewActivity;
 import com.gzfgeh.customview.CustomDrawable.CustomDrawableActivity;
+import com.gzfgeh.customview.CustomTitleSwitch.CustomTitleSwitchActivity;
 import com.gzfgeh.customview.CustomTouchInEvent.TouchEventInActivity;
 import com.gzfgeh.customview.CustomTouchOutEvent.TouchEventOutActivity;
 import com.gzfgeh.customview.threadpool.ThreadPoolActivity;
@@ -65,6 +66,14 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(MainActivity.this, CustomCacheActivity.class));
+            }
+        });
+
+        Button btn7 = (Button) findViewById(R.id.title_switch);
+        btn7.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this, CustomTitleSwitchActivity.class));
             }
         });
     }
