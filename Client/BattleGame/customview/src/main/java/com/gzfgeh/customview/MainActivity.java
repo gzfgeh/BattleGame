@@ -9,6 +9,7 @@ import android.widget.Button;
 import com.gzfgeh.customview.CustomCache.CustomCacheActivity;
 import com.gzfgeh.customview.CustomCircleView.CustomCircleViewActivity;
 import com.gzfgeh.customview.CustomDrawable.CustomDrawableActivity;
+import com.gzfgeh.customview.CustomSwipeBack.SwipeBackActivity;
 import com.gzfgeh.customview.CustomTitleSwitch.CustomTitleSwitchActivity;
 import com.gzfgeh.customview.CustomTouchInEvent.TouchEventInActivity;
 import com.gzfgeh.customview.CustomTouchOutEvent.TouchEventOutActivity;
@@ -74,6 +75,14 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(MainActivity.this, CustomTitleSwitchActivity.class));
+            }
+        });
+
+        Button btn8 = (Button) findViewById(R.id.swipe_back);
+        btn8.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this, SwipeBackActivity.class));
             }
         });
     }
