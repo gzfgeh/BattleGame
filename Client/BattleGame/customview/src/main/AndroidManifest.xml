@@ -29,7 +29,7 @@
         <activity android:name=".threadpool.NoLimitActivity"/>
         <activity android:name=".CustomCache.CustomCacheActivity"/>
         <activity android:name=".CustomTitleSwitch.CustomTitleSwitchActivity"/>
-        <activity android:name=".CustomSwipeBack.SwipeBackActivity"/>
+        <activity android:name=".CustomSwipeBack.SwipeBackActivityDemo"/>
 
     </application>
 

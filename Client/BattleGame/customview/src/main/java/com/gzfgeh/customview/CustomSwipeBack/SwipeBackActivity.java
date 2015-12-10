@@ -1,6 +1,7 @@
 package com.gzfgeh.customview.CustomSwipeBack;
 
 import android.app.Activity;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 
 import com.gzfgeh.customview.R;
@@ -14,7 +15,8 @@ public class SwipeBackActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-//        setContentView(R.layout.activity_swipeback);
+        getWindow().setBackgroundDrawable(new ColorDrawable(0xff));
+        getWindow().getDecorView().setBackgroundDrawable(null);
         layout = new SwipeBackLayout(this);
     }
 
