@@ -11,6 +11,10 @@ public class SwipeBackActivityDemo extends SwipeBackActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_swipeback);
+    }
+
+    @Override
+    protected int setContentView() {
+        return R.layout.activity_swipeback;
     }
 }

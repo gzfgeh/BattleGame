@@ -6,11 +6,12 @@ import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 
 import com.gzfgeh.customview.R;
+import com.gzfgeh.customview.threadpool.BaseActivity;
 
 /**
  * Created by guzhenfu on 15/12/6.
  */
-public class SwipeBackActivity extends FragmentActivity {
+public abstract class SwipeBackActivity extends BaseActivity {
     private SwipeBackLayout layout;
     private boolean isFinishing;
 
@@ -21,6 +22,7 @@ public class SwipeBackActivity extends FragmentActivity {
         getWindow().getDecorView().setBackgroundDrawable(null);
         layout = new SwipeBackLayout(this);
     }
+
 
     @Override
     protected void onPostCreate(Bundle savedInstanceState) {
