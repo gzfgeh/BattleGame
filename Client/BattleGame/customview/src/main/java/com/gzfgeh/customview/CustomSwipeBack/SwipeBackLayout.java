@@ -14,6 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
 
+import com.gzfgeh.customview.LogUtils;
 import com.gzfgeh.customview.R;
 
 /**
@@ -30,7 +31,9 @@ public class SwipeBackLayout extends FrameLayout {
     private Rect mTmpRect = new Rect();
     private Drawable mShadowLeft;
     private float mScrollPercent;
+    private float mScrimOpacity;
     private int mContentLeft;
+    private boolean mInLayout;
 
 
     public SwipeBackLayout(Context context) {
@@ -65,8 +68,8 @@ public class SwipeBackLayout extends FrameLayout {
         linearLayout.setBackgroundResource(background);
         decorView.removeView(linearLayout);
         addView(linearLayout);
-        decorView.addView(this);
         setContentView(linearLayout);
+        decorView.addView(this);
     }
 
     private void setContentView(View view){
@@ -75,11 +78,9 @@ public class SwipeBackLayout extends FrameLayout {
 
     public void scrollToFinishActivity() {
         final int childWidth = mContentView.getWidth();
-        final int childHeight = mContentView.getHeight();
 
-        int left = 0, top = 0;
-        left = childWidth;
-        mDragHelper.smoothSlideViewTo(mContentView, left, top);
+        int left = childWidth + mShadowLeft.getIntrinsicWidth() + 20;
+        mDragHelper.smoothSlideViewTo(mContentView, left, 0);
         invalidate();
     }
 
@@ -87,23 +88,28 @@ public class SwipeBackLayout extends FrameLayout {
     protected boolean drawChild(Canvas canvas, View child, long drawingTime) {
         drawShadow(canvas, child);
         boolean ret = super.drawChild(canvas, child, drawingTime);
-        drawScrim(canvas, child);
+        if ((mScrimOpacity > 0) &&
+            (mDragHelper.getViewDragState() != ViewDragHelper.STATE_IDLE))
+            drawScrim(canvas, child);
+        LogUtils.i("TAG", "mScrimOpacity :" + mScrimOpacity + "-------ret ：" + ret);
         return ret;
     }
 
     private void drawScrim(Canvas canvas, View child) {
         final int baseAlpha = (mScrimColor & 0xff000000) >>> 24;
-        final int alpha = (int) (baseAlpha * (1 - mScrollPercent));
+        final int alpha = (int) (baseAlpha * mScrimOpacity);
         final int color = alpha << 24 | (mScrimColor & 0xffffff);
 
         canvas.clipRect(0, 0, child.getLeft(), getHeight());
         canvas.drawColor(color);
+        LogUtils.i("TAG", "child.getLeft() :" + child.getLeft() +
+                        "---------" + getHeight());
     }
 
     private void drawShadow(Canvas canvas, View child) {
         final Rect childRect = mTmpRect;
         child.getHitRect(childRect);
-        mShadowLeft.setBounds(childRect.width() - mShadowLeft.getIntrinsicWidth(),
+        mShadowLeft.setBounds(childRect.left - mShadowLeft.getIntrinsicWidth(),
                 childRect.top, childRect.left, childRect.bottom);
         mShadowLeft.draw(canvas);
     }
@@ -119,22 +125,37 @@ public class SwipeBackLayout extends FrameLayout {
 
     @Override
     public void computeScroll() {
+        mScrimOpacity = 1 - mScrollPercent;
         if (mDragHelper.continueSettling(true)) {
             ViewCompat.postInvalidateOnAnimation(this);
         }
     }
 
     @Override
-    protected void onLayout(boolean changed, int left, int top, int right, int bottom) {
-        mContentView.layout(mContentLeft, 0,
-                mContentView.getMeasuredWidth(), mContentView.getMeasuredHeight());
+    public void requestLayout() {
+        if (!mInLayout)
+            super.requestLayout();
     }
 
+    @Override
+    protected void onLayout(boolean changed, int left, int top, int right, int bottom) {
+        mInLayout = true;
+        mContentView.layout(mContentLeft, 0,
+                mContentView.getMeasuredWidth(), mContentView.getMeasuredHeight());
+        mInLayout = false;
+    }
+
+    /*
+     *让ViewDrawerHelper处理 必须的
+     */
     @Override
     public boolean onInterceptTouchEvent(MotionEvent ev) {
         return mDragHelper.shouldInterceptTouchEvent(ev);
     }
 
+    /*
+     *让ViewDrawerHelper处理 必须的
+     */
     @Override
     public boolean onTouchEvent(MotionEvent event) {
         mDragHelper.processTouchEvent(event);
@@ -142,28 +163,47 @@ public class SwipeBackLayout extends FrameLayout {
     }
 
     private class ViewDragCallBack extends ViewDragHelper.Callback{
-
+        /*
+         *那些View可以滑动 返回true
+         */
         @Override
         public boolean tryCaptureView(View child, int pointerId) {
             return true;
         }
 
+        /*
+         *水平方向滑动设置
+         */
         @Override
         public int clampViewPositionHorizontal(View child, int left, int dx) {
             return Math.min(child.getWidth(), Math.max(left, 0));
         }
 
+        /*
+         *竖直方向滑动设置
+         */
         @Override
         public int clampViewPositionVertical(View child, int top, int dy) {
             return 0;
         }
 
+        /*
+         *View 释放后返回的位置
+         */
         @Override
         public void onViewReleased(View releasedChild, float xvel, float yvel) {
-            mDragHelper.settleCapturedViewAt(0, 0);
+            if (mScrollPercent < 0.3){
+                mDragHelper.settleCapturedViewAt(0, 0);
+            }else{
+                mDragHelper.settleCapturedViewAt(mContentView.getWidth()
+                        + mShadowLeft.getIntrinsicWidth(), 0);
+            }
             invalidate();
         }
 
+        /*
+         *下面两个：如果子View中有Clickable控件，就必须返回大于0的值
+         */
         @Override
         public int getViewHorizontalDragRange(View child) {
             return 1;
@@ -174,12 +214,31 @@ public class SwipeBackLayout extends FrameLayout {
             return 1;
         }
 
+        /*
+         *View 滑动过程中动态计算和改变
+         */
         @Override
         public void onViewPositionChanged(View changedView, int left, int top, int dx, int dy) {
             mScrollPercent = Math.abs((float) left
                     / (mContentView.getWidth() + mShadowLeft.getIntrinsicWidth()));
             mContentLeft = left;
             invalidate();
+            LogUtils.i("TAG", "mScrollPercent :" + mScrollPercent + "------");
+            if (mScrollPercent >= 1.0f) {
+                mActivity.finish();
+                LogUtils.i("TAG", "mScrollPercent :-------" + mScrollPercent + "------");
+            }
         }
+
+        @Override
+        public void onViewDragStateChanged(int state) {
+            super.onViewDragStateChanged(state);
+            if (state == ViewDragHelper.STATE_IDLE) {
+                ViewCompat.setLayerType(SwipeBackLayout.this, ViewCompat.LAYER_TYPE_NONE, null);
+            } else if (state == ViewDragHelper.STATE_SETTLING) {
+                ViewCompat.setLayerType(SwipeBackLayout.this, ViewCompat.LAYER_TYPE_HARDWARE, null);
+            }
+        }
+
     }
 }
