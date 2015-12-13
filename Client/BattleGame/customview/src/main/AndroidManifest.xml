@@ -33,6 +33,9 @@
         <activity android:name=".CustomSwipeBack.SwipeBackActivityDemo"
             android:theme="@android:style/Theme.Translucent"/>
 
+        <activity android:name=".CustomListView.ActivityCommonListView"
+            android:theme="@android:style/Theme.Translucent"/>
+
     </application>
 
 </manifest>
