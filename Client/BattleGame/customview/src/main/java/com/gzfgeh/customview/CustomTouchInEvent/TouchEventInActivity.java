@@ -12,7 +12,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.gzfgeh.customview.R;
-import com.gzfgeh.customview.Utils;
+import com.gzfgeh.customview.Utils.Utils;
 
 import java.util.ArrayList;
 

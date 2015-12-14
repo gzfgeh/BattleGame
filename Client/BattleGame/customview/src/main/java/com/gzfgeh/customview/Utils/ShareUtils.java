@@ -1,8 +1,10 @@
-package com.gzfgeh.customview;
+package com.gzfgeh.customview.Utils;
 
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
+
+import com.gzfgeh.customview.APP;
 
 public class ShareUtils {
     public final static String SETTING = "Setting";

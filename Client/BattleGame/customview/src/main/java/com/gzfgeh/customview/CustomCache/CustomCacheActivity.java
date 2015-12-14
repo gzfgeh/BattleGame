@@ -12,7 +12,7 @@ import android.widget.BaseAdapter;
 import android.widget.GridView;
 
 import com.gzfgeh.customview.R;
-import com.gzfgeh.customview.Utils;
+import com.gzfgeh.customview.Utils.Utils;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -11,7 +11,7 @@ import com.gzfgeh.customview.threadpool.BaseActivity;
 /**
  * Created by guzhenfu on 15/12/6.
  */
-public abstract class SwipeBackActivity extends BaseActivity {
+public class SwipeBackActivity extends BaseActivity {
     private SwipeBackLayout layout;
     private boolean isFinishing;
 
@@ -21,6 +21,11 @@ public abstract class SwipeBackActivity extends BaseActivity {
         getWindow().setBackgroundDrawable(new ColorDrawable(0));
         getWindow().getDecorView().setBackgroundDrawable(null);
         layout = new SwipeBackLayout(this);
+    }
+
+    @Override
+    protected int setContentView() {
+        return R.layout.toolbar_layout;
     }
 
 
@@ -40,4 +45,6 @@ public abstract class SwipeBackActivity extends BaseActivity {
         isFinishing = false;
         super.finish();
     }
+
+
 }

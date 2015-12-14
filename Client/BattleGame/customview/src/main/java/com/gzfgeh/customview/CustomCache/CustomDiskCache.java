@@ -2,7 +2,7 @@ package com.gzfgeh.customview.CustomCache;
 
 import android.content.Context;
 
-import com.gzfgeh.customview.Utils;
+import com.gzfgeh.customview.Utils.Utils;
 
 import java.io.File;
 import java.io.IOException;

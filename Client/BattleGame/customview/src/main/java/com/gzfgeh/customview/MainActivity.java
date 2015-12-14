@@ -9,6 +9,7 @@ import android.widget.Button;
 import com.gzfgeh.customview.CustomCache.CustomCacheActivity;
 import com.gzfgeh.customview.CustomCircleView.CustomCircleViewActivity;
 import com.gzfgeh.customview.CustomDrawable.CustomDrawableActivity;
+import com.gzfgeh.customview.CustomHttp.ActivityCustomHttp;
 import com.gzfgeh.customview.CustomListView.ActivityCommonListView;
 import com.gzfgeh.customview.CustomSwipeBack.SwipeBackActivity;
 import com.gzfgeh.customview.CustomSwipeBack.SwipeBackActivityDemo;
@@ -93,6 +94,14 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(MainActivity.this, ActivityCommonListView.class));
+            }
+        });
+
+        Button btn10 = (Button) findViewById(R.id.custom_http);
+        btn10.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this, ActivityCustomHttp.class));
             }
         });
     }

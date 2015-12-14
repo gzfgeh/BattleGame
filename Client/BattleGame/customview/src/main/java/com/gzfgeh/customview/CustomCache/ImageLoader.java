@@ -10,7 +10,7 @@ import android.text.TextUtils;
 import android.widget.ImageView;
 
 import com.gzfgeh.customview.R;
-import com.gzfgeh.customview.Utils;
+import com.gzfgeh.customview.Utils.Utils;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;

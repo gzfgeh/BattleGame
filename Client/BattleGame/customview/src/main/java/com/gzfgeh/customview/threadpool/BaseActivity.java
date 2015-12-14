@@ -1,16 +1,14 @@
 package com.gzfgeh.customview.threadpool;
 
-import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.TypedValue;
 import android.view.MenuItem;
-import android.view.WindowManager;
 
 import com.gzfgeh.customview.R;
-import com.gzfgeh.customview.ShareUtils;
-import com.gzfgeh.customview.ThemeUtils;
+import com.gzfgeh.customview.Utils.ShareUtils;
+import com.gzfgeh.customview.Utils.ThemeUtils;
 
 
 /**

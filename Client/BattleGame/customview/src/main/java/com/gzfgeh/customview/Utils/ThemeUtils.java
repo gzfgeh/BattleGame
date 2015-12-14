@@ -1,7 +1,9 @@
-package com.gzfgeh.customview;
+package com.gzfgeh.customview.Utils;
 
 import android.app.Activity;
 import android.content.res.TypedArray;
+
+import com.gzfgeh.customview.R;
 
 
 /**
