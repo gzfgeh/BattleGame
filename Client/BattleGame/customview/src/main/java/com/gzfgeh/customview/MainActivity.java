@@ -11,12 +11,11 @@ import com.gzfgeh.customview.CustomCircleView.CustomCircleViewActivity;
 import com.gzfgeh.customview.CustomDrawable.CustomDrawableActivity;
 import com.gzfgeh.customview.CustomHttp.ActivityCustomHttp;
 import com.gzfgeh.customview.CustomListView.ActivityCommonListView;
-import com.gzfgeh.customview.CustomSwipeBack.SwipeBackActivity;
 import com.gzfgeh.customview.CustomSwipeBack.SwipeBackActivityDemo;
 import com.gzfgeh.customview.CustomTitleSwitch.CustomTitleSwitchActivity;
 import com.gzfgeh.customview.CustomTouchInEvent.TouchEventInActivity;
 import com.gzfgeh.customview.CustomTouchOutEvent.TouchEventOutActivity;
-import com.gzfgeh.customview.CustomWebview.ActivityCustomWebview;
+import com.gzfgeh.customview.CustomWebview.ActivityCustomWebView;
 import com.gzfgeh.customview.threadpool.ThreadPoolActivity;
 
 public class MainActivity extends AppCompatActivity {
@@ -110,7 +109,7 @@ public class MainActivity extends AppCompatActivity {
         btn11.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(MainActivity.this, ActivityCustomWebview.class));
+                startActivity(new Intent(MainActivity.this, ActivityCustomWebView.class));
             }
         });
     }
