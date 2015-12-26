@@ -1,5 +1,9 @@
 apply plugin: 'com.android.application'
 
+def releaseTime(){
+    return new Date().format("yyyy-MM-dd", TimeZone.getTimeZone("UTC"))
+}
+
 android {
     compileSdkVersion 22
     buildToolsVersion "23.0.0 rc3"
@@ -9,15 +13,77 @@ android {
         targetSdkVersion 22
         versionCode 1
         versionName "1.0"
+
+        //dex 突破65535限制
+        multiDexEnabled true
+        //Androidmainifest.xml 里面UMENG_CHANNEL的Value为 ${UMENG_CHANNEL_VALUE}
+        manifestPlaceholders = [UMENG_CHANNEL_VALUE:"umeng"]
     }
-    buildTypes {
-        release {
-            minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+
+    //执行lint检查，遇到任何警告或者错误停止构建
+    lintOptions{
+        abortOnError false
+    }
+
+//    //签名
+    signingConfigs{
+        release{
+            storeFile file("gzfgeh.jks")
+            storePassword "gzfgeh"
+            keyAlias "gzfgeh"
+            keyPassword "gzfgeh"
         }
     }
-    productFlavors {
+
+    buildTypes {
+        debug{
+            buildConfigField "boolean","LOG_DEBUG","true"
+            versionNameSuffix "-debug"
+            minifyEnabled false
+            zipAlignEnabled false
+            shrinkResources false
+            signingConfig signingConfigs.debug
+        }
+        release {
+            //不显示log
+            buildConfigField "boolean","LOG_DEBUG","false"
+            //混淆
+            minifyEnabled false
+            //Zipalign优化
+            zipAlignEnabled true
+            //移除无用resource
+            shrinkResources true
+            //加载默认混淆文件
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            //签名
+            signingConfig signingConfigs.release
+
+            applicationVariants.all { variant ->
+                variant.outputs.each { output ->
+                    def outputFile = output.outputFile
+                    if (outputFile != null && outputFile.name.endsWith('.apk')) {
+                        // 输出apk名称为boohee_v1.0_2015-01-15_wandoujia.apk
+                        def fileName = "Gzfgeh_V${defaultConfig.versionName}_${releaseTime()}_${variant.productFlavors[0].name}.apk"
+                        output.outputFile = new File(outputFile.parent, fileName)
+                    }
+                }
+            }
+        }
     }
+    //渠道
+    productFlavors {
+        wandoujia {}
+        _360 {}
+        baidu {}
+        xiaomi {}
+        tencent {}
+        taobao {}
+    }
+
+    productFlavors.all{ flavor->
+        flavor.manifestPlaceholders = [UMENG_CHANNEL_VALUE: name]
+    }
+
 }
 
 dependencies {

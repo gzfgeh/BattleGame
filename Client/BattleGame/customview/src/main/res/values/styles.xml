@@ -8,7 +8,9 @@
         <item name="android:windowNoTitle">true</item>-->
         <item name="android:textColorPrimary">@color/text_color_primary</item>  <!-- 一级菜单 -->
         <item name="android:textColorSecondary">@color/text_second_color_primary</item> <!-- 二级菜单-->
-
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowActionBar">false</item>
+        <item name="android:windowNoTitle">true</item>
     </style>
 
     <style name="ToolbarTheme" parent="AppTheme">
@@ -21,8 +23,8 @@
     <style name="BaseDialogTheme" parent="Theme.AppCompat.Light.Dialog">
         <item name="android:textColorPrimary">@color/text_color_primary</item>
         <item name="android:textColorSecondary">@color/text_second_color_primary</item>
-        <item name="android:windowEnterAnimation">@anim/abc_popup_enter</item>
-        <item name="android:windowExitAnimation">@anim/abc_popup_exit</item>
+        <!--<item name="android:windowEnterAnimation">@anim/abc_popup_enter</item>
+        <item name="android:windowExitAnimation">@anim/abc_popup_exit</item>-->
     </style>
 
     <style name="RedTheme" parent="AppTheme">
@@ -120,5 +122,7 @@
         <item name="colorPrimaryDark">@color/dark_green</item>
         <item name="colorAccent">@color/accent_green</item>
     </style>
+
+    <attr name="SwipeBackLayoutStyle" format="reference"/>
 
 </resources>

@@ -44,7 +44,7 @@
             android:theme="@android:style/Theme.Translucent"/>
 
         <activity android:name=".CustomHttp.ActivityCustomHttp"
-            android:theme="@android:style/Theme.Translucent"/>
+            android:theme="@style/Theme.Swipe.Back"/>
 
         <activity android:name=".CustomWebview.ActivityCustomWebView"
             android:theme="@android:style/Theme.Translucent"/>

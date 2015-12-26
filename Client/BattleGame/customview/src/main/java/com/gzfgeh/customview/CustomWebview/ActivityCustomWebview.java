@@ -29,6 +29,7 @@ public class ActivityCustomWebView extends SwipeBackActivity {
         webView = (WebView) findViewById(R.id.web_view);
         settings = webView.getSettings();
         settings.setJavaScriptEnabled(true);
+        webView.setWebViewClient(new MyWebViewClient());
         enableDatabaseCache();
         enableHTML5AppCache();
         webView.loadUrl("http://www.baidu.com");
@@ -56,8 +57,7 @@ public class ActivityCustomWebView extends SwipeBackActivity {
 
     private void enableDatabaseCache(){
         webView.getSettings().setDatabaseEnabled(true);
-        final String dbPath = getApplicationContext().getDir("db", Context.MODE_PRIVATE).getPath();
-        webView.getSettings().setDatabasePath(dbPath);
+        webView.getSettings().setDatabasePath("/data/data/"+ getPackageName() +"/db");
     }
 
 
@@ -86,29 +86,29 @@ public class ActivityCustomWebView extends SwipeBackActivity {
         });
     }
 
-//    final class MyWebViewClient extends WebViewClient {
-//        public boolean shouldOverrideUrlLoading(WebView view, String url) {
-//            view.loadUrl(url);
-//            return true;
-//        }
-//        public void onPageStarted(WebView view, String url, Bitmap favicon) {
-//            Log.d("WebView","onPageStarted");
-//            super.onPageStarted(view, url, favicon);
-//        }
-//        public void onPageFinished(WebView view, String url) {
-//            Log.d("WebView","onPageFinished ");
-//            view.loadUrl("javascript:window.local_obj.showSource('<head>'+" +
-//                    "document.getElementsByTagName('html')[0].innerHTML+'</head>');");
-//            super.onPageFinished(view, url);
-//        }
-//    }
-//
-//    final class InJavaScriptLocalObj {
-//
-//        @JavascriptInterface
-//        public void showSource(String html) {
-//            Log.d("HTML", html);
-//            Toast.makeText(ActivityCustomWebView.this, html, Toast.LENGTH_SHORT).show();
-//        }
-//    }
+    final class MyWebViewClient extends WebViewClient {
+        public boolean shouldOverrideUrlLoading(WebView view, String url) {
+            view.loadUrl(url);
+            return true;
+        }
+        public void onPageStarted(WebView view, String url, Bitmap favicon) {
+            Log.d("WebView","onPageStarted");
+            super.onPageStarted(view, url, favicon);
+        }
+        public void onPageFinished(WebView view, String url) {
+            Log.d("WebView","onPageFinished ");
+            view.loadUrl("javascript:window.local_obj.showSource('<head>'+" +
+                    "document.getElementsByTagName('html')[0].innerHTML+'</head>');");
+            super.onPageFinished(view, url);
+        }
+    }
+
+    final class InJavaScriptLocalObj {
+
+        @JavascriptInterface
+        public void showSource(String html) {
+            Log.d("HTML+", html);
+            Toast.makeText(ActivityCustomWebView.this, html, Toast.LENGTH_SHORT).show();
+        }
+    }
 }
