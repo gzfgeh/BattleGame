@@ -1,4 +1,5 @@
 apply plugin: 'com.android.application'
+apply plugin: 'me.tatarka.retrolambda'
 
 def releaseTime(){
     return new Date().format("yyyy-MM-dd", TimeZone.getTimeZone("UTC"))
@@ -82,6 +83,11 @@ android {
 
     productFlavors.all{ flavor->
         flavor.manifestPlaceholders = [UMENG_CHANNEL_VALUE: name]
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
     }
 
 }
