@@ -24,9 +24,13 @@ public class ActivityRxAndroid extends BaseActivity {
         ButterKnife.bind(this);
         rxAndroid.setOnClickListener(v -> {
             Observable.just("Hello Rxjava")
+                    .map(s1 -> s1 + " gzf")
+                    .map(s2 -> s2.hashCode())
+                    .map(i -> Integer.toString(i))
                     .subscribe(s -> Toast.makeText(ActivityRxAndroid.this,
                             s, Toast.LENGTH_SHORT).show());
         });
+
     }
 
     @Override
