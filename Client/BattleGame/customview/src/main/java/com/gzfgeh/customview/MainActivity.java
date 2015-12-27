@@ -11,6 +11,7 @@ import com.gzfgeh.customview.CustomCircleView.CustomCircleViewActivity;
 import com.gzfgeh.customview.CustomDrawable.CustomDrawableActivity;
 import com.gzfgeh.customview.CustomHttp.ActivityCustomHttp;
 import com.gzfgeh.customview.CustomListView.ActivityCommonListView;
+import com.gzfgeh.customview.CustomRxAndroid.ActivityRxAndroid;
 import com.gzfgeh.customview.CustomSwipeBack.SwipeBackActivityDemo;
 import com.gzfgeh.customview.CustomTitleSwitch.CustomTitleSwitchActivity;
 import com.gzfgeh.customview.CustomTouchInEvent.TouchEventInActivity;
@@ -26,28 +27,19 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         Button btn = (Button) findViewById(R.id.horizontal);
-        btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(MainActivity.this, TouchEventOutActivity.class));
-            }
-        });
+        btn.setOnClickListener(v ->
+            startActivity(new Intent(MainActivity.this, TouchEventOutActivity.class))
+        );
 
         Button btn2 = (Button) findViewById(R.id.horizontal2);
-        btn2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(MainActivity.this, TouchEventInActivity.class));
-            }
-        });
+        btn2.setOnClickListener(v ->
+                startActivity(new Intent(MainActivity.this, TouchEventInActivity.class))
+        );
 
         Button btn3 = (Button) findViewById(R.id.circle_view);
-        btn3.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(MainActivity.this, CustomCircleViewActivity.class));
-            }
-        });
+        btn3.setOnClickListener(v ->
+                startActivity(new Intent(MainActivity.this, CustomCircleViewActivity.class))
+        );
 
         Button btn4 = (Button) findViewById(R.id.drawable_view);
         btn4.setOnClickListener(new View.OnClickListener() {
@@ -106,12 +98,14 @@ public class MainActivity extends AppCompatActivity {
         });
 
         Button btn11 = (Button) findViewById(R.id.custom_webview);
-        btn11.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(MainActivity.this, ActivityCustomWebView.class));
-            }
-        });
+        btn11.setOnClickListener(v ->
+                startActivity(new Intent(MainActivity.this, ActivityCustomWebView.class))
+        );
+
+        Button btn12 = (Button) findViewById(R.id.custom_rx_android);
+        btn12.setOnClickListener(v ->
+                startActivity(new Intent(MainActivity.this, ActivityRxAndroid.class))
+        );
     }
 
 }
