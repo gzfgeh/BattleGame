@@ -33,18 +33,15 @@ public class LoginActivity extends BaseActivity {
         et_password = (EditText) findViewById(R.id.et_password);
 
         btn_login = (Button) findViewById(R.id.btn_login);
-        btn_login.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                JSONObject object = new JSONObject();
-                try {
-                    object.put("cmd","auth");
-                    object.put("name", et_user.getText().toString().trim());
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-                MinaManager.sendMessage(LoginActivity.this, object.toString());
+        btn_login.setOnClickListener(v -> {
+            JSONObject object = new JSONObject();
+            try {
+                object.put("cmd","auth");
+                object.put("name", et_user.getText().toString().trim());
+            } catch (JSONException e) {
+                e.printStackTrace();
             }
+            MinaManager.sendMessage(LoginActivity.this, object.toString());
         });
 
         tv_register = (TextView) findViewById(R.id.btn_register);
