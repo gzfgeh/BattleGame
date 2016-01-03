@@ -34,11 +34,11 @@ public abstract class SwipeBackActivity extends BaseActivity {
         mSwipeBackLayout.attachToActivity(this);
     }
 
-    @Override
-    protected void initToolBar() {
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        super.initToolBar(toolbar);
-    }
+//    @Override
+//    protected void initToolBar() {
+//        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+//        super.initToolBar(toolbar);
+//    }
 
     @Override
     public View findViewById(int id) {

@@ -36,6 +36,7 @@ public class MainActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
         initDrawerLayout();
         initSlideTab();
     }
@@ -121,14 +122,14 @@ public class MainActivity extends BaseActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    @Override
-    protected void initToolBar() {
-        toolbar = (Toolbar) findViewById(R.id.toolbar);
-        super.initToolBar(toolbar);
-    }
-
-    @Override
-    protected int getContentView() {
-        return R.layout.activity_main;
-    }
+//    @Override
+//    protected void initToolBar() {
+//        toolbar = (Toolbar) findViewById(R.id.toolbar);
+//        super.initToolBar(toolbar);
+//    }
+//
+//    @Override
+//    protected int getContentView() {
+//        return R.layout.activity_main;
+//    }
 }

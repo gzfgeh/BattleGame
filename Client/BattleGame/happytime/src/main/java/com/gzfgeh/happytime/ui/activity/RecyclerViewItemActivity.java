@@ -35,6 +35,7 @@ public class RecyclerViewItemActivity extends BaseActivity implements SwipeRefre
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_recycle_item);
         initView();
     }
 
@@ -88,10 +89,10 @@ public class RecyclerViewItemActivity extends BaseActivity implements SwipeRefre
         }
     }
 
-    @Override
-    protected int getContentView() {
-        return R.layout.activity_recycle_item;
-    }
+//    @Override
+//    protected int getContentView() {
+//        return R.layout.activity_recycle_item;
+//    }
 
     @Override
     public void onRefresh() {

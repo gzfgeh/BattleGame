@@ -15,13 +15,14 @@ public class BannerActivityOne extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_banner_one);
         powerImageView = (PowerImageView) findViewById(R.id.power_image_view);
         powerImageView.setUrl("http://cdn.duitang.com/uploads/item/201311/20/20131120213622_mJCUy.thumb.600_0.gif");
 
     }
-
-    @Override
-    protected int getContentView() {
-        return R.layout.activity_banner_one;
-    }
+//
+//    @Override
+//    protected int getContentView() {
+//        return R.layout.activity_banner_one;
+//    }
 }

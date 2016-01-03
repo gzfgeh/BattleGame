@@ -28,6 +28,7 @@ public class SplashActivity extends BaseActivity{
     protected void onCreate(Bundle savedInstanceState) {
         getSentence();
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_splash);
         initView();
 
         Thread splashThread = new Thread(){
@@ -72,15 +73,15 @@ public class SplashActivity extends BaseActivity{
         }
     }
 
-    @Override
-    protected void initToolBar() {
-        return;
-    }
-
-    @Override
-    protected int getContentView() {
-        return R.layout.activity_splash;
-    }
+//    @Override
+//    protected void initToolBar() {
+//        return;
+//    }
+//
+//    @Override
+//    protected int getContentView() {
+//        return R.layout.activity_splash;
+//    }
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
