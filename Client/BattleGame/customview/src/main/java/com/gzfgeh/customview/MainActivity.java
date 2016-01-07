@@ -16,7 +16,6 @@ import com.gzfgeh.customview.CustomSwipeBack.SwipeBackActivityDemo;
 import com.gzfgeh.customview.CustomTitleSwitch.CustomTitleSwitchActivity;
 import com.gzfgeh.customview.CustomTouchInEvent.TouchEventInActivity;
 import com.gzfgeh.customview.CustomTouchOutEvent.TouchEventOutActivity;
-import com.gzfgeh.customview.CustomWebview.ActivityCustomWebView;
 import com.gzfgeh.customview.threadpool.ThreadPoolActivity;
 
 public class MainActivity extends AppCompatActivity {
@@ -98,9 +97,9 @@ public class MainActivity extends AppCompatActivity {
         });
 
         Button btn11 = (Button) findViewById(R.id.custom_webview);
-        btn11.setOnClickListener(v ->
-                startActivity(new Intent(MainActivity.this, ActivityCustomWebView.class))
-        );
+//        btn11.setOnClickListener(v ->
+//                startActivity(new Intent(MainActivity.this, ActivityCustomWebView.class))
+//        );
 
         Button btn12 = (Button) findViewById(R.id.custom_rx_android);
         btn12.setOnClickListener(v ->

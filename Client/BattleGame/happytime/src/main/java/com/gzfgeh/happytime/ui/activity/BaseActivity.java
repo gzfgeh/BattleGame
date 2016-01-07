@@ -8,7 +8,6 @@ import android.util.TypedValue;
 import android.view.MenuItem;
 import android.view.WindowManager;
 
-import com.gzfgeh.happytime.R;
 import com.gzfgeh.happytime.utils.ShareUtils;
 import com.gzfgeh.happytime.utils.ThemeUtils;
 

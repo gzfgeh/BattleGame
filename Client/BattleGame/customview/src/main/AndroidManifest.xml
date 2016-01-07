@@ -55,7 +55,7 @@
         <activity android:name=".CustomHttp.ActivityCustomHttp"
             android:theme="@style/Theme.Swipe.Back"/>
 
-        <activity android:name=".CustomWebview.ActivityCustomWebView"
+        <activity android:name=".customWebView.ActivityCustomWebView"
             android:theme="@android:style/Theme.Translucent"/>
 
         <activity android:name=".CustomRxAndroid.ActivityRxAndroid"
