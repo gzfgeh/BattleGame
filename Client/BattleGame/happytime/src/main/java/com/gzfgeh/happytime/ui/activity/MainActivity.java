@@ -2,6 +2,7 @@ package com.gzfgeh.happytime.ui.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
@@ -9,6 +10,7 @@ import android.support.v4.view.MenuItemCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.ShareActionProvider;
 import android.support.v7.widget.Toolbar;
@@ -18,6 +20,9 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.gzfgeh.happytime.R;
+import com.gzfgeh.happytime.presenter.IMainPresenter;
+import com.gzfgeh.happytime.presenter.IMainView;
+import com.gzfgeh.happytime.presenter.MainPresenterImpl;
 import com.gzfgeh.happytime.ui.fragment.GifFragment;
 import com.gzfgeh.happytime.ui.fragment.SuperAwesomeCardFragment;
 import com.gzfgeh.happytime.utils.ThemeUtils;
@@ -27,26 +32,46 @@ import com.gzfgeh.happytime.widget.TabViewPagerAdapter;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends BaseActivity {
-
+public class MainActivity extends AppCompatActivity implements IMainView {
     private Toolbar toolbar;
     private DrawerLayout drawerLayout;
     private ActionBarDrawerToggle drawerToggle;
+    private NavigationView mNavigationView;
+    private IMainPresenter mMainPresenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        initToolBar();
         initDrawerLayout();
-        initSlideTab();
+        initNavigationView();
     }
 
-    private void initSlideTab() {
-        PagerSlidingTabStrip strip = (PagerSlidingTabStrip) findViewById(R.id.tabs);
-        ViewPager pager = (ViewPager) findViewById(R.id.pager);
-        TabViewPagerAdapter adapter = new TabViewPagerAdapter(getSupportFragmentManager(),getData());
-        pager.setAdapter(adapter);
-        strip.setViewPager(pager);
+    private void initToolBar() {
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+    }
+
+
+    private void initNavigationView() {
+        mNavigationView = (NavigationView) findViewById(R.id.navigation_view);
+        setupDrawerContent(mNavigationView);
+        mMainPresenter = new MainPresenterImpl(this);
+        switch2News();
+    }
+
+    private void setupDrawerContent(NavigationView navigationView) {
+        navigationView.setNavigationItemSelectedListener(
+                new NavigationView.OnNavigationItemSelectedListener() {
+                    @Override
+                    public boolean onNavigationItemSelected(MenuItem menuItem) {
+                        mMainPresenter.switchNavigation(menuItem.getItemId());
+                        menuItem.setChecked(true);
+                        drawerLayout.closeDrawers();
+                        return true;
+                    }
+                });
     }
 
     private List<Fragment> getData() {
@@ -61,21 +86,7 @@ public class MainActivity extends BaseActivity {
 
     private void initDrawerLayout(){
         drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
-        drawerToggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, 0, 0){
-            @Override
-            public void onDrawerOpened(View drawerView) {
-                super.onDrawerOpened(drawerView);
-                invalidateOptionsMenu();
-                toolbar.setTitle(R.string.app_name);
-            }
-
-            @Override
-            public void onDrawerClosed(View drawerView) {
-                super.onDrawerClosed(drawerView);
-                invalidateOptionsMenu();
-                toolbar.setTitle(R.string.app_name);
-            }
-        };
+        drawerToggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.drawer_open, R.string.drawer_close);
         drawerToggle.syncState();
         drawerToggle.setDrawerIndicatorEnabled(true);
         drawerLayout.setDrawerListener(drawerToggle);
@@ -122,14 +133,27 @@ public class MainActivity extends BaseActivity {
         return super.onOptionsItemSelected(item);
     }
 
-//    @Override
-//    protected void initToolBar() {
-//        toolbar = (Toolbar) findViewById(R.id.toolbar);
-//        super.initToolBar(toolbar);
-//    }
-//
-//    @Override
-//    protected int getContentView() {
-//        return R.layout.activity_main;
-//    }
+    @Override
+    public void switch2News() {
+        getSupportFragmentManager().beginTransaction().replace(R.id.frame_content, new GifFragment()).commit();
+        toolbar.setTitle(R.string.navigation_news);
+    }
+
+    @Override
+    public void switch2Images() {
+        getSupportFragmentManager().beginTransaction().replace(R.id.frame_content, new GifFragment()).commit();
+        toolbar.setTitle(R.string.navigation_images);
+    }
+
+    @Override
+    public void switch2Weather() {
+        getSupportFragmentManager().beginTransaction().replace(R.id.frame_content, new GifFragment()).commit();
+        toolbar.setTitle(R.string.navigation_weather);
+    }
+
+    @Override
+    public void switch2About() {
+        getSupportFragmentManager().beginTransaction().replace(R.id.frame_content, new GifFragment()).commit();
+        toolbar.setTitle(R.string.navigation_about);
+    }
 }

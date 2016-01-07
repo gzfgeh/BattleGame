@@ -8,7 +8,25 @@
     android:id="@+id/drawer_layout">
     <!-- android:fitsSystemWindows="true" 5.0以上版本，不用Windows绘制的颜色，交给DrawerLayout-->
 
-    <include layout="@layout/main_view_pager"/>
+    <android.support.design.widget.CoordinatorLayout
+        android:id="@+id/main_content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <include
+            android:id="@+id/appbar"
+            layout="@layout/toolbar_layout" />
+
+
+        <FrameLayout
+            android:id="@+id/frame_content"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/appbar"
+            android:scrollbars="none"
+            android:elevation="5dp"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+
+    </android.support.design.widget.CoordinatorLayout>
 
     <android.support.design.widget.NavigationView
         android:id="@+id/navigation_view"

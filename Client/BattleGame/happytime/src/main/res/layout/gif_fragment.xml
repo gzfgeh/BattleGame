@@ -4,47 +4,52 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <include layout="@layout/refresh_recycle_view"/>
-
-    <com.github.clans.fab.FloatingActionMenu
+    <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="bottom|right"
-        android:id="@+id/float_menu"
-        android:layout_marginBottom="20dp"
-        android:layout_marginRight="20dp">
+        android:text="@string/hello_world"/>
 
-        <com.github.clans.fab.FloatingActionButton
-            android:id="@+id/float_button_one"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/ic_add"
-            fab:fab_colorNormal="?attr/colorPrimary"
-            fab:fab_colorPressed="?attr/colorPrimaryDark"
-            fab:fab_colorRipple="?attr/colorAccent"
-            fab:fab_size="mini"/>
+    <!--<include layout="@layout/refresh_recycle_view"/>-->
 
-        <com.github.clans.fab.FloatingActionButton
-            android:id="@+id/float_button_two"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/ic_add"
-            fab:fab_colorNormal="?attr/colorPrimary"
-            fab:fab_colorPressed="?attr/colorPrimaryDark"
-            fab:fab_colorRipple="?attr/colorAccent"
-            fab:fab_size="mini"/>
+    <!--<com.github.clans.fab.FloatingActionMenu-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_gravity="bottom|right"-->
+        <!--android:id="@+id/float_menu"-->
+        <!--android:layout_marginBottom="20dp"-->
+        <!--android:layout_marginRight="20dp">-->
 
-        <com.github.clans.fab.FloatingActionButton
-            android:id="@+id/float_button_three"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/ic_add"
-            fab:fab_colorNormal="?attr/colorPrimary"
-            fab:fab_colorPressed="?attr/colorPrimaryDark"
-            fab:fab_colorRipple="?attr/colorAccent"
-            fab:fab_size="mini"/>
+        <!--<com.github.clans.fab.FloatingActionButton-->
+            <!--android:id="@+id/float_button_one"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:src="@drawable/ic_add"-->
+            <!--fab:fab_colorNormal="?attr/colorPrimary"-->
+            <!--fab:fab_colorPressed="?attr/colorPrimaryDark"-->
+            <!--fab:fab_colorRipple="?attr/colorAccent"-->
+            <!--fab:fab_size="mini"/>-->
 
-    </com.github.clans.fab.FloatingActionMenu>
+        <!--<com.github.clans.fab.FloatingActionButton-->
+            <!--android:id="@+id/float_button_two"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:src="@drawable/ic_add"-->
+            <!--fab:fab_colorNormal="?attr/colorPrimary"-->
+            <!--fab:fab_colorPressed="?attr/colorPrimaryDark"-->
+            <!--fab:fab_colorRipple="?attr/colorAccent"-->
+            <!--fab:fab_size="mini"/>-->
+
+        <!--<com.github.clans.fab.FloatingActionButton-->
+            <!--android:id="@+id/float_button_three"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:src="@drawable/ic_add"-->
+            <!--fab:fab_colorNormal="?attr/colorPrimary"-->
+            <!--fab:fab_colorPressed="?attr/colorPrimaryDark"-->
+            <!--fab:fab_colorRipple="?attr/colorAccent"-->
+            <!--fab:fab_size="mini"/>-->
+
+    <!--</com.github.clans.fab.FloatingActionMenu>-->
 
 
 

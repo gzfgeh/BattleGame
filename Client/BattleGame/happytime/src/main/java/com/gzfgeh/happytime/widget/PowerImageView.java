@@ -21,8 +21,6 @@ import com.gzfgeh.happytime.APP;
 import com.gzfgeh.happytime.R;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 
-import org.apache.http.Header;
-
 import java.io.InputStream;
 
 /**
@@ -80,28 +78,28 @@ public class PowerImageView extends ImageView implements View.OnClickListener {
 
     public void setUrl(String url) {
         this.url = url;
-        APP.getAsyncHttpClientInstance().get(url, new AsyncHttpResponseHandler() {
-            @Override
-            public void onSuccess(int i, Header[] headers, byte[] bytes) {
-                mMovie = Movie.decodeByteArray(bytes, 0, bytes.length);
-                bitmap = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
-                if (mMovie != null) {
-                    mImageWidth = bitmap.getWidth();
-                    mImageHeight = bitmap.getHeight();
-                    bitmap.recycle();
-                    measure(MeasureSpec.makeMeasureSpec(mMovie.width(), MeasureSpec.EXACTLY),
-                            MeasureSpec.makeMeasureSpec(mMovie.height(), MeasureSpec.EXACTLY));
-                }
-                invalidate();
-            }
-
-            @Override
-            public void onFailure(int i, Header[] headers, byte[] bytes, Throwable throwable) {
-                Toast.makeText(APP.getContext(), "load power image view error", Toast.LENGTH_SHORT).show();
-                mIsLoadFail = true;
-                bitmapLoadFail = BitmapFactory.decodeResource(getResources(), mLoadFailResId);
-            }
-        });
+//        APP.getAsyncHttpClientInstance().get(url, new AsyncHttpResponseHandler() {
+//            @Override
+//            public void onSuccess(int i, Header[] headers, byte[] bytes) {
+//                mMovie = Movie.decodeByteArray(bytes, 0, bytes.length);
+//                bitmap = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
+//                if (mMovie != null) {
+//                    mImageWidth = bitmap.getWidth();
+//                    mImageHeight = bitmap.getHeight();
+//                    bitmap.recycle();
+//                    measure(MeasureSpec.makeMeasureSpec(mMovie.width(), MeasureSpec.EXACTLY),
+//                            MeasureSpec.makeMeasureSpec(mMovie.height(), MeasureSpec.EXACTLY));
+//                }
+//                invalidate();
+//            }
+//
+//            @Override
+//            public void onFailure(int i, Header[] headers, byte[] bytes, Throwable throwable) {
+//                Toast.makeText(APP.getContext(), "load power image view error", Toast.LENGTH_SHORT).show();
+//                mIsLoadFail = true;
+//                bitmapLoadFail = BitmapFactory.decodeResource(getResources(), mLoadFailResId);
+//            }
+//        });
     }
 
     public PowerImageView(Context context) {

@@ -20,8 +20,6 @@ import com.gzfgeh.happytime.widget.ZoomInEnter;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 
-import org.apache.http.Header;
-
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -77,7 +75,7 @@ public class HomeRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.V
             RecyclerViewItem dataItem = data.get(i - 1);
             ((VHItem) holder).title.setText(dataItem.mName);
             handler = new AsyncHttpHandler(((VHItem) holder).gifImageView);
-            mAsyncHttpClient.get(dataItem.mGifViewUrl, handler);
+            mAsyncHttpClient.get(dataItem.mGifViewUrl, null);
 
         } else if (holder instanceof VHHeader) {
             ((VHHeader) holder).banner

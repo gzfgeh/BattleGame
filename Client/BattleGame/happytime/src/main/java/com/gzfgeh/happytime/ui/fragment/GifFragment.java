@@ -85,57 +85,57 @@ public class GifFragment extends Fragment implements SwipeRefreshLayout.OnRefres
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.gif_fragment, container, false);
-        mSwipeRefreshLayout = (SwipeRefreshLayout) rootView.findViewById(R.id.main_swipe);
-        mSwipeRefreshLayout.setColorScheme(R.color.red, R.color.blue, R.color.green);
-        mSwipeRefreshLayout.setOnRefreshListener(this);
-        mSwipeRefreshLayout.setProgressViewOffset(false, 0, (int) TypedValue
-                .applyDimension(TypedValue.COMPLEX_UNIT_DIP, 48, getResources()
-                        .getDisplayMetrics()));
-        mSwipeRefreshLayout.post(new Runnable() {
-
-            @SuppressWarnings("static-access")
-            @Override
-            public void run() {
-                try {
-                    handler.sendEmptyMessageDelayed(0, 1000);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-        });
-
-        mRecyclerView = (RecyclerView) rootView.findViewById(R.id.id_recycler_view);
-        mLayoutManager = new LinearLayoutManager(getActivity());
-        mRecyclerView.setLayoutManager(mLayoutManager);
-        mAdapter = new HomeRecyclerViewAdapter(getActivity());
-
-        mRecyclerView.setItemAnimator(new FadeInAnimator());
-        mRecyclerView.setHasFixedSize(true);
-        mRecyclerView.addItemDecoration(new DividerItemDecoration(
-                getActivity(), DividerItemDecoration.HORIZONTAL_LIST));
-        //AlphaInAnimationAdapter alphaAdapter = new AlphaInAnimationAdapter(mAdapter);
-        //ScaleInAnimationAdapter scaleAdapter = new ScaleInAnimationAdapter(alphaAdapter);
-        //mRecyclerView.setAdapter(scaleAdapter);
-        mRecyclerView.setAdapter(mAdapter);
-        mAdapter.setListener(this);
-        mAdapter.setLongListener(this);
-        mAdapter.setListenerL(this);
-        mRecyclerView.setOnScrollListener(new RecyclerView.OnScrollListener() {
-            @Override
-            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
-                super.onScrollStateChanged(recyclerView, newState);
-                if (newState == RecyclerView.SCROLL_STATE_IDLE
-                        && lastVisibleItem + 1 == mAdapter.getItemCount()) {
-                    handler.sendEmptyMessageDelayed(1, 1000);
-                }
-            }
-
-            @Override
-            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
-                super.onScrolled(recyclerView, dx, dy);
-                lastVisibleItem = mLayoutManager.findLastVisibleItemPosition();
-            }
-        });
+//        mSwipeRefreshLayout = (SwipeRefreshLayout) rootView.findViewById(R.id.main_swipe);
+//        mSwipeRefreshLayout.setColorScheme(R.color.red, R.color.blue, R.color.green);
+//        mSwipeRefreshLayout.setOnRefreshListener(this);
+//        mSwipeRefreshLayout.setProgressViewOffset(false, 0, (int) TypedValue
+//                .applyDimension(TypedValue.COMPLEX_UNIT_DIP, 48, getResources()
+//                        .getDisplayMetrics()));
+//        mSwipeRefreshLayout.post(new Runnable() {
+//
+//            @SuppressWarnings("static-access")
+//            @Override
+//            public void run() {
+//                try {
+//                    handler.sendEmptyMessageDelayed(0, 1000);
+//                } catch (Exception e) {
+//                    e.printStackTrace();
+//                }
+//            }
+//        });
+//
+//        mRecyclerView = (RecyclerView) rootView.findViewById(R.id.id_recycler_view);
+//        mLayoutManager = new LinearLayoutManager(getActivity());
+//        mRecyclerView.setLayoutManager(mLayoutManager);
+//        mAdapter = new HomeRecyclerViewAdapter(getActivity());
+//
+//        mRecyclerView.setItemAnimator(new FadeInAnimator());
+//        mRecyclerView.setHasFixedSize(true);
+//        mRecyclerView.addItemDecoration(new DividerItemDecoration(
+//                getActivity(), DividerItemDecoration.HORIZONTAL_LIST));
+//        //AlphaInAnimationAdapter alphaAdapter = new AlphaInAnimationAdapter(mAdapter);
+//        //ScaleInAnimationAdapter scaleAdapter = new ScaleInAnimationAdapter(alphaAdapter);
+//        //mRecyclerView.setAdapter(scaleAdapter);
+//        mRecyclerView.setAdapter(mAdapter);
+//        mAdapter.setListener(this);
+//        mAdapter.setLongListener(this);
+//        mAdapter.setListenerL(this);
+//        mRecyclerView.setOnScrollListener(new RecyclerView.OnScrollListener() {
+//            @Override
+//            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+//                super.onScrollStateChanged(recyclerView, newState);
+//                if (newState == RecyclerView.SCROLL_STATE_IDLE
+//                        && lastVisibleItem + 1 == mAdapter.getItemCount()) {
+//                    handler.sendEmptyMessageDelayed(1, 1000);
+//                }
+//            }
+//
+//            @Override
+//            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+//                super.onScrolled(recyclerView, dx, dy);
+//                lastVisibleItem = mLayoutManager.findLastVisibleItemPosition();
+//            }
+//        });
         return rootView;
     }
 

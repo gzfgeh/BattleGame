@@ -1,12 +1,11 @@
 package com.gzfgeh.happytime.module.recyclerview;
 
+import android.preference.PreferenceActivity;
 import android.widget.Toast;
 
 import com.gzfgeh.happytime.APP;
 import com.gzfgeh.happytime.R;
 import com.loopj.android.http.AsyncHttpResponseHandler;
-
-import org.apache.http.Header;
 
 import java.io.IOException;
 
@@ -16,7 +15,7 @@ import pl.droidsonroids.gif.GifImageView;
 /**
  * Created by guzhenfu on 15/10/31.
  */
-public class AsyncHttpHandler extends AsyncHttpResponseHandler {
+public class AsyncHttpHandler {
     private GifImageView mView;
     private GifDrawable mDrawable;
 
@@ -32,8 +31,7 @@ public class AsyncHttpHandler extends AsyncHttpResponseHandler {
         this.mView = view;
     }
 
-    @Override
-    public void onSuccess(int i, Header[] headers, byte[] bytes) {
+    public void onSuccess(int i, PreferenceActivity.Header[] headers, byte[] bytes) {
         try {
             mDrawable = new GifDrawable(bytes);
             setDrawable(mDrawable);
@@ -44,14 +42,7 @@ public class AsyncHttpHandler extends AsyncHttpResponseHandler {
         mView.setImageDrawable(mDrawable);
     }
 
-    @Override
-    public void onFailure(int i, Header[] headers, byte[] bytes, Throwable throwable) {
+    public void onFailure(int i, PreferenceActivity.Header[] headers, byte[] bytes, Throwable throwable) {
         Toast.makeText(APP.getContext(), "load error", Toast.LENGTH_SHORT).show();
-    }
-
-    @Override
-    public void onProgress(int bytesWritten, int totalSize) {
-        mView.setImageDrawable(APP.getContext().getResources().getDrawable(R.drawable.ic_add));
-        super.onProgress(bytesWritten, totalSize);
     }
 }

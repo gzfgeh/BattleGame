@@ -12,4 +12,7 @@
     <string name="navigation_weather">天气</string>
     <string name="navigation_about">关于</string>
 
+    <string name="drawer_open">Open</string>
+    <string name="drawer_close">Close</string>
+
 </resources>
