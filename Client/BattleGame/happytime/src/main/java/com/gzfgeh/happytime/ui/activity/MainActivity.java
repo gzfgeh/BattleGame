@@ -96,27 +96,27 @@ public class MainActivity extends AppCompatActivity implements IMainView {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_main, menu);
-        SearchView searchView = (SearchView) menu.findItem(R.id.ab_search).getActionView();
-        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-            @Override
-            public boolean onQueryTextSubmit(String s) {
-                Toast.makeText(MainActivity.this, "提交文本：" + s, Toast.LENGTH_SHORT).show();
-                return false;
-            }
-
-            @Override
-            public boolean onQueryTextChange(String s) {
-                Toast.makeText(MainActivity.this, "当前文本：" + s, Toast.LENGTH_SHORT).show();
-                return false;
-            }
-        });
-
-        ShareActionProvider mShareActionProvider =(ShareActionProvider)
-                MenuItemCompat.getActionProvider(menu.findItem(R.id.action_share));
-        Intent share = new Intent(Intent.ACTION_SEND);
-        share.setAction(Intent.ACTION_SEND).putExtra(Intent.EXTRA_TEXT, "TEST")
-                .setType("text/plain");
-        mShareActionProvider.setShareIntent(share);
+//        SearchView searchView = (SearchView) menu.findItem(R.id.ab_search).getActionView();
+//        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+//            @Override
+//            public boolean onQueryTextSubmit(String s) {
+//                Toast.makeText(MainActivity.this, "提交文本：" + s, Toast.LENGTH_SHORT).show();
+//                return false;
+//            }
+//
+//            @Override
+//            public boolean onQueryTextChange(String s) {
+//                Toast.makeText(MainActivity.this, "当前文本：" + s, Toast.LENGTH_SHORT).show();
+//                return false;
+//            }
+//        });
+//
+//        ShareActionProvider mShareActionProvider =(ShareActionProvider)
+//                MenuItemCompat.getActionProvider(menu.findItem(R.id.action_share));
+//        Intent share = new Intent(Intent.ACTION_SEND);
+//        share.setAction(Intent.ACTION_SEND).putExtra(Intent.EXTRA_TEXT, "TEST")
+//                .setType("text/plain");
+//        mShareActionProvider.setShareIntent(share);
         return true;
     }
 

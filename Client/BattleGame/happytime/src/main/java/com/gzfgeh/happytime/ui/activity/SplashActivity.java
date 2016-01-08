@@ -1,5 +1,6 @@
 package com.gzfgeh.happytime.ui.activity;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -16,7 +17,7 @@ import java.util.Random;
 /**
  * Created by guzhenfu on 15/8/8.
  */
-public class SplashActivity extends BaseActivity{
+public class SplashActivity extends Activity {
     private static final int TIME = 1000;
     private String userSentence = null;
     private TextView sentence;
@@ -72,16 +73,6 @@ public class SplashActivity extends BaseActivity{
             userSentence = ShareUtils.getValue(s, null);
         }
     }
-
-//    @Override
-//    protected void initToolBar() {
-//        return;
-//    }
-//
-//    @Override
-//    protected int getContentView() {
-//        return R.layout.activity_splash;
-//    }
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
