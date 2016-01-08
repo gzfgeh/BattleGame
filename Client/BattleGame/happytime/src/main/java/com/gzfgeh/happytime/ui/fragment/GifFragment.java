@@ -5,11 +5,12 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.annotation.Nullable;
+import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
+import android.support.v4.view.ViewPager;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,8 +20,6 @@ import com.flyco.banner.widget.Banner.base.BaseBanner;
 import com.gzfgeh.happytime.Global;
 import com.gzfgeh.happytime.R;
 import com.gzfgeh.happytime.adapter.HomeRecyclerViewAdapter;
-import com.gzfgeh.happytime.module.banner.DataProvider;
-import com.gzfgeh.happytime.module.recyclerview.DividerItemDecoration;
 import com.gzfgeh.happytime.module.recyclerview.RecyclerDataProvider;
 import com.gzfgeh.happytime.module.recyclerview.RecyclerViewItem;
 import com.gzfgeh.happytime.ui.activity.BannerActivityOne;
@@ -29,13 +28,21 @@ import com.gzfgeh.happytime.ui.activity.RecyclerViewItemActivity;
 import java.util.ArrayList;
 import java.util.List;
 
-import jp.wasabeef.recyclerview.animators.FadeInAnimator;
+import butterknife.Bind;
+import butterknife.ButterKnife;
 import pl.droidsonroids.gif.GifImageView;
 
 /**
  * Created by guzhenfu on 15/9/27.
  */
 public class GifFragment extends Fragment implements SwipeRefreshLayout.OnRefreshListener, HomeRecyclerViewAdapter.RecyclerItemClickListener, HomeRecyclerViewAdapter.RecyclerItemLongClickListener, BaseBanner.OnItemClickL {
+    @Bind(R.id.tab_layout)
+    TabLayout tabLayout;
+    @Bind(R.id.viewpager)
+    ViewPager viewpager;
+    private List<Fragment> fragments;
+    private List<String> titles;
+
     private SwipeRefreshLayout mSwipeRefreshLayout;
     private RecyclerView mRecyclerView;
     private HomeRecyclerViewAdapter mAdapter;
@@ -73,7 +80,7 @@ public class GifFragment extends Fragment implements SwipeRefreshLayout.OnRefres
     }
 
 
-    public static GifFragment newInstance(String title){
+    public static GifFragment newInstance(String title) {
         GifFragment fragment = new GifFragment();
         Bundle bundle = new Bundle();
         bundle.putString(Global.ARG_TITLE, title);
@@ -136,6 +143,10 @@ public class GifFragment extends Fragment implements SwipeRefreshLayout.OnRefres
 //                lastVisibleItem = mLayoutManager.findLastVisibleItemPosition();
 //            }
 //        });
+        ButterKnife.bind(this, rootView);
+        tabLayout.setTabMode(TabLayout.MODE_FIXED);
+        fragments = new ArrayList<>();
+//        fragments.add()
         return rootView;
     }
 
@@ -146,7 +157,7 @@ public class GifFragment extends Fragment implements SwipeRefreshLayout.OnRefres
 
     @Override
     public void onItemClick(View view, int position) {
-        if (view instanceof GifImageView){
+        if (view instanceof GifImageView) {
             Intent intent = new Intent(getActivity(), RecyclerViewItemActivity.class);
             startActivity(intent);
         }
@@ -160,7 +171,7 @@ public class GifFragment extends Fragment implements SwipeRefreshLayout.OnRefres
 
     @Override
     public void onItemClick(int i) {
-        switch (i){
+        switch (i) {
             case 0:
                 Intent intent = new Intent(getActivity(), BannerActivityOne.class);
                 startActivity(intent);
@@ -171,5 +182,11 @@ public class GifFragment extends Fragment implements SwipeRefreshLayout.OnRefres
                 break;
         }
 
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        ButterKnife.unbind(this);
     }
 }

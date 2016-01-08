@@ -44,4 +44,5 @@ dependencies {
     compile 'pl.droidsonroids.gif:android-gif-drawable:1.1.+'
     compile files('libs/android-async-http-1.4.5.jar')
     compile 'com.zhy:autolayout:1.3.6'
+    compile 'com.jakewharton:butterknife:7.0.1'
 }

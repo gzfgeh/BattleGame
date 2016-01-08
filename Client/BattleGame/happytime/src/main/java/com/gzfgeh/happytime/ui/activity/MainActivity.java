@@ -74,15 +74,6 @@ public class MainActivity extends AppCompatActivity implements IMainView {
                 });
     }
 
-    private List<Fragment> getData() {
-        List<Fragment> lists = new ArrayList<>();
-        GifFragment fragment = GifFragment.newInstance("gjfjfgj");
-        lists.add(fragment);
-        fragment = GifFragment.newInstance("sksjhfk");
-        lists.add(fragment);
-        return lists;
-    }
-
 
     private void initDrawerLayout(){
         drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -96,27 +87,6 @@ public class MainActivity extends AppCompatActivity implements IMainView {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_main, menu);
-//        SearchView searchView = (SearchView) menu.findItem(R.id.ab_search).getActionView();
-//        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-//            @Override
-//            public boolean onQueryTextSubmit(String s) {
-//                Toast.makeText(MainActivity.this, "提交文本：" + s, Toast.LENGTH_SHORT).show();
-//                return false;
-//            }
-//
-//            @Override
-//            public boolean onQueryTextChange(String s) {
-//                Toast.makeText(MainActivity.this, "当前文本：" + s, Toast.LENGTH_SHORT).show();
-//                return false;
-//            }
-//        });
-//
-//        ShareActionProvider mShareActionProvider =(ShareActionProvider)
-//                MenuItemCompat.getActionProvider(menu.findItem(R.id.action_share));
-//        Intent share = new Intent(Intent.ACTION_SEND);
-//        share.setAction(Intent.ACTION_SEND).putExtra(Intent.EXTRA_TEXT, "TEST")
-//                .setType("text/plain");
-//        mShareActionProvider.setShareIntent(share);
         return true;
     }
 
@@ -135,25 +105,29 @@ public class MainActivity extends AppCompatActivity implements IMainView {
 
     @Override
     public void switch2News() {
-        getSupportFragmentManager().beginTransaction().replace(R.id.frame_content, new GifFragment()).commit();
+        getSupportFragmentManager().beginTransaction().replace(R.id.frame_content,
+                GifFragment.newInstance(getString(R.string.navigation_news))).commit();
         toolbar.setTitle(R.string.navigation_news);
     }
 
     @Override
     public void switch2Images() {
-        getSupportFragmentManager().beginTransaction().replace(R.id.frame_content, new GifFragment()).commit();
+        getSupportFragmentManager().beginTransaction().replace(R.id.frame_content,
+                GifFragment.newInstance(getString(R.string.navigation_news))).commit();
         toolbar.setTitle(R.string.navigation_images);
     }
 
     @Override
     public void switch2Weather() {
-        getSupportFragmentManager().beginTransaction().replace(R.id.frame_content, new GifFragment()).commit();
+        getSupportFragmentManager().beginTransaction().replace(R.id.frame_content,
+                GifFragment.newInstance(getString(R.string.navigation_news))).commit();
         toolbar.setTitle(R.string.navigation_weather);
     }
 
     @Override
     public void switch2About() {
-        getSupportFragmentManager().beginTransaction().replace(R.id.frame_content, new GifFragment()).commit();
+        getSupportFragmentManager().beginTransaction().replace(R.id.frame_content,
+                GifFragment.newInstance(getString(R.string.navigation_news))).commit();
         toolbar.setTitle(R.string.navigation_about);
     }
 }
