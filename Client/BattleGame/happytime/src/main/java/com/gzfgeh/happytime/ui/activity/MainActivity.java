@@ -1,36 +1,20 @@
 package com.gzfgeh.happytime.ui.activity;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
-import android.support.v4.view.MenuItemCompat;
-import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.SearchView;
-import android.support.v7.widget.ShareActionProvider;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.Toast;
 
 import com.gzfgeh.happytime.R;
-import com.gzfgeh.happytime.presenter.IMainPresenter;
-import com.gzfgeh.happytime.presenter.IMainView;
-import com.gzfgeh.happytime.presenter.MainPresenterImpl;
-import com.gzfgeh.happytime.ui.fragment.GifFragment;
-import com.gzfgeh.happytime.ui.fragment.SuperAwesomeCardFragment;
-import com.gzfgeh.happytime.utils.ThemeUtils;
-import com.gzfgeh.happytime.widget.PagerSlidingTabStrip;
-import com.gzfgeh.happytime.widget.TabViewPagerAdapter;
-
-import java.util.ArrayList;
-import java.util.List;
+import com.gzfgeh.happytime.presenter.activity_main.IMainPresenter;
+import com.gzfgeh.happytime.presenter.activity_main.IMainView;
+import com.gzfgeh.happytime.presenter.activity_main.MainPresenterImpl;
+import com.gzfgeh.happytime.ui.fragment.NewsFragment;
 
 public class MainActivity extends AppCompatActivity implements IMainView {
     private Toolbar toolbar;
@@ -106,28 +90,28 @@ public class MainActivity extends AppCompatActivity implements IMainView {
     @Override
     public void switch2News() {
         getSupportFragmentManager().beginTransaction().replace(R.id.frame_content,
-                GifFragment.newInstance(getString(R.string.navigation_news))).commit();
+                NewsFragment.newInstance(getString(R.string.navigation_news))).commit();
         toolbar.setTitle(R.string.navigation_news);
     }
 
     @Override
     public void switch2Images() {
         getSupportFragmentManager().beginTransaction().replace(R.id.frame_content,
-                GifFragment.newInstance(getString(R.string.navigation_news))).commit();
+                NewsFragment.newInstance(getString(R.string.navigation_news))).commit();
         toolbar.setTitle(R.string.navigation_images);
     }
 
     @Override
     public void switch2Weather() {
         getSupportFragmentManager().beginTransaction().replace(R.id.frame_content,
-                GifFragment.newInstance(getString(R.string.navigation_news))).commit();
+                NewsFragment.newInstance(getString(R.string.navigation_news))).commit();
         toolbar.setTitle(R.string.navigation_weather);
     }
 
     @Override
     public void switch2About() {
         getSupportFragmentManager().beginTransaction().replace(R.id.frame_content,
-                GifFragment.newInstance(getString(R.string.navigation_news))).commit();
+                NewsFragment.newInstance(getString(R.string.navigation_news))).commit();
         toolbar.setTitle(R.string.navigation_about);
     }
 }

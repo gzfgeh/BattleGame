@@ -1,4 +1,4 @@
-package com.gzfgeh.happytime.presenter;
+package com.gzfgeh.happytime.presenter.activity_main;
 
 /**
  * Created by sunup_002 on 2016/1/7.
