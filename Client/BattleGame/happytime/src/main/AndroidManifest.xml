@@ -35,8 +35,8 @@
         <activity android:name=".ui.activity.BannerActivityOne"
             android:theme="@android:style/Theme.Translucent"/>
 
-        <activity android:name=".ui.activity.RecyclerViewItemActivity"
-            android:theme="@android:style/Theme.Translucent"/>
+        <activity android:name=".ui.activity.NewsDetailActivity"
+            android:theme="@style/AppTheme.NoActionBar.Translucent"/>
 
     </application>
 

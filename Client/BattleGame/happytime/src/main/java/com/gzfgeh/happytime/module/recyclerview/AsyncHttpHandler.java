@@ -5,7 +5,6 @@ import android.widget.Toast;
 
 import com.gzfgeh.happytime.APP;
 import com.gzfgeh.happytime.R;
-import com.loopj.android.http.AsyncHttpResponseHandler;
 
 import java.io.IOException;
 

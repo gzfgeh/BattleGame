@@ -5,10 +5,10 @@ import com.gzfgeh.happytime.R;
 /**
  * Created by sunup_002 on 2016/1/7.
  */
-public class MainPresenterImpl implements IMainPresenter {
+public class MainPresenter implements IMainPresenter {
     private IMainView mainView;
 
-    public MainPresenterImpl(IMainView mainView){
+    public MainPresenter(IMainView mainView){
         this.mainView = mainView;
     }
 

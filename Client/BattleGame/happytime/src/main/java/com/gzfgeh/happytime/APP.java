@@ -6,7 +6,6 @@ import android.content.pm.ApplicationInfo;
 
 import com.gzfgeh.happytime.utils.LogUtils;
 import com.gzfgeh.happytime.utils.ShareUtils;
-import com.loopj.android.http.AsyncHttpClient;
 import com.squareup.leakcanary.LeakCanary;
 import com.squareup.leakcanary.RefWatcher;
 
@@ -16,18 +15,6 @@ import com.squareup.leakcanary.RefWatcher;
 public class APP extends Application {
     private static Context context;
     private RefWatcher refWatcher;
-    private volatile static AsyncHttpClient asyncHttpClient;
-
-    public static AsyncHttpClient getAsyncHttpClientInstance(){
-        if (asyncHttpClient == null){
-            synchronized (APP.class){
-                if (asyncHttpClient == null){
-                    asyncHttpClient = new AsyncHttpClient();
-                }
-            }
-        }
-        return asyncHttpClient;
-    }
 
     public static Context getContext(){
         return context;

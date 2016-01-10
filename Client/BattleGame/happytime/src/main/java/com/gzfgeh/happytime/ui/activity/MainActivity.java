@@ -13,7 +13,7 @@ import android.widget.Toast;
 import com.gzfgeh.happytime.R;
 import com.gzfgeh.happytime.presenter.activity_main.IMainPresenter;
 import com.gzfgeh.happytime.presenter.activity_main.IMainView;
-import com.gzfgeh.happytime.presenter.activity_main.MainPresenterImpl;
+import com.gzfgeh.happytime.presenter.activity_main.MainPresenter;
 import com.gzfgeh.happytime.ui.fragment.NewsFragment;
 
 public class MainActivity extends AppCompatActivity implements IMainView {
@@ -41,7 +41,7 @@ public class MainActivity extends AppCompatActivity implements IMainView {
     private void initNavigationView() {
         mNavigationView = (NavigationView) findViewById(R.id.navigation_view);
         setupDrawerContent(mNavigationView);
-        mMainPresenter = new MainPresenterImpl(this);
+        mMainPresenter = new MainPresenter(this);
         switch2News();
     }
 
