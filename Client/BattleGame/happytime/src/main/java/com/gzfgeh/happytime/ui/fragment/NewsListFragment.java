@@ -33,17 +33,11 @@ import butterknife.ButterKnife;
 /**
  * Created by guzhenfu on 16/1/9.
  */
-public class NewsListFragment extends Fragment implements INewsView, SwipeRefreshLayout.OnRefreshListener {
-    @Bind(R.id.recycle_view)
-    RecyclerView recycleView;
-    @Bind(R.id.swipe_refresh_widget)
-    SwipeRefreshLayout swipeRefreshWidget;
-
+public class NewsListFragment extends BaseListFragment implements INewsView {
     private int type;
     private int pageIndex = 0;
     private INewsPresenter presenter;
     private NewsRecyclerViewAdapter adapter;
-    private LinearLayoutManager mLayoutManager;
     private List<NewsBean> mData;
 
     public static NewsListFragment newInstance(int type) {
@@ -59,27 +53,6 @@ public class NewsListFragment extends Fragment implements INewsView, SwipeRefres
         super.onCreate(savedInstanceState);
         type = getArguments().getInt("type");
         presenter = new NewsPresenter(this);
-    }
-
-    @Nullable
-    @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_news_list, null);
-        ButterKnife.bind(this, view);
-        swipeRefreshWidget.setColorSchemeResources(R.color.yellow, R.color.pink,
-            R.color.blue, R.color.green);
-        swipeRefreshWidget.setOnRefreshListener(this);
-
-        recycleView.setHasFixedSize(true);
-        mLayoutManager = new LinearLayoutManager(getActivity());
-        recycleView.setLayoutManager(mLayoutManager);
-
-        adapter = new NewsRecyclerViewAdapter(getContext(), this);
-        recycleView.setAdapter(adapter);
-        adapter.setListener(listener);
-        recycleView.addOnScrollListener(scrollListener);
-        onRefresh();
-        return view;
     }
 
     private RecyclerView.OnScrollListener scrollListener = new RecyclerView.OnScrollListener(){
@@ -120,19 +93,11 @@ public class NewsListFragment extends Fragment implements INewsView, SwipeRefres
     };
 
     @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        ButterKnife.unbind(this);
-    }
-
-    @Override
-    public void showProgress() {
-        swipeRefreshWidget.setRefreshing(true);
-    }
-
-    @Override
-    public void hideProgress() {
-        swipeRefreshWidget.setRefreshing(false);
+    public void setRecycleView() {
+        adapter = new NewsRecyclerViewAdapter(getContext(), this);
+        adapter.setListener(listener);
+        recycleView.setAdapter(adapter);
+        recycleView.addOnScrollListener(scrollListener);
     }
 
     @Override

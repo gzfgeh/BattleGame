@@ -1,5 +1,7 @@
 package com.gzfgeh.happytime.presenter.activity_news_details;
 
+import com.gzfgeh.happytime.presenter.IProgress;
+
 /**
  * Description:
  * Created by guzhenfu on 16/1/10.
@@ -7,8 +9,6 @@ package com.gzfgeh.happytime.presenter.activity_news_details;
  * Blog:   http://blog.csdn.net/u011370933
  * Github: https://github.com/gzfgeh
  */
-public interface INewsDetailModle {
+public interface INewsDetailModle extends IProgress{
     void showNewsDetailContent(String content);
-    void showProgress();
-    void hideProgress();
 }
