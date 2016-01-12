@@ -2,7 +2,9 @@ package com.gzfgeh.happytime.adapter;
 
 import android.content.Context;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.ContentLoadingProgressBar;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,12 +13,15 @@ import android.widget.TextView;
 
 import com.flyco.banner.transform.ZoomOutSlideTransformer;
 import com.flyco.banner.widget.Banner.base.BaseBanner;
+import com.gzfgeh.happytime.APP;
 import com.gzfgeh.happytime.R;
 import com.gzfgeh.happytime.beans.NewsBean;
 import com.gzfgeh.happytime.module.banner.DataProvider;
 import com.gzfgeh.happytime.module.banner.SimpleImageBanner;
 import com.gzfgeh.happytime.module.recyclerview.AsyncHttpHandler;
 import com.gzfgeh.happytime.utils.ImageLoaderUtils;
+import com.gzfgeh.happytime.utils.LogUtils;
+import com.gzfgeh.happytime.utils.NetWorkUtils;
 import com.gzfgeh.happytime.widget.ZoomInEnter;
 
 import java.util.List;
@@ -105,6 +110,7 @@ public class NewsRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.V
 
     public void setData(List<NewsBean> data) {
         this.data = data;
+        notifyDataSetChanged();
     }
 
     public boolean isShowFooter() {
@@ -158,8 +164,22 @@ public class NewsRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.V
     }
 
     static class VHFooter extends RecyclerView.ViewHolder {
+        public ContentLoadingProgressBar progressBar;
+        public TextView tvLoadFail;
+
         public VHFooter(View itemView) {
             super(itemView);
+            progressBar = (ContentLoadingProgressBar) itemView.findViewById(R.id.progressbar);
+            tvLoadFail = (TextView) itemView.findViewById(R.id.foot_load_fail);
+            if (NetWorkUtils.isNetworkAvailable(APP.getContext())) {
+                progressBar.setVisibility(View.VISIBLE);
+                tvLoadFail.setVisibility(View.GONE);
+                LogUtils.i("TAG", "net work");
+            }else{
+                progressBar.setVisibility(View.GONE);
+                tvLoadFail.setVisibility(View.VISIBLE);
+                LogUtils.i("TAG", "net work is not available");
+            }
         }
     }
 

@@ -26,7 +26,7 @@ public class NewModle implements INewsModle {
         OkHttpUtils.get().url(url).build().execute(new StringCallback() {
             @Override
             public void onError(Request request, Exception e) {
-                listener.onFailure(request.body().toString(), e);
+                listener.onFailure(e.getMessage().toString(), e);
             }
 
             @Override

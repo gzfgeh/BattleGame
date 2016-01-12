@@ -20,4 +20,6 @@
     <string name="drawer_open">Open</string>
     <string name="drawer_close">Close</string>
 
+    <string name="load_fail">加载数据失败，请检查网络</string>
+
 </resources>
