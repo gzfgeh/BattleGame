@@ -6,6 +6,7 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.google.gson.JsonSyntaxException;
+import com.gzfgeh.happytime.beans.ImageBean;
 import com.gzfgeh.happytime.beans.NewsBean;
 import com.gzfgeh.happytime.beans.NewsDetailBean;
 
@@ -112,6 +113,22 @@ public class JsonUtils {
             LogUtils.e("TAG", "readJsonNewsBeans error");
         }
         return newsDetailBean;
+    }
+
+    public static List<ImageBean> readJsonImageBeans(String res) {
+        List<ImageBean> beans = new ArrayList<>();
+        try {
+            JsonParser parser = new JsonParser();
+            JsonArray jsonArray = parser.parse(res).getAsJsonArray();
+            for (int i = 1; i < jsonArray.size(); i++) {
+                JsonObject jo = jsonArray.get(i).getAsJsonObject();
+                ImageBean news = JsonUtils.deserialize(jo, ImageBean.class);
+                beans.add(news);
+            }
+        } catch (Exception e) {
+            LogUtils.e("TAG", "readJsonImageBeans error");
+        }
+        return beans;
     }
 
 }
