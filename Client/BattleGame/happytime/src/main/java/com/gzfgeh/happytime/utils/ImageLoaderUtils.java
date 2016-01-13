@@ -39,4 +39,6 @@ public class ImageLoaderUtils {
         Glide.with(fragment).load(url).placeholder(R.drawable.ic_image_loading)
                 .error(R.drawable.ic_image_loadfail).crossFade().into(imageView);
     }
+
+
 }

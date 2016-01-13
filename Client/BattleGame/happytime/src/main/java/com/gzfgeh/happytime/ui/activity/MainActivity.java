@@ -14,6 +14,7 @@ import com.gzfgeh.happytime.R;
 import com.gzfgeh.happytime.presenter.activity_main.IMainPresenter;
 import com.gzfgeh.happytime.presenter.activity_main.IMainView;
 import com.gzfgeh.happytime.presenter.activity_main.MainPresenter;
+import com.gzfgeh.happytime.ui.fragment.ImageFragment;
 import com.gzfgeh.happytime.ui.fragment.NewsFragment;
 
 public class MainActivity extends AppCompatActivity implements IMainView {
@@ -97,7 +98,7 @@ public class MainActivity extends AppCompatActivity implements IMainView {
     @Override
     public void switch2Images() {
         getSupportFragmentManager().beginTransaction().replace(R.id.frame_content,
-                NewsFragment.newInstance(getString(R.string.navigation_news))).commit();
+                ImageFragment.newInstance(getString(R.string.navigation_images))).commit();
         toolbar.setTitle(R.string.navigation_images);
     }
 

@@ -50,6 +50,12 @@ public abstract class BaseListFragment extends Fragment implements SwipeRefreshL
     }
 
     @Override
+    public void onResume() {
+        super.onResume();
+        onRefresh();
+    }
+
+    @Override
     public void onDestroyView() {
         super.onDestroyView();
         ButterKnife.unbind(this);

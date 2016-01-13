@@ -4,7 +4,6 @@ import android.content.Context;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.ContentLoadingProgressBar;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,15 +17,12 @@ import com.gzfgeh.happytime.R;
 import com.gzfgeh.happytime.beans.NewsBean;
 import com.gzfgeh.happytime.module.banner.DataProvider;
 import com.gzfgeh.happytime.module.banner.SimpleImageBanner;
-import com.gzfgeh.happytime.module.recyclerview.AsyncHttpHandler;
 import com.gzfgeh.happytime.utils.ImageLoaderUtils;
 import com.gzfgeh.happytime.utils.LogUtils;
 import com.gzfgeh.happytime.utils.NetWorkUtils;
 import com.gzfgeh.happytime.widget.ZoomInEnter;
 
 import java.util.List;
-
-import butterknife.Bind;
 
 /**
  * Created by guzhenfu on 15/10/20.
@@ -54,7 +50,7 @@ public class NewsRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.V
             View view = LayoutInflater.from(context).inflate(R.layout.list_view_header, viewGroup, false);
             return new VHHeader(view, null);
         } else if (i == TYPE_ITEM) {
-            View view = LayoutInflater.from(context).inflate(R.layout.recycler_view_item, viewGroup, false);
+            View view = LayoutInflater.from(context).inflate(R.layout.news_item, viewGroup, false);
             return new VHItem(view);
         } else if (i == TYPE_FOOTER) {
             View view = LayoutInflater.from(context).inflate(R.layout.recycler_view_footer_view, viewGroup, false);
