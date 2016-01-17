@@ -1,1 +1,1 @@
-include ':app', ':happytime', ':customview', ':jnidemo', ':jnidemo'
+include ':app', ':customview', ':jnidemo', ':happytime'

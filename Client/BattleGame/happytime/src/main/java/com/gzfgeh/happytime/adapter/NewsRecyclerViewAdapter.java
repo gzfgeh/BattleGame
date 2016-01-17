@@ -10,17 +10,12 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.flyco.banner.transform.ZoomOutSlideTransformer;
-import com.flyco.banner.widget.Banner.base.BaseBanner;
 import com.gzfgeh.happytime.APP;
 import com.gzfgeh.happytime.R;
 import com.gzfgeh.happytime.beans.NewsBean;
-import com.gzfgeh.happytime.module.banner.DataProvider;
-import com.gzfgeh.happytime.module.banner.SimpleImageBanner;
 import com.gzfgeh.happytime.utils.ImageLoaderUtils;
 import com.gzfgeh.happytime.utils.LogUtils;
 import com.gzfgeh.happytime.utils.NetWorkUtils;
-import com.gzfgeh.happytime.widget.ZoomInEnter;
 
 import java.util.List;
 
@@ -48,7 +43,7 @@ public class NewsRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.V
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
         if (i == TYPE_HEADER) {
             View view = LayoutInflater.from(context).inflate(R.layout.list_view_header, viewGroup, false);
-            return new VHHeader(view, null);
+            return new VHHeader(view);
         } else if (i == TYPE_ITEM) {
             View view = LayoutInflater.from(context).inflate(R.layout.news_item, viewGroup, false);
             return new VHItem(view);
@@ -70,11 +65,6 @@ public class NewsRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.V
             ((VHItem) holder).mDesc.setText(bean.getDigest());
             ImageLoaderUtils.display(fragment, ((VHItem) holder).mNewsImg, bean.getImgsrc());
         } else if (holder instanceof VHHeader) {
-            ((VHHeader) holder).banner
-                    .setSelectAnimClass(ZoomInEnter.class)
-                    .setSource(DataProvider.getList())
-                    .setTransformerClass(ZoomOutSlideTransformer.class)
-                    .startScroll();
         }
     }
 
@@ -141,21 +131,10 @@ public class NewsRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.V
         }
     }
 
-    static class VHHeader extends RecyclerView.ViewHolder implements BaseBanner.OnItemClickL {
-        private SimpleImageBanner banner;
-        private BaseBanner.OnItemClickL mListener;
+    static class VHHeader extends RecyclerView.ViewHolder {
 
-        public VHHeader(View itemView, BaseBanner.OnItemClickL listener) {
+        public VHHeader(View itemView) {
             super(itemView);
-            banner = (SimpleImageBanner) itemView.findViewById(R.id.banner);
-            mListener = listener;
-            banner.setOnItemClickL(this);
-        }
-
-        @Override
-        public void onItemClick(int i) {
-            if (mListener != null)
-                mListener.onItemClick(i);
         }
     }
 

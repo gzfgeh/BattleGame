@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.gzfgeh.happytime.widget.PercentRelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical" >
@@ -9,19 +8,14 @@
         android:id="@+id/iv_receive"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_widthPercent="90%w"
-        app:layout_heightPercent="50%h"
         android:src="@drawable/icon_popular"
         android:layout_centerHorizontal="true"/>
 
-    <com.gzfgeh.happytime.widget.PercentRelativeLayout
+    <RelativeLayout
         android:id="@+id/rl_receive_apicture"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_widthPercent="40%h"
-        app:layout_heightPercent="40%h"
-        android:layout_centerHorizontal="true"
-        app:layout_marginTopPercent="10%h">
+        android:layout_centerHorizontal="true">
 
         <ImageView
             android:id="@+id/iv_receive_apicture"
@@ -34,10 +28,6 @@
             android:id="@+id/iv_gold"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_widthPercent="15%w"
-            app:layout_heightPercent="15%w"
-            app:layout_marginTopPercent="18%h"
-            app:layout_marginLeftPercent="37%w"
             android:src="@drawable/icon_gold" />
 
         <ImageView
@@ -47,7 +37,7 @@
             android:layout_centerHorizontal="true"
             android:src="@drawable/icon_reward"
             android:visibility="gone"/>
-    </com.gzfgeh.happytime.widget.PercentRelativeLayout>
+    </RelativeLayout>
 
     <TextView
         android:id="@+id/reward"
@@ -65,9 +55,8 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        app:layout_marginBottomPercent="15%h"
         android:text="@string/video_reward"
         android:textColor="#FFFFFFFF"
         android:textSize="37dp"/>
 
-</com.gzfgeh.happytime.widget.PercentRelativeLayout>
+</RelativeLayout>

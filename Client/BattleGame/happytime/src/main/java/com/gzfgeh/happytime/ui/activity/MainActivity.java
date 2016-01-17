@@ -64,7 +64,7 @@ public class MainActivity extends AppCompatActivity implements IMainView {
         drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawerToggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.drawer_open, R.string.drawer_close);
         drawerToggle.syncState();
-        drawerToggle.setDrawerIndicatorEnabled(true);
+//        drawerToggle.setDrawerIndicatorEnabled(true);
         drawerLayout.setDrawerListener(drawerToggle);
         drawerLayout.setScrimColor(getResources().getColor(R.color.drawer_scrim_color));
     }

@@ -55,6 +55,8 @@ public class NewsListFragment extends BaseListFragment implements INewsView {
         presenter = new NewsPresenter(this);
     }
 
+
+
     private RecyclerView.OnScrollListener scrollListener = new RecyclerView.OnScrollListener(){
         private int lastVisiableItem;
 

@@ -45,7 +45,6 @@ public abstract class BaseListFragment extends Fragment implements SwipeRefreshL
         recycleView.setLayoutManager(mLayoutManager);
 
         setRecycleView();
-        onRefresh();
         return view;
     }
 

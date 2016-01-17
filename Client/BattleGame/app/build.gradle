@@ -7,7 +7,7 @@ def releaseTime(){
 
 android {
     compileSdkVersion 22
-    buildToolsVersion "23.0.0 rc3"
+    buildToolsVersion '23.0.2'
     defaultConfig {
         applicationId 'com.gzfgeh.battlegame'
         minSdkVersion 14

@@ -49,7 +49,7 @@ public class NewsFragment extends Fragment {
     }
 
     private void initTabLayout() {
-        tabLayout.setTabMode(TabLayout.MODE_FIXED);
+//        tabLayout.setTabMode(TabLayout.MODE_FIXED);
         tabLayout.addTab(tabLayout.newTab().setText(R.string.top));
         tabLayout.addTab(tabLayout.newTab().setText(R.string.cars));
         tabLayout.addTab(tabLayout.newTab().setText(R.string.nba));
@@ -59,7 +59,8 @@ public class NewsFragment extends Fragment {
 
     private void initViewPager() {
         viewpager.setOffscreenPageLimit(3);
-        TabViewPagerAdapter adapter = new TabViewPagerAdapter(getFragmentManager());
+        //Fragment中嵌套使用Fragment一定要使用getChildFragmentManager(),否则会有问题
+        TabViewPagerAdapter adapter = new TabViewPagerAdapter(getChildFragmentManager());
         adapter.addFragment(NewsListFragment.newInstance(NEWS_TYPE_TOP), getString(R.string.top));
         adapter.addFragment(NewsListFragment.newInstance(NEWS_TYPE_CARS), getString(R.string.cars));
         adapter.addFragment(NewsListFragment.newInstance(NEWS_TYPE_NBA), getString(R.string.nba));
