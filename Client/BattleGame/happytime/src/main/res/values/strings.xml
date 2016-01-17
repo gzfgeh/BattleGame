@@ -22,4 +22,12 @@
 
     <string name="load_fail">加载数据失败，请检查网络</string>
 
+    <string name="app_description">本APP用来演示Material Design以及MVP设计模式在项目中的使用</string>
+    <string name="app_github_url">APP地址：https://github.com/gzfgeh/BattleGame</string>
+    <string name="author">作者：gzfgeh</string>
+    <string name="email">邮箱：gzfgeh@sina.com</string>
+    <string name="blog">博客：http://blog.csdn.net/u011370933</string>
+
+    <string name="exit">再按一次，退出应用</string>
+
 </resources>

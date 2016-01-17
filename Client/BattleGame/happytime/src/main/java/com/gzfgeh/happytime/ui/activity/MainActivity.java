@@ -1,11 +1,13 @@
 package com.gzfgeh.happytime.ui.activity;
 
 import android.os.Bundle;
+import android.provider.Settings;
 import android.support.design.widget.NavigationView;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
@@ -14,8 +16,10 @@ import com.gzfgeh.happytime.R;
 import com.gzfgeh.happytime.presenter.activity_main.IMainPresenter;
 import com.gzfgeh.happytime.presenter.activity_main.IMainView;
 import com.gzfgeh.happytime.presenter.activity_main.MainPresenter;
+import com.gzfgeh.happytime.ui.fragment.AboutFragment;
 import com.gzfgeh.happytime.ui.fragment.ImageFragment;
 import com.gzfgeh.happytime.ui.fragment.NewsFragment;
+import com.gzfgeh.happytime.ui.fragment.WeatherFragment;
 
 public class MainActivity extends AppCompatActivity implements IMainView {
     private Toolbar toolbar;
@@ -105,14 +109,32 @@ public class MainActivity extends AppCompatActivity implements IMainView {
     @Override
     public void switch2Weather() {
         getSupportFragmentManager().beginTransaction().replace(R.id.frame_content,
-                NewsFragment.newInstance(getString(R.string.navigation_news))).commit();
+                WeatherFragment.newInstance(getString(R.string.navigation_weather))).commit();
         toolbar.setTitle(R.string.navigation_weather);
     }
 
     @Override
     public void switch2About() {
         getSupportFragmentManager().beginTransaction().replace(R.id.frame_content,
-                NewsFragment.newInstance(getString(R.string.navigation_news))).commit();
+                AboutFragment.newInstance(getString(R.string.navigation_about))).commit();
         toolbar.setTitle(R.string.navigation_about);
+    }
+
+    long firstTime = 0L;
+    @Override
+    public boolean onKeyUp(int keyCode, KeyEvent event) {
+        switch (keyCode){
+            case KeyEvent.KEYCODE_BACK:
+                long time = System.currentTimeMillis();
+                if (time - firstTime > 2000){
+                    Toast.makeText(this, getString(R.string.exit), Toast.LENGTH_SHORT).show();
+                    firstTime = time;
+                    return true;
+                }else{
+                    System.exit(0);
+                }
+                break;
+        }
+        return super.onKeyUp(keyCode, event);
     }
 }
