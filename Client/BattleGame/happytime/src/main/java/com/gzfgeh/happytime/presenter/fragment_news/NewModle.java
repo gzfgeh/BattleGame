@@ -26,7 +26,7 @@ public class NewModle implements INewsModle {
         OkHttpUtils.get().url(url).build().execute(new StringCallback() {
             @Override
             public void onError(Request request, Exception e) {
-                listener.onFailure(e.getMessage().toString(), e);
+                listener.onFailure(e.getMessage());
             }
 
             @Override
@@ -44,7 +44,7 @@ public class NewModle implements INewsModle {
         OkHttpUtils.get().url(url).build().execute(new StringCallback() {
             @Override
             public void onError(Request request, Exception e) {
-                listener.onFailure(request.body().toString(), e);
+                listener.onFailure(e.getMessage());
             }
 
             @Override
@@ -85,11 +85,11 @@ public class NewModle implements INewsModle {
 
     public interface OnLoadNewsListListener {
         void onSuccess(List<NewsBean> list);
-        void onFailure(String msg, Exception e);
+        void onFailure(String msg);
     }
 
     public interface OnLoadNewsDetailListener {
         void onSuccess(NewsDetailBean newsDetailBean);
-        void onFailure(String msg, Exception e);
+        void onFailure(String msg);
     }
 }

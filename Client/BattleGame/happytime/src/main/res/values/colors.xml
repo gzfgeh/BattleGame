@@ -55,4 +55,5 @@
     <color name="divider_color">#b5b5b5</color>
 
     <color name="background_tab_pressed">#6633B5E5</color>
+    <color name="primary_light">#FFCDD2</color>
 </resources>

@@ -34,7 +34,7 @@ public class NewsDetailPresenter implements INewsDetailPresenter, NewModle.OnLoa
     }
 
     @Override
-    public void onFailure(String msg, Exception e) {
+    public void onFailure(String msg) {
         viewModle.hideProgress();
 
     }

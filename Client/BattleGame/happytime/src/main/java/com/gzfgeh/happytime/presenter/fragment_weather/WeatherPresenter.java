@@ -43,6 +43,7 @@ public class WeatherPresenter implements IWeatherPresenter, WeatherModle.LoadWea
         @Override
         public void onFail(String msg) {
             view.showFail(msg);
+            view.hideProgress();
         }
     };
 

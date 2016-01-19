@@ -89,6 +89,7 @@ public class WeatherFragment extends Fragment implements IWeatherView {
 
     @Override
     public void showFail(String msg) {
+
         Toast.makeText(getActivity(), msg, Toast.LENGTH_SHORT).show();
     }
 

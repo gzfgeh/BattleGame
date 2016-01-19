@@ -67,11 +67,13 @@ public abstract class BaseListFragment extends Fragment implements SwipeRefreshL
 
     @Override
     public void showProgress() {
-        swipeRefreshWidget.setRefreshing(true);
+        if (swipeRefreshWidget != null)
+            swipeRefreshWidget.setRefreshing(true);
     }
 
     @Override
     public void hideProgress() {
-        swipeRefreshWidget.setRefreshing(false);
+        if (swipeRefreshWidget != null)
+            swipeRefreshWidget.setRefreshing(false);
     }
 }
