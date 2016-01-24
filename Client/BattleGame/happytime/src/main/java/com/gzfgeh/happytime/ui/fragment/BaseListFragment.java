@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.gzfgeh.happytime.APP;
 import com.gzfgeh.happytime.R;
 import com.gzfgeh.happytime.presenter.IProgress;
 
@@ -45,19 +46,21 @@ public abstract class BaseListFragment extends Fragment implements SwipeRefreshL
         recycleView.setLayoutManager(mLayoutManager);
 
         setRecycleView();
+        onRefresh();
         return view;
     }
 
-    @Override
-    public void onResume() {
-        super.onResume();
-        onRefresh();
-    }
+//    @Override
+//    public void onResume() {
+//        super.onResume();
+//        onRefresh();
+//    }
 
     @Override
     public void onDestroyView() {
         super.onDestroyView();
         ButterKnife.unbind(this);
+        APP.getRefWatcher(getActivity());
     }
 
     public abstract void setRecycleView();

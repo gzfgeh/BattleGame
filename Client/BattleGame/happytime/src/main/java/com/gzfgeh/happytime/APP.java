@@ -20,6 +20,10 @@ public class APP extends Application {
         return context;
     }
 
+    public static RefWatcher getRefWatcher(Context context){
+        APP app = (APP) context.getApplicationContext();
+        return app.refWatcher;
+    }
     @Override
     public void onCreate() {
         super.onCreate();

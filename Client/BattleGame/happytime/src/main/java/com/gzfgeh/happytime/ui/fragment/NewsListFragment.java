@@ -96,7 +96,7 @@ public class NewsListFragment extends BaseListFragment implements INewsView {
 
     @Override
     public void setRecycleView() {
-        adapter = new NewsRecyclerViewAdapter(getContext(), this);
+        adapter = new NewsRecyclerViewAdapter(getActivity().getApplicationContext());
         adapter.setListener(listener);
         recycleView.setAdapter(adapter);
         recycleView.addOnScrollListener(scrollListener);

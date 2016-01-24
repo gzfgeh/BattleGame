@@ -31,6 +31,11 @@ public class SplashActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
         initView();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
 
         Thread splashThread = new Thread(){
             @Override

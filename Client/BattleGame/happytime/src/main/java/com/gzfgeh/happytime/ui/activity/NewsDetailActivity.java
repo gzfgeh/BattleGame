@@ -9,7 +9,9 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 
+import com.gzfgeh.happytime.APP;
 import com.gzfgeh.happytime.R;
 import com.gzfgeh.happytime.beans.NewsBean;
 import com.gzfgeh.happytime.presenter.activity_news_details.INewsDetailModle;
@@ -35,7 +37,7 @@ public class NewsDetailActivity extends AppCompatActivity implements INewsDetail
     @Bind(R.id.progress)
     ProgressBar progress;
     @Bind(R.id.htNewsContent)
-    HtmlTextView htNewsContent;
+    TextView htNewsContent;
 
     private NewsBean mNews;
     private INewsDetailPresenter mNewsDetailPresenter;
@@ -50,7 +52,7 @@ public class NewsDetailActivity extends AppCompatActivity implements INewsDetail
         mNews = (NewsBean)getIntent().getSerializableExtra("bean");
         collapsingToolbar.setTitle(mNews.getTitle());
 
-        ImageLoaderUtils.display(this, ivImage, mNews.getImgsrc());
+        ImageLoaderUtils.display(getApplicationContext(), ivImage, mNews.getImgsrc());
         mNewsDetailPresenter = new NewsDetailPresenter(this);
         mNewsDetailPresenter.loadNewsDetail(mNews.getDocid());
     }
@@ -67,26 +69,9 @@ public class NewsDetailActivity extends AppCompatActivity implements INewsDetail
     }
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_recycle_view_item, menu);
-        return super.onCreateOptionsMenu(menu);
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        int id = item.getItemId();
-        switch (id) {
-            case android.R.id.home:
-                finish();
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
-        }
-    }
-
-    @Override
     public void showNewsDetailContent(String content) {
-        htNewsContent.setHtmlFromString(content, new HtmlTextView.LocalImageGetter());
+//        htNewsContent.setHtmlFromString(content, new HtmlTextView.LocalImageGetter());
+        htNewsContent.setText(content);
     }
 
     @Override
@@ -97,5 +82,12 @@ public class NewsDetailActivity extends AppCompatActivity implements INewsDetail
     @Override
     public void hideProgress() {
         progress.setVisibility(View.GONE);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        ButterKnife.unbind(this);
+        APP.getRefWatcher(this);
     }
 }

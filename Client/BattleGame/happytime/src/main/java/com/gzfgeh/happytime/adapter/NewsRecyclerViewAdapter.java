@@ -34,9 +34,8 @@ public class NewsRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.V
 
     private RecyclerItemClickListener mListener;
 
-    public NewsRecyclerViewAdapter(Context context, Fragment fragment) {
+    public NewsRecyclerViewAdapter(Context context) {
         this.context = context;
-        this.fragment = fragment;       //为了Glider
     }
 
     @Override
@@ -63,7 +62,7 @@ public class NewsRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.V
                 return ;
             ((VHItem) holder).mTitle.setText(bean.getTitle());
             ((VHItem) holder).mDesc.setText(bean.getDigest());
-            ImageLoaderUtils.display(fragment, ((VHItem) holder).mNewsImg, bean.getImgsrc());
+            ImageLoaderUtils.display(context, ((VHItem) holder).mNewsImg, bean.getImgsrc());
         } else if (holder instanceof VHHeader) {
         }
     }

@@ -61,12 +61,19 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"/>
 
-            <org.sufficientlysecure.htmltextview.HtmlTextView
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/htNewsContent"
+                android:padding="12dp"
+                android:textAppearance="@android:style/TextAppearance.Medium"/>
+
+            <!--<org.sufficientlysecure.htmltextview.HtmlTextView
                 android:id="@+id/htNewsContent"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:padding="12dp"
-                android:textAppearance="@android:style/TextAppearance.Medium" />
+                android:textAppearance="@android:style/TextAppearance.Medium" />-->
 
         </LinearLayout>
 
