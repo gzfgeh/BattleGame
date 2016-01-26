@@ -12,7 +12,10 @@
         <option name="SELECTED_TEST_ARTIFACT" value="_android_test_" />
         <option name="ASSEMBLE_TASK_NAME" value="assembleBaiduDebug" />
         <option name="COMPILE_JAVA_TASK_NAME" value="compileBaiduDebugSources" />
+        <option name="ASSEMBLE_TEST_TASK_NAME" value="assembleBaiduDebugAndroidTest" />
+        <option name="COMPILE_JAVA_TEST_TASK_NAME" value="compileBaiduDebugAndroidTestSources" />
         <afterSyncTasks>
+          <task>generateBaiduDebugAndroidTestSources</task>
           <task>generateBaiduDebugSources</task>
         </afterSyncTasks>
         <option name="ALLOW_USER_CONFIGURATION" value="false" />
@@ -61,13 +64,6 @@
       <sourceFolder url="file://$MODULE_DIR$/src/androidTestBaidu/java" isTestSource="true" />
       <sourceFolder url="file://$MODULE_DIR$/src/androidTestBaidu/jni" isTestSource="true" />
       <sourceFolder url="file://$MODULE_DIR$/src/androidTestBaidu/rs" isTestSource="true" />
-      <sourceFolder url="file://$MODULE_DIR$/src/testBaidu/res" type="java-test-resource" />
-      <sourceFolder url="file://$MODULE_DIR$/src/testBaidu/resources" type="java-test-resource" />
-      <sourceFolder url="file://$MODULE_DIR$/src/testBaidu/assets" type="java-test-resource" />
-      <sourceFolder url="file://$MODULE_DIR$/src/testBaidu/aidl" isTestSource="true" />
-      <sourceFolder url="file://$MODULE_DIR$/src/testBaidu/java" isTestSource="true" />
-      <sourceFolder url="file://$MODULE_DIR$/src/testBaidu/jni" isTestSource="true" />
-      <sourceFolder url="file://$MODULE_DIR$/src/testBaidu/rs" isTestSource="true" />
       <sourceFolder url="file://$MODULE_DIR$/src/debug/res" type="java-resource" />
       <sourceFolder url="file://$MODULE_DIR$/src/debug/resources" type="java-resource" />
       <sourceFolder url="file://$MODULE_DIR$/src/debug/assets" type="java-resource" />
@@ -75,13 +71,6 @@
       <sourceFolder url="file://$MODULE_DIR$/src/debug/java" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/debug/jni" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/debug/rs" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/src/testDebug/res" type="java-test-resource" />
-      <sourceFolder url="file://$MODULE_DIR$/src/testDebug/resources" type="java-test-resource" />
-      <sourceFolder url="file://$MODULE_DIR$/src/testDebug/assets" type="java-test-resource" />
-      <sourceFolder url="file://$MODULE_DIR$/src/testDebug/aidl" isTestSource="true" />
-      <sourceFolder url="file://$MODULE_DIR$/src/testDebug/java" isTestSource="true" />
-      <sourceFolder url="file://$MODULE_DIR$/src/testDebug/jni" isTestSource="true" />
-      <sourceFolder url="file://$MODULE_DIR$/src/testDebug/rs" isTestSource="true" />
       <sourceFolder url="file://$MODULE_DIR$/src/main/res" type="java-resource" />
       <sourceFolder url="file://$MODULE_DIR$/src/main/resources" type="java-resource" />
       <sourceFolder url="file://$MODULE_DIR$/src/main/assets" type="java-resource" />
@@ -89,13 +78,6 @@
       <sourceFolder url="file://$MODULE_DIR$/src/main/java" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/main/jni" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/main/rs" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/src/test/res" type="java-test-resource" />
-      <sourceFolder url="file://$MODULE_DIR$/src/test/resources" type="java-test-resource" />
-      <sourceFolder url="file://$MODULE_DIR$/src/test/assets" type="java-test-resource" />
-      <sourceFolder url="file://$MODULE_DIR$/src/test/aidl" isTestSource="true" />
-      <sourceFolder url="file://$MODULE_DIR$/src/test/java" isTestSource="true" />
-      <sourceFolder url="file://$MODULE_DIR$/src/test/jni" isTestSource="true" />
-      <sourceFolder url="file://$MODULE_DIR$/src/test/rs" isTestSource="true" />
       <sourceFolder url="file://$MODULE_DIR$/src/androidTest/res" type="java-test-resource" />
       <sourceFolder url="file://$MODULE_DIR$/src/androidTest/resources" type="java-test-resource" />
       <sourceFolder url="file://$MODULE_DIR$/src/androidTest/assets" type="java-test-resource" />
@@ -106,34 +88,29 @@
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/assets" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/classes" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/dependency-cache" />
-      <excludeFolder url="file://$MODULE_DIR$/build/intermediates/dex" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/exploded-aar/com.github.liuguangqiang.swipeback/library/1.0.2/jars" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/incremental" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/manifests" />
-      <excludeFolder url="file://$MODULE_DIR$/build/intermediates/mockable-android-23.jar" />
-      <excludeFolder url="file://$MODULE_DIR$/build/intermediates/multi-dex" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/res" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/resources" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/rs" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/symbols" />
-      <excludeFolder url="file://$MODULE_DIR$/build/intermediates/tmp" />
       <excludeFolder url="file://$MODULE_DIR$/build/outputs" />
       <excludeFolder url="file://$MODULE_DIR$/build/retrolambda" />
       <excludeFolder url="file://$MODULE_DIR$/build/tmp" />
     </content>
     <orderEntry type="jdk" jdkName="Android API 23 Platform" jdkType="Android SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="library" exported="" scope="TEST" name="mockable-android-23" level="project" />
-    <orderEntry type="library" exported="" name="library-1.0.2" level="project" />
-    <orderEntry type="library" exported="" name="systembartint-1.0.4" level="project" />
     <orderEntry type="library" exported="" name="butterknife-7.0.1" level="project" />
-    <orderEntry type="library" exported="" name="okhttp-2.5.0" level="project" />
-    <orderEntry type="library" exported="" name="rxjava-1.0.9" level="project" />
-    <orderEntry type="library" exported="" name="okhttputils-2.0.0" level="project" />
-    <orderEntry type="library" exported="" name="support-v4-22.2.1" level="project" />
     <orderEntry type="library" exported="" name="okio-1.6.0" level="project" />
     <orderEntry type="library" exported="" name="multidex-1.0.1" level="project" />
+    <orderEntry type="library" exported="" name="okhttputils-2.0.0" level="project" />
+    <orderEntry type="library" exported="" name="rxjava-1.0.9" level="project" />
+    <orderEntry type="library" exported="" name="support-v4-22.2.1" level="project" />
+    <orderEntry type="library" exported="" name="systembartint-1.0.4" level="project" />
+    <orderEntry type="library" exported="" name="library-1.0.2" level="project" />
     <orderEntry type="library" exported="" name="support-annotations-22.2.1" level="project" />
+    <orderEntry type="library" exported="" name="okhttp-2.5.0" level="project" />
     <orderEntry type="library" exported="" name="appcompat-v7-22.2.1" level="project" />
   </component>
 </module>

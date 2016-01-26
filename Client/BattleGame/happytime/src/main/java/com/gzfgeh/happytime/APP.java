@@ -8,6 +8,13 @@ import com.gzfgeh.happytime.utils.LogUtils;
 import com.gzfgeh.happytime.utils.ShareUtils;
 import com.squareup.leakcanary.LeakCanary;
 import com.squareup.leakcanary.RefWatcher;
+import com.squareup.okhttp.Cache;
+import com.squareup.okhttp.CacheControl;
+import com.squareup.okhttp.OkHttpClient;
+import com.zhy.http.okhttp.OkHttpUtils;
+
+import java.io.File;
+import java.util.concurrent.TimeUnit;
 
 /**
  * Created by guzhenfu on 15/8/8.
@@ -28,6 +35,8 @@ public class APP extends Application {
     public void onCreate() {
         super.onCreate();
         context = getApplicationContext();
+
+        setOkHttpCache();
         setSentence();
         if (debugMode()){
             refWatcher = LeakCanary.install(this);
@@ -37,6 +46,13 @@ public class APP extends Application {
             LogUtils.LEVEL = LogUtils.NOTHING;
         }
 
+    }
+
+    private void setOkHttpCache(){
+        OkHttpClient client = OkHttpUtils.getInstance().getOkHttpClient();
+        File sdCache = getExternalCacheDir();
+        int cacheSize = 10 * 1024 * 1024;
+        client.setCache(new Cache(sdCache.getAbsoluteFile(), cacheSize));
     }
 
     private void setSentence(){
