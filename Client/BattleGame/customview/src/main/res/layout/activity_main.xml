@@ -41,25 +41,12 @@
             android:id="@+id/drawable_view"
             android:text="Drawable View"
             android:layout_gravity="center_horizontal"/>
-    </LinearLayout>
-
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
 
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/thread_pool"
             android:text="Thread Pool"
-            android:layout_gravity="center_horizontal"/>
-
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/cache"
-            android:text="Cache"
             android:layout_gravity="center_horizontal"/>
     </LinearLayout>
 
@@ -81,6 +68,13 @@
             android:id="@+id/swipe_back"
             android:text="Swipe Back"
             android:layout_gravity="center_horizontal"/>
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/cache"
+            android:text="Cache"
+            android:layout_gravity="center_horizontal"/>
     </LinearLayout>
 
     <LinearLayout
@@ -100,6 +94,13 @@
             android:id="@+id/custom_http"
             android:text="Custom Http"
             android:layout_gravity="center_horizontal"/>
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/custom_webview"
+            android:text="Custom Webview"
+            android:layout_gravity="center_horizontal"/>
     </LinearLayout>
 
     <LinearLayout
@@ -109,15 +110,15 @@
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/custom_webview"
-            android:text="Custom Webview"
+            android:id="@+id/custom_rx_android"
+            android:text="Custom RxAndroid"
             android:layout_gravity="center_horizontal"/>
 
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/custom_rx_android"
-            android:text="Custom RxAndroid"
+            android:id="@+id/custom_rxjava"
+            android:text="Custom Rxjava"
             android:layout_gravity="center_horizontal"/>
     </LinearLayout>
 
